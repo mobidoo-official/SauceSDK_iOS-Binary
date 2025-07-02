@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
   # 소스
   spec.source               = { 
     :git => "https://github.com/mobidoo-official/SauceSDK_iOS-Binary.git", 
-    :tag => "#{spec.version}" 
+    :tag => "v#{spec.version}" 
   }
   
   # XCFramework 설정 (Static Linking)
