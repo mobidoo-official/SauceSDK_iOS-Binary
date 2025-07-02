@@ -18,7 +18,7 @@ let package = Package(
         .binaryTarget(
             name: "SauceSDK",
             url: "https://github.com/mobidoo-official/SauceSDK_iOS-Binary/releases/download/0.0.1/SauceSDK.xcframework.zip",
-            checksum: "your_checksum_here"
+            checksum: "9fd942dc293e9245e7f45b49061da455ceecfe6c60b96006fb0be4f659ecf583"
         )
     ]
 ) 
