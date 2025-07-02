@@ -1,0 +1,2861 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0.2 effective-5.10 (swiftlang-6.0.2.1.2 clang-1600.0.26.4)
+// swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name SauceSDK
+import AVFAudio
+import AVFoundation
+import AVKit
+import Combine
+import CryptoKit
+import DeveloperToolsSupport
+import Foundation
+import Network
+import QuartzCore
+import Swift
+import SwiftUI
+import UIKit
+import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_hasMissingDesignatedInitializers public class SauceClient {
+  public static let shared: SauceSDK.SauceClient
+  public static var partnerID: Swift.String? {
+    get
+  }
+  public static var apiHost: SauceSDK.SauceClient.APIHost {
+    get
+  }
+  public static var isInitialized: Swift.Bool {
+    get
+  }
+  public enum APIHost {
+    case stage
+    case prod
+    public static func == (a: SauceSDK.SauceClient.APIHost, b: SauceSDK.SauceClient.APIHost) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public static func initInstance(partnerID: Swift.String, apiHost: SauceSDK.SauceClient.APIHost = .stage)
+  public static func checkInitialization()
+  public static func printConfiguration()
+  @objc deinit
+}
+public enum ResourceNamespace {
+  public static let showroom: Swift.String
+  public static let live: Swift.String
+  public static let clip: Swift.String
+}
+public enum ModuleType {
+  case showroom
+  case live
+  case clip
+  public static func == (a: SauceSDK.ModuleType, b: SauceSDK.ModuleType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class BaseViewController : UIKit.UIViewController, UIKit.UINavigationControllerDelegate, UIKit.UIGestureRecognizerDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency @objc public func gestureRecognizer(_ gestureRecognizer: UIKit.UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public enum ShareType {
+  case defaultType
+  case custom
+  case none
+  public static func == (a: SauceSDK.ShareType, b: SauceSDK.ShareType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum TutorialType {
+  case once
+  case always
+  case none
+  public static func == (a: SauceSDK.TutorialType, b: SauceSDK.TutorialType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum ProductTheme {
+  case transparent
+  case white
+  public static func == (a: SauceSDK.ProductTheme, b: SauceSDK.ProductTheme) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc public protocol SauceClipPlayerCallbackListener {
+  @objc optional func clickShare(info: SauceSDK.SauceShareInfo)
+  @objc optional func clickProduct(info: SauceSDK.SauceProductInfo)
+  @objc optional func clickCartProduct(info: SauceSDK.SauceCartInfo)
+  @objc optional func clickChannel(info: SauceSDK.SauceChannelInfo)
+  @objc optional func onError(info: SauceSDK.SauceError)
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class SauceClipPlayerClient : SauceSDK.BaseViewController {
+  @_Concurrency.MainActor @preconcurrency public var onShare: ((SauceSDK.SauceShareInfo) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onProduct: ((SauceSDK.SauceProductInfo) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onCartProduct: ((SauceSDK.SauceCartInfo) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onChannel: ((SauceSDK.SauceChannelInfo) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onError: ((SauceSDK.SauceError) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onClose: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onLogin: (() -> Swift.Void)?
+  @available(*, deprecated, message: "Use callback properties instead")
+  @_Concurrency.MainActor @preconcurrency weak public var delegate: (any SauceSDK.SauceClipPlayerCallbackListener)?
+  @_Concurrency.MainActor @preconcurrency public var pipController: AVKit.AVPictureInPictureController?
+  @_Concurrency.MainActor @preconcurrency public static func initInstance(partnerID: Swift.String, apiHost: SauceSDK.ClipAPIHost = .stage)
+  @_Concurrency.MainActor @preconcurrency public static func getInstance(viewController: UIKit.UIViewController) -> SauceSDK.SauceClipPlayerClient
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency public func setShare(shareType: SauceSDK.ShareType, shortUrl: Swift.String? = nil)
+  @_Concurrency.MainActor @preconcurrency public func setLike(isUsed: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func setClose(isUsed: Swift.Bool, closeImageUrl: Swift.String? = nil)
+  @_Concurrency.MainActor @preconcurrency public func setTutorial(tutorialType: SauceSDK.TutorialType)
+  @_Concurrency.MainActor @preconcurrency public func setDim(isUsed: Swift.Bool, dimColor: Swift.String = "000000", dimAlpha: CoreFoundation.CGFloat = 0.5)
+  @_Concurrency.MainActor @preconcurrency public func setPIP(isUsed: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func setProductTheme(productTheme: SauceSDK.ProductTheme)
+  @_Concurrency.MainActor @preconcurrency public func setProductMoveCustom(isUsed: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func setRewardToken(_ token: Swift.String)
+  @_Concurrency.MainActor @preconcurrency public func setStageMode(isUsed: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func setFullScreenMode(isUsed: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func startPlayer()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewWillDisappear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
+}
+extension SauceSDK.SauceClipPlayerClient : UIKit.UITableViewDelegate, UIKit.UITableViewDataSource, UIKit.UITableViewDataSourcePrefetching {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, willDisplay cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didEndDisplaying cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, prefetchRowsAt indexPaths: [Foundation.IndexPath])
+}
+extension SauceSDK.SauceClipPlayerClient : UIKit.UIScrollViewDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDragging(_ scrollView: UIKit.UIScrollView, willDecelerate decelerate: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
+}
+extension SauceSDK.SauceClipPlayerClient : AVKit.AVPictureInPictureControllerDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVKit.AVPictureInPictureController)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func pictureInPictureControllerDidStopPictureInPicture(_ pictureInPictureController: AVKit.AVPictureInPictureController)
+}
+public enum ClipAPIHost {
+  case stage
+  case prod
+  public static func == (a: SauceSDK.ClipAPIHost, b: SauceSDK.ClipAPIHost) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(iOS 15.0, *)
+public protocol AVPIPKitRenderer {
+  var policy: SauceSDK.AVPIPKitRenderPolicy { get }
+  var renderPublisher: Combine.AnyPublisher<UIKit.UIImage, Swift.Never> { get }
+  func start()
+  func stop()
+  func exit()
+}
+extension SauceSDK.PIPKit {
+  public static var isAVPIPKitSupported: Swift.Bool {
+    get
+  }
+}
+@available(iOS 15.0, *)
+public enum AVPIPKitRenderPolicy {
+  case once
+  case preferredFramesPerSecond(Swift.Int)
+}
+@available(iOS 15.0, *)
+public protocol AVPIPKitUsable {
+  var renderer: any SauceSDK.AVPIPKitRenderer { get }
+  func startPictureInPicture()
+  func stopPictureInPicture()
+}
+@available(iOS 15.0, *)
+extension SauceSDK.AVPIPKitUsable {
+  public var isAVKitPIPSupported: Swift.Bool {
+    get
+  }
+}
+@available(iOS 15.0, *)
+public protocol AVPIPUIKitUsable : SauceSDK.AVPIPKitUsable {
+  var pipTargetView: UIKit.UIView { get }
+  var renderPolicy: SauceSDK.AVPIPKitRenderPolicy { get }
+  var exitPublisher: Combine.AnyPublisher<Swift.Void, Swift.Never> { get }
+}
+@available(iOS 15.0, *)
+extension SauceSDK.AVPIPUIKitUsable {
+  public var renderPolicy: SauceSDK.AVPIPKitRenderPolicy {
+    get
+  }
+}
+@available(iOS 15.0, *)
+extension SauceSDK.AVPIPUIKitUsable where Self : UIKit.UIViewController {
+  public var pipTargetView: UIKit.UIView {
+    get
+  }
+  public var renderer: any SauceSDK.AVPIPKitRenderer {
+    get
+  }
+  public var exitPublisher: Combine.AnyPublisher<Swift.Void, Swift.Never> {
+    get
+  }
+  public func startPictureInPicture()
+  public func stopPictureInPicture()
+  public func renderPictureInPicture()
+}
+@available(iOS 15.0, *)
+extension SauceSDK.AVPIPUIKitUsable where Self : UIKit.UIView {
+  public var pipTargetView: UIKit.UIView {
+    get
+  }
+  public var renderer: any SauceSDK.AVPIPKitRenderer {
+    get
+  }
+  public var exitPublisher: Combine.AnyPublisher<Swift.Void, Swift.Never> {
+    get
+  }
+  public func startPictureInPicture()
+  public func stopPictureInPicture()
+  public func renderPictureInPicture()
+}
+public struct PIPShadow {
+  public let color: UIKit.UIColor
+  public let opacity: Swift.Float
+  public let offset: CoreFoundation.CGSize
+  public let radius: CoreFoundation.CGFloat
+  public init(color: UIKit.UIColor, opacity: Swift.Float, offset: CoreFoundation.CGSize, radius: CoreFoundation.CGFloat)
+}
+public struct PIPCorner {
+  public let radius: CoreFoundation.CGFloat
+  public let curve: QuartzCore.CALayerCornerCurve?
+  public init(radius: CoreFoundation.CGFloat, curve: QuartzCore.CALayerCornerCurve? = nil)
+}
+public enum PIPState {
+  case pip
+  case full
+  public static func == (a: SauceSDK.PIPState, b: SauceSDK.PIPState) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum PIPPosition {
+  case topLeft
+  case middleLeft
+  case bottomLeft
+  case topRight
+  case middleRight
+  case bottomRight
+  public static func == (a: SauceSDK.PIPPosition, b: SauceSDK.PIPPosition) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public typealias PIPKitViewController = (UIKit.UIViewController & SauceSDK.PIPUsable)
+@_hasMissingDesignatedInitializers final public class PIPKit {
+  public static var isActive: Swift.Bool {
+    get
+  }
+  public static var isPIP: Swift.Bool {
+    get
+  }
+  public static var visibleViewController: (any UIKit.UIViewController & SauceSDK.PIPUsable)? {
+    get
+  }
+  final public class func show(with viewController: any UIKit.UIViewController & SauceSDK.PIPUsable, completion: (() -> Swift.Void)? = nil)
+  final public class func dismiss(animated: Swift.Bool, completion: (() -> Swift.Void)? = nil)
+  @objc deinit
+}
+public protocol PIPUsable {
+  var initialState: SauceSDK.PIPState { get }
+  var initialPosition: SauceSDK.PIPPosition { get }
+  var insetsPIPFromSafeArea: Swift.Bool { get }
+  var pipEdgeInsets: UIKit.UIEdgeInsets { get }
+  var pipSize: CoreFoundation.CGSize { get }
+  var pipShadow: SauceSDK.PIPShadow? { get }
+  var pipCorner: SauceSDK.PIPCorner? { get }
+  func didChangedState(_ state: SauceSDK.PIPState)
+  func didChangePosition(_ position: SauceSDK.PIPPosition)
+}
+extension SauceSDK.PIPUsable {
+  public var initialState: SauceSDK.PIPState {
+    get
+  }
+  public var initialPosition: SauceSDK.PIPPosition {
+    get
+  }
+  public var insetsPIPFromSafeArea: Swift.Bool {
+    get
+  }
+  public var pipEdgeInsets: UIKit.UIEdgeInsets {
+    get
+  }
+  public var pipSize: CoreFoundation.CGSize {
+    get
+  }
+  public var pipShadow: SauceSDK.PIPShadow? {
+    get
+  }
+  public var pipCorner: SauceSDK.PIPCorner? {
+    get
+  }
+  public func didChangedState(_ state: SauceSDK.PIPState)
+  public func didChangePosition(_ position: SauceSDK.PIPPosition)
+}
+extension SauceSDK.PIPUsable where Self : UIKit.UIViewController {
+  public func setNeedsUpdatePIPFrame()
+  public func startPIPMode()
+  public func stopPIPMode()
+}
+@objc @objcMembers public class SauceCartInfo : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let clipIdx: Swift.String
+  @objc final public let productId: Swift.Int
+  @objc final public let price: Swift.String
+  @objc final public let productImg: Swift.String
+  @objc final public let productName: Swift.String
+  @objc final public let externalProductId: Swift.String?
+  @objc final public let productCode: Swift.String?
+  @objc final public let optionCode: Swift.String?
+  @objc public init(clipIdx: Swift.String, productId: Swift.Int, price: Swift.String, productImg: Swift.String, productName: Swift.String, externalProductId: Swift.String?, productCode: Swift.String?, optionCode: Swift.String?)
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@objc @objcMembers public class SauceProductInfo : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let linkUrl: Swift.String
+  @objc final public let clipIdx: Swift.String
+  @objc final public let externalProductId: Swift.String?
+  @objc final public let productId: Swift.Int
+  @objc public init(linkUrl: Swift.String, clipIdx: Swift.String, externalProductId: Swift.String?, productId: Swift.Int)
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@objc @objcMembers public class SauceClipTag : ObjectiveC.NSObject, Swift.Codable {
+  final public let id: Swift.Int?
+  @objc final public let tag: Swift.String?
+  @objc public init(id: Swift.Int, tag: Swift.String)
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@objc @objcMembers public class SauceShareInfo : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let linkUrl: Swift.String
+  @objc final public let clipId: Swift.String
+  @objc final public let partnerId: Swift.String
+  @objc final public let thumbnailUrl: Swift.String
+  @objc final public let title: Swift.String
+  @objc final public let tags: [SauceSDK.SauceClipTag]
+  @objc public init(linkUrl: Swift.String, clipId: Swift.String, partnerId: Swift.String, thumbnailUrl: Swift.String, title: Swift.String, tags: [SauceSDK.SauceClipTag])
+  @objc public var objcTags: Foundation.NSArray {
+    @objc get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@objc @objcMembers public class SauceBroadcastInfo : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let clipId: Swift.Int
+  @objc final public let curationId: Swift.Int
+  @objc final public let partnerId: Swift.String
+  @objc final public let shortUrl: Swift.String?
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@objc @objcMembers public class SauceError : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let errorType: Swift.String
+  @objc final public let errorDetails: Swift.String
+  @objc final public let errorCode: Swift.String
+  @objc public init(errorType: Swift.String, errorDetails: Swift.String, errorCode: Swift.String)
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@objc @objcMembers public class DomSize : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let domRect: SauceSDK.DomRect
+  @objc final public let elementId: Swift.String
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@objc @objcMembers public class DomRect : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let x: Swift.Float
+  @objc final public let y: Swift.Float
+  @objc final public let width: Swift.Float
+  @objc final public let height: Swift.Float
+  @objc final public let top: Swift.Float
+  @objc final public let right: Swift.Float
+  @objc final public let bottom: Swift.Float
+  @objc final public let left: Swift.Float
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@objc @objcMembers public class SauceChannelInfo : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let channelUrl: Swift.String
+  @objc public init(channelUrl: Swift.String)
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public enum MessageHandlerName : Swift.String {
+  case enter
+  case exit
+  case login
+  case moveProduct
+  case moveCart
+  case addCart
+  case onShare
+  case moveBroadcast
+  case onError
+  case sendDOMRect
+  case onCollectionError
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc public protocol SauceClipDelegate {
+  @objc optional func sauceClipManager(_ manager: SauceSDK.SauceClipViewController, didReceiveEnterMessage message: WebKit.WKScriptMessage)
+  @objc optional func sauceClipManager(_ manager: SauceSDK.SauceClipViewController, didReceiveExitMessage message: WebKit.WKScriptMessage)
+  @objc optional func sauceClipManager(_ manager: SauceSDK.SauceClipViewController, didReceiveLoginMessage message: WebKit.WKScriptMessage)
+  @objc optional func sauceClipManager(_ manager: SauceSDK.SauceClipViewController, didReceiveMoveProductMessage productInfo: SauceSDK.SauceProductInfo?)
+  @objc optional func sauceClipManager(_ manager: SauceSDK.SauceClipViewController, didReceiveMoveCartMessage: WebKit.WKScriptMessage?)
+  @objc optional func sauceClipManager(_ manager: SauceSDK.SauceClipViewController, didReceiveAddCartMessage cartInfo: SauceSDK.SauceCartInfo?)
+  @objc optional func sauceClipManager(_ manager: SauceSDK.SauceClipViewController, didReceiveOnShareMessage shareInfo: SauceSDK.SauceShareInfo?)
+  @objc optional func sauceClipManager(_ manager: SauceSDK.SauceClipViewController, didReceiveErrorMessage sauceError: SauceSDK.SauceError?)
+}
+public struct SauceClipConfig {
+  public let isEnterEnabled: Swift.Bool
+  public let isExitEnabled: Swift.Bool
+  public let isLoginEnabled: Swift.Bool
+  public let isMoveProductEnabled: Swift.Bool
+  public let isMoveCartEnabled: Swift.Bool
+  public let isAddCartEnabled: Swift.Bool
+  public let isOnShareEnabled: Swift.Bool
+  public let pipSize: CoreFoundation.CGSize?
+  weak public var delegate: (any SauceSDK.SauceClipDelegate)?
+  public init(isEnterEnabled: Swift.Bool? = false, isExitEnabled: Swift.Bool? = false, isLoginEnabled: Swift.Bool? = false, isMoveProductEnabled: Swift.Bool? = false, isMoveCartEnabled: Swift.Bool? = false, isAddCartEnabled: Swift.Bool? = false, isOnShareEnabled: Swift.Bool? = false, pipSize: CoreFoundation.CGSize? = nil, delegate: (any SauceSDK.SauceClipDelegate)?)
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency open class SauceClipViewController : UIKit.UIViewController, WebKit.WKScriptMessageHandler {
+  @_Concurrency.MainActor @preconcurrency public var webView: WebKit.WKWebView!
+  @_Concurrency.MainActor @preconcurrency weak public var delegate: (any SauceSDK.SauceClipDelegate)?
+  @_Concurrency.MainActor @preconcurrency public var messageHandlerNames: [SauceSDK.MessageHandlerName]
+  @_Concurrency.MainActor @preconcurrency public var url: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public var isProductViewShow: Swift.Bool?
+  @_Concurrency.MainActor @preconcurrency public var pipSize: CoreFoundation.CGSize
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency public func configure(with config: SauceSDK.SauceClipConfig)
+  @_Concurrency.MainActor @preconcurrency public func loadURL(_ urlString: Swift.String)
+  @objc @_Concurrency.MainActor @preconcurrency open func leftButtonTapped()
+  @objc @_Concurrency.MainActor @preconcurrency open func rightButtonTapped()
+  @_Concurrency.MainActor @preconcurrency public func startPictureInPicture()
+  @_Concurrency.MainActor @preconcurrency public func stopPictureInPicture()
+  @_Concurrency.MainActor @preconcurrency public func configureWebView()
+  @_Concurrency.MainActor @preconcurrency @objc public func userContentController(_ userContentController: WebKit.WKUserContentController, didReceive message: WebKit.WKScriptMessage)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public class SauceClipLib {
+  public init()
+  weak public var viewController: SauceSDK.SauceClipViewController?
+  public func setInit(partnerID: Swift.String, clipID: Swift.String, curationID: Swift.String? = nil)
+  public func setStageMode(on: Swift.Bool = false)
+  public func setProductVC(on: Swift.Bool = true)
+  public func load()
+  @objc deinit
+}
+extension SauceSDK.SauceClipViewController : SauceSDK.PIPUsable {
+  @_Concurrency.MainActor @preconcurrency public var initialState: SauceSDK.PIPState {
+    get
+  }
+}
+extension SauceSDK.SauceClipViewController : WebKit.WKNavigationDelegate {
+}
+extension SauceSDK.SauceClipViewController : WebKit.WKUIDelegate {
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class SauceCurationLib : WebKit.WKWebView {
+  @_Concurrency.MainActor @preconcurrency public var messageHandlerNames: [SauceSDK.MessageHandlerName]
+  @_Concurrency.MainActor @preconcurrency weak public var delegate: (any SauceSDK.SauceCurationDelegate)?
+  public struct SauceCurationConfig {
+    public let isBroadCastEnabled: Swift.Bool
+    weak public var delegate: (any SauceSDK.SauceCurationDelegate)?
+    public init(isBroadCastEnabled: Swift.Bool? = false, delegate: (any SauceSDK.SauceCurationDelegate)?)
+  }
+  @_Concurrency.MainActor @preconcurrency public func configure(with config: SauceSDK.SauceCurationLib.SauceCurationConfig)
+  @_Concurrency.MainActor @preconcurrency public func setInit(partnerID: Swift.String, curationID: Swift.String)
+  @_Concurrency.MainActor @preconcurrency public func setPvVisibility(_ hidden: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func setHorizontalPadding(_ size: Swift.Int)
+  @_Concurrency.MainActor @preconcurrency public func setPreviewAutoPlay(_ on: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func setStageMode(on: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func load()
+  @objc deinit
+}
+@objc public protocol SauceCurationDelegate {
+  @objc optional func sauceCurationManager(_ manager: SauceSDK.SauceCurationLib, didReceiveBroadCastMessage broadCastInfo: SauceSDK.SauceBroadcastInfo?)
+  @objc optional func sauceCurationManager(_ manager: SauceSDK.SauceCurationLib, didReceiveErrorMessage sauceError: SauceSDK.SauceError?)
+}
+extension SauceSDK.SauceCurationLib : WebKit.WKScriptMessageHandler {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func userContentController(_ userContentController: WebKit.WKUserContentController, didReceive message: WebKit.WKScriptMessage)
+}
+extension SauceSDK.SauceCurationLib : WebKit.WKNavigationDelegate {
+}
+extension SauceSDK.SauceCurationLib : WebKit.WKUIDelegate {
+}
+public enum PlayerVersion : Swift.String {
+  case v1
+  case v2
+  public static var defaultVersion: SauceSDK.PlayerVersion {
+    get
+  }
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class BroadcastConfigManager {
+  public static let shared: SauceSDK.BroadcastConfigManager
+  public var currentConfig: SauceSDK.BroadcastConfigData? {
+    get
+  }
+  public var manualPlayerVersion: SauceSDK.PlayerVersion
+  public var isUseManualVersion: Swift.Bool
+  public var globalPlayerVersion: SauceSDK.PlayerVersion {
+    get
+  }
+  public func updateConfig(_ config: SauceSDK.BroadcastConfigData)
+  public func clearConfig()
+  public func getCurrentPlayerVersion() -> SauceSDK.PlayerVersion
+  public func setPlayerVersion(_ version: SauceSDK.PlayerVersion?)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class PIPManager {
+  public static let shared: SauceSDK.PIPManager
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class SauceLivePlayerClient {
+  public static func initInstance(partnerID: Swift.String?, apiHost: SauceSDK.LiveAPIHost = .stage)
+  public static func getInstance(broadcastID: Swift.String, token: Swift.String? = nil, viewController: UIKit.UIViewController) -> SauceSDK.LiveBaseView
+  public func setAPIHost(_ host: SauceSDK.LiveAPIHost)
+  public func getAPIHost() -> SauceSDK.LiveAPIHost
+  public static func getPartnerID() -> Swift.String?
+  @objc deinit
+}
+public struct APIBaseResponse<T> : Swift.Codable where T : Swift.Decodable, T : Swift.Encodable {
+  public let code: Swift.String
+  public let timestamp: Swift.Int64
+  public let requestId: Swift.String
+  public let message: Swift.String
+  public let response: T
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ProductInterestRequest : Swift.Codable {
+  public let broadcastId: Swift.String
+  public let partnerId: Swift.String
+  public let productId: Swift.String
+  public init(broadcastId: Swift.String, partnerId: Swift.String, productId: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct BannedWordResponse : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct BannedWordItem : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct JoinUserRequest : Swift.Codable {
+  public struct AppSyncInput : Swift.Codable {
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct JoinInput : Swift.Codable {
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public init(appsync: SauceSDK.JoinUserRequest.AppSyncInput, kinesis: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct JoinUserResponse : Swift.Codable {
+  public struct ResponseData : Swift.Codable {
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct KinesisData : Swift.Codable {
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct AppsyncData : Swift.Codable {
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct AttributesData : Swift.Codable {
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct IncomingCounterInfo : Swift.Codable {
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct BroadcastConfigResponse : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct BroadcastConfigData : Swift.Codable {
+  public static func defaultConfig() -> SauceSDK.BroadcastConfigData
+  public enum ShareType : Swift.String, Swift.Codable {
+    case none
+    case custom
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public enum TutorialType : Swift.String, Swift.Codable {
+    case none
+    case once
+    case always
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public enum ProductTheme : Swift.String, Swift.Codable {
+    case transparent
+    case white
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public init(partnerUniqueId: Swift.String? = nil, livePlayerVersion: Swift.String? = nil, airbridge: SauceSDK.AirbridgeConfig? = nil, alarm: SauceSDK.AlarmConfig? = nil, appsFlyer: SauceSDK.AppsFlyerConfig? = nil, chat: SauceSDK.ChatConfig? = nil, collect: SauceSDK.CollectConfig? = nil, consult: SauceSDK.ConsultConfig? = nil, coupon: SauceSDK.CouponConfig? = nil, enter: SauceSDK.EnterConfig? = nil, guestLogin: SauceSDK.GuestLoginConfig? = nil, marketingGTM: SauceSDK.MarketingGTMConfig? = nil, pip: SauceSDK.PIPConfig? = nil, product: SauceSDK.ProductConfig? = nil, purchase: SauceSDK.PurchaseConfig? = nil, redirection: SauceSDK.RedirectionConfig? = nil, reward: SauceSDK.RewardConfig? = nil, screenOption: SauceSDK.ScreenOptionConfig? = nil, share: SauceSDK.ShareConfig? = nil, sauceclip: SauceSDK.SauceclipConfig? = nil, theme: SauceSDK.ThemeConfig? = nil, theme2: SauceSDK.ThemeConfig2? = nil, wish: SauceSDK.WishConfig? = nil, broadcastOperation: SauceSDK.BroadcastOperationConfig? = nil, staffSignup: SauceSDK.StaffSignupConfig? = nil, update: SauceSDK.UpdateConfig? = nil, shareType: SauceSDK.BroadcastConfigData.ShareType = .none, tutorialType: SauceSDK.BroadcastConfigData.TutorialType = .none, isLikeEnabled: Swift.Bool? = true, isCloseEnabled: Swift.Bool? = true, isDimEnabled: Swift.Bool? = true, dimColor: Swift.String? = "000000", dimAlpha: CoreFoundation.CGFloat? = 0.5, productTheme: SauceSDK.BroadcastConfigData.ProductTheme? = .transparent, isCustomProductMove: Swift.Bool = false, isPIPEnabled: Swift.Bool = true, isFullScreenEnabled: Swift.Bool = true)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct AirbridgeConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct AlarmConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct AppsFlyerConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ChatConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CollectConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CollectConfigDetail : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CollectTheme : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ThemeColor : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ThemeFont : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CollectSauceclip : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ConsultConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CouponConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct EnterConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct GuestLoginConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct MarketingGTMConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct PIPConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ProductConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct PurchaseConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RedirectionConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RedirectionDetail : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct LogoClickConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RewardConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ScreenOptionConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ShareConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct SauceclipConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ThemeConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ThemeConfig2 : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct WishConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct BroadcastOperationConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct StaffSignupConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct StaffSignupTheme : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct UpdateConfig : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct BroadcastListResponse : Swift.Codable {
+  public let count: Swift.Int
+  public let items: [SauceSDK.BroadcastDetail]
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct BroadcastDetail : Swift.Codable {
+  public let broadcastId: Swift.String
+  public let broadcastName: Swift.String?
+  public let broadcastTypeCode: Swift.String?
+  public let broadcastStateCode: Swift.String?
+  public let broadcastStartDt: Swift.String?
+  public let broadcastEndDt: Swift.String?
+  public let viewerCount: Swift.Int?
+  public let likeCount: Swift.Int?
+  public let replyCount: Swift.Int?
+  public let aspectRatio: Swift.String?
+  public let roomId: Swift.String?
+  public let partnerId: Swift.String?
+  public let programmingStartDt: Swift.String?
+  public let thumbnailList: [SauceSDK.ThumbnailInfo]?
+  public let broadcastThumbnailList: [SauceSDK.ThumbnailInfo]?
+  public let productList: [Swift.String]?
+  public let productListDetail: [SauceSDK.ProductListDetail]?
+  public let outputInfo: [SauceSDK.OutputInfo]?
+  public let cueCardList: [SauceSDK.cueCardList]?
+  public let useShare: Swift.Int?
+  public let isLikeEnabled: Swift.Bool?
+  public let isPIPEnabled: Swift.Bool?
+  public let usePurchaseEvent: Swift.Bool?
+  public let me: SauceSDK.BroadcastMetaInfo?
+  public let broadcastSecretTypeCode: Swift.String?
+  public let shortUrl: Swift.String?
+  public let isReplay: Swift.Bool?
+  public let programmingTypeCode: Swift.String?
+  public let isTest: Swift.Bool?
+  public let etcLinkOpenType: Swift.String?
+  public let clickCount: Swift.Int?
+  public let chatVersion: Swift.String?
+  public let liveBroadcastId: Swift.String?
+  public let serviceAdminName: Swift.String?
+  public let serviceAdminId: Swift.String?
+  public let explanation: Swift.String?
+  public let isCoupon: Swift.Bool?
+  public let isExhibitPartner: Swift.Int?
+  public let broadcastUsePassword: Swift.Bool?
+  public let isExhibitSauceFlex: Swift.Int?
+  public let isExhibitSauceTv: Swift.Int?
+  public let isShutdown: Swift.Bool?
+  public let explanationImages: [SauceSDK.ExplanationImage]?
+  public let shopName: Swift.String?
+  public let partnerProfileImageUrl: Swift.String?
+  public let shopId: Swift.String?
+  public let playlistAvailable: Swift.Bool?
+  public let broadcastCategoryName1: Swift.String?
+  public let broadcastCategoryName2: Swift.String?
+  public let broadcastCategoryId1: Swift.String?
+  public let broadcastCategoryId2: Swift.String?
+  public let hashTagList: [Swift.String]?
+  public let metaData: SauceSDK.NoticeMetaData?
+  public let bannerList: [SauceSDK.LiveBannerModel]?
+  public let couponList: [SauceSDK.CouponList]?
+  public let highlightList: [SauceSDK.HighlightList]?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct NoticeMetaData : Swift.Codable {
+  public let isUsingVodLiveBadge: Swift.Bool?
+  public let notice: SauceSDK.NoticeMetaItem?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct NoticeMetaItem : Swift.Codable {
+  public let message: Swift.String?
+  public let type: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ThumbnailInfo : Swift.Codable {
+  public let isRepresentative: Swift.Bool?
+  public let thumbnailUrl: Swift.String?
+  public let isVod: Swift.Bool?
+  public let snapshotUrl: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct HighlightList : Swift.Codable {
+  public let startTime: Swift.String?
+  public let endTime: Swift.String?
+  public let tagName: Swift.String?
+  public let tagId: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CouponList : Swift.Codable {
+  public let clickEventType: Swift.String?
+  public let imageSizeRate: Swift.Int?
+  public let imageUrl: Swift.String?
+  public let name: Swift.String?
+  public let isRequireLogin: Swift.Bool?
+  public let couponId: Swift.String?
+  public let clickActionType: Swift.String?
+  public let couponCode: Swift.String?
+  public let isDisplay: Swift.Bool?
+  public let linkUrl: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct cueCardList : Swift.Codable {
+  public let cueCardId: Swift.String?
+  public let noticeYn: Swift.Bool?
+  public let content: Swift.String?
+  public let cueTypeCode: Swift.String?
+  public let imageUrl: Swift.String?
+  public let snapshotUrl: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct OutputInfo : Swift.Codable {
+  public let type: Swift.String?
+  public let path: Swift.String?
+  public let preview: Swift.String?
+  public let downloadUrl: Swift.String?
+  public let thumbnailUrl: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct BroadcastMetaInfo : Swift.Codable {
+  public let standby: Swift.Bool?
+  public let httpOutputPath: Swift.String?
+  public let state: Swift.String?
+  public let metaData: SauceSDK.MetaData?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct MetaData : Swift.Codable {
+  public let width: Swift.Int?
+  public let height: Swift.Int?
+  public let size: Swift.String?
+  public let inputWidth: Swift.String?
+  public let inputHeight: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ProductListDetail : Swift.Codable {
+  public let productThumbnailUrlList: [SauceSDK.ProductThumbnail]?
+  public let currencyNotation: Swift.String?
+  public let externalProductId: Swift.String?
+  public let priceTypeCode: Swift.String?
+  public let productTypeCode: Swift.String?
+  public let redirectUrl: Swift.String?
+  public let productEventTypeCode: Swift.String?
+  public let sellingPrice: Swift.String?
+  public let countryId: Swift.String?
+  public let currencyId: Swift.String?
+  public let languageTag: Swift.String?
+  public let ord: Swift.Int?
+  public let productId: Swift.String?
+  public let productName: Swift.String?
+  public let price: Swift.String?
+  public let discountPrice: Swift.String?
+  public let discountRate: Swift.String?
+  public let discountTypeCode: Swift.String?
+  public let brandName: Swift.String?
+  public let isSoldout: Swift.Int?
+  public let realTimeProductShow: Swift.Bool?
+  public let realTimeIntroduction: Swift.Bool?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ExplanationImage : Swift.Codable {
+  public let thumbnailUrl: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ProductThumbnail : Swift.Codable {
+  public let isRepresentative: Swift.Bool?
+  public let thumbnailUrl: Swift.String?
+  public let productThumbnailType: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct LiveBannerModel : Swift.Codable {
+  public let bannerId: Swift.String?
+  public let bannerTypeCode: Swift.String?
+  public let imageUrl: Swift.String?
+  public let content: Swift.String?
+  public let link: Swift.String?
+  public let alwaysYn: Swift.Bool?
+  public let startTime: Swift.String?
+  public let endTime: Swift.String?
+  public let useIcon: Swift.Int?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct LiveThumbnailModel : Swift.Codable {
+  public let isRepresentative: Swift.Bool?
+  public let thumbnailUrl: Swift.String?
+  public let isVod: Swift.Bool?
+  public let snapshotUrl: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct EmptyResponse : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ChatReportRequest : Swift.Codable {
+  public init(reporterId: Swift.String, reporterName: Swift.String, chat: Swift.String, chatMemberId: Swift.String, chatMemberName: Swift.String, report: Swift.String, messageRegDate: Swift.String, messageId: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct TokenRequest : Swift.Codable {
+  public init(partnerId: Swift.String, nickName: Swift.String, memberType: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct TokenResponse : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct TokenData : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct TokenValidationResponse : Swift.Codable {
+  public struct ValidationData : Swift.Codable {
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class AlertPopupView {
+  public static let shared: SauceSDK.AlertPopupView
+  public func show(title: Swift.String, message: Swift.String, confirmMessage: Swift.String, completion: (() -> Swift.Void)? = nil)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class BottomToastView {
+  public static let shared: SauceSDK.BottomToastView
+  public func show(message: Swift.String, duration: Foundation.TimeInterval = 3.0)
+  public func hide()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class ClosePopupView {
+  public static let shared: SauceSDK.ClosePopupView
+  public func show(title: Swift.String, completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class MarqueeLabel : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency final public let homeLabel: UIKit.UILabel
+  @_Concurrency.MainActor @preconcurrency public var text: Swift.String? {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency public var font: UIKit.UIFont {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency public var textColor: UIKit.UIColor {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency public var speed: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency public var initialDelay: Swift.Double
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency public func stopScrolling()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class FadedMarqueeView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var fadeWidth: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency public func enableFadeEffect(_ enable: Swift.Bool)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class ReportChatModalView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public func show(completion: @escaping (Swift.String) -> Swift.Void, cancelCompletion: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor @preconcurrency public func dismiss(completion: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor @preconcurrency public func setReportMessage(nickname: Swift.String, message: Swift.String)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class SecretLiveEnterView : ObjectiveC.NSObject {
+  public static let shared: SauceSDK.SecretLiveEnterView
+  public func show(completion: @escaping (Swift.String) -> Swift.Void, cancelCompletion: (() -> Swift.Void)? = nil)
+  public func showError()
+  @objc deinit
+}
+extension SauceSDK.SecretLiveEnterView : UIKit.UITextFieldDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func textField(_ textField: UIKit.UITextField, shouldChangeCharactersIn range: Foundation.NSRange, replacementString string: Swift.String) -> Swift.Bool
+}
+@_hasMissingDesignatedInitializers public class ToastView {
+  public static let shared: SauceSDK.ToastView
+  public func show(message: Swift.String, icon: UIKit.UIImage?, in view: UIKit.UIView, autoHide: Swift.Bool = true, onTap: (() -> Swift.Void)? = nil)
+  public func hide()
+  @objc deinit
+}
+public struct ProductClickParams {
+  public init(memberId: Swift.String, partnerId: Swift.String, broadcastId: Swift.String, productId: Swift.String, playStart: Swift.String, isExhibitSauceFlex: Swift.String, isExhibitPartner: Swift.String, os: Swift.String, isRedirect: Swift.String, eElk: Swift.String)
+}
+public struct BannerClickParams {
+  public init(memberId: Swift.String, partnerId: Swift.String, broadcastId: Swift.String, bannerId: Swift.String, playStart: Swift.String, isExhibitSauceFlex: Swift.String, isExhibitPartner: Swift.String, os: Swift.String, isRedirect: Swift.String, eElk: Swift.String, isUse: Swift.String)
+}
+public struct ClickResponse : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ElkData : Swift.Codable {
+  public init(userAgent: Swift.String, userHost: Swift.String, userUri: Swift.String, userBrowser: Swift.String, isAdmin: Swift.Bool, sessionId: Swift.String, referrer: Swift.String, roomId: Swift.String, usedSource: Swift.String, genderCode: Swift.String, ageCode: Swift.String, timeSinceStart: Swift.Int, seekTimeWithMs: Swift.Double, seekTime: Swift.Int, isMute: Swift.Bool, playingState: Swift.String, fullscreen: Swift.Bool, floating: Swift.Bool)
+  public func toBase64String() -> Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class AnalyticsManager {
+  public func updateField(_ key: Swift.String, value: Any)
+  public func updateFields(_ fields: [Swift.String : Any])
+  @objc deinit
+}
+public enum APIEndpoint {
+  case broadcast(id: Swift.String)
+  case config(partnerId: Swift.String)
+  case token(request: SauceSDK.TokenRequest)
+  case validateToken(broadcastId: Swift.String, token: Swift.String)
+  case quiz(id: Swift.String)
+  case chat(roomId: Swift.String)
+  case stream(id: Swift.String)
+  case addProductInterest(memberId: Swift.String, request: SauceSDK.ProductInterestRequest)
+  case removeProductInterest(memberId: Swift.String, partnerId: Swift.String, productId: Swift.String)
+  case secretPassword(broadcastId: Swift.String, password: Swift.String)
+  case vodChatKey(broadCastID: Swift.String, partnerID: Swift.String)
+  case vodChatMessages(broadCastID: Swift.String, partnerID: Swift.String, key: Swift.String)
+  case chatReport(broadcastId: Swift.String, request: SauceSDK.ChatReportRequest)
+  case getProductInterest(memberId: Swift.String, partnerId: Swift.String, returnLimit: Swift.Int, returnPage: Swift.Int)
+  case productClick(params: SauceSDK.ProductClickParams)
+  case bannerClick(params: SauceSDK.BannerClickParams)
+}
+public enum APIError : Swift.Error {
+  case invalidURL
+  case noData
+  case decodingError
+  case requestFailed(statusCode: Swift.Int, error: any Swift.Error)
+  case invalidResponse(statusCode: Swift.Int, errorData: (any Swift.Decodable)? = nil)
+  case dataParsingFailed(any Swift.Error)
+  case invalidParameter(message: Swift.String)
+}
+extension SauceSDK.APIError {
+  public var description: Swift.String {
+    get
+  }
+}
+public protocol APIServiceProtocol {
+  func fetch<T>(endpoint: SauceSDK.APIEndpoint) -> Combine.AnyPublisher<SauceSDK.APIBaseResponse<T>, SauceSDK.APIError> where T : Swift.Decodable, T : Swift.Encodable
+}
+@_hasMissingDesignatedInitializers public class APIService : SauceSDK.APIServiceProtocol {
+  public static let shared: SauceSDK.APIService
+  public func fetch<T>(endpoint: SauceSDK.APIEndpoint) -> Combine.AnyPublisher<SauceSDK.APIBaseResponse<T>, SauceSDK.APIError> where T : Swift.Decodable, T : Swift.Encodable
+  public func fetchBroadcast(id: Swift.String) -> Combine.AnyPublisher<SauceSDK.APIBaseResponse<SauceSDK.BroadcastListResponse>, SauceSDK.APIError>
+  public func fetchBroadcastConfig(partnerId: Swift.String) -> Combine.AnyPublisher<SauceSDK.BroadcastConfigResponse, SauceSDK.APIError>
+  public func fetchToken(partnerId: Swift.String, nickName: Swift.String, memberType: Swift.String = "0") -> Combine.AnyPublisher<SauceSDK.TokenResponse, SauceSDK.APIError>
+  public func validateToken(broadcastId: Swift.String, token: Swift.String) -> Combine.AnyPublisher<SauceSDK.TokenValidationResponse, SauceSDK.APIError>
+  public func addProductInterest(memberId: Swift.String, broadcastId: Swift.String, partnerId: Swift.String, productId: Swift.String) -> Combine.AnyPublisher<SauceSDK.APIBaseResponse<SauceSDK.EmptyResponse>, SauceSDK.APIError>
+  public func removeProductInterest(memberId: Swift.String, partnerId: Swift.String, productId: Swift.String) -> Combine.AnyPublisher<SauceSDK.APIBaseResponse<SauceSDK.EmptyResponse>, SauceSDK.APIError>
+  public func reportChat(broadcastId: Swift.String, request: SauceSDK.ChatReportRequest) -> Combine.AnyPublisher<SauceSDK.APIBaseResponse<SauceSDK.EmptyResponse>, SauceSDK.APIError>
+  public func fetchBannedWords(partnerId: Swift.String) -> Combine.AnyPublisher<SauceSDK.APIBaseResponse<SauceSDK.BannedWordResponse>, SauceSDK.APIError>
+  public func setJoinUser<T, U>(request: T) -> Combine.AnyPublisher<U, SauceSDK.APIError> where T : Swift.Decodable, T : Swift.Encodable, U : Swift.Decodable, U : Swift.Encodable
+  public func trackProductClick(params: SauceSDK.ProductClickParams) -> Combine.AnyPublisher<SauceSDK.APIBaseResponse<SauceSDK.ClickResponse>, SauceSDK.APIError>
+  public func trackBannerClick(params: SauceSDK.BannerClickParams) -> Combine.AnyPublisher<SauceSDK.APIBaseResponse<SauceSDK.ClickResponse>, SauceSDK.APIError>
+  @objc deinit
+}
+public enum LiveAPIHost {
+  case stage
+  case prod
+  public static var currentSocketURL: Swift.String {
+    get
+  }
+  public static var currentConfigURL: Swift.String {
+    get
+  }
+  public static var currentAnalyticsURL: Swift.String {
+    get
+  }
+  public static func == (a: SauceSDK.LiveAPIHost, b: SauceSDK.LiveAPIHost) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public var liveCurrentEnvironment: SauceSDK.LiveAPIHost
+@_hasMissingDesignatedInitializers public class NetworkService {
+  public static let shared: SauceSDK.NetworkService
+  @objc deinit
+}
+public enum PlayerEvent {
+  case ready(SauceSDK.BroadcastDetail)
+  case play
+  case pause
+  case finish
+  case error(any Swift.Error)
+  case timeUpdate(Swift.Double)
+  case qualityChanged(Swift.String)
+  case likeButtonTapped
+  case shareButtonTapped
+  case closeButtonTapped
+}
+@_hasMissingDesignatedInitializers public class Config {
+  public static let `default`: SauceSDK.Config
+  @objc deinit
+}
+public struct ConfigSettings {
+  public let showControls: Swift.Bool
+  public let showCloseButton: Swift.Bool
+  public let showLikeButton: Swift.Bool
+  public let showShareButton: Swift.Bool
+  public let dimColor: UIKit.UIColor
+  public let dimAlpha: CoreFoundation.CGFloat
+  public static let `default`: SauceSDK.ConfigSettings
+  public init(showControls: Swift.Bool = true, showCloseButton: Swift.Bool = true, showLikeButton: Swift.Bool = true, showShareButton: Swift.Bool = true, dimColor: UIKit.UIColor = .black, dimAlpha: CoreFoundation.CGFloat = 0.5)
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class LiveBaseView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var onBroadcastInfoUpdate: ((SauceSDK.BroadcastDetail) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onError: ((any Swift.Error) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onClose: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onLogin: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onCouponEvent: ((Swift.String?) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public init(broadcastID: Swift.String, token: Swift.String? = nil, viewController: UIKit.UIViewController)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency public func startPlayer()
+}
+extension SauceSDK.LiveBaseView : SauceSDK.PlayerView.BaseViewDelegate {
+  @_Concurrency.MainActor @preconcurrency public func refreshBroadcastInfo(completion: @escaping (SauceSDK.BroadcastDetail?) -> Swift.Void)
+  @_Concurrency.MainActor @preconcurrency public func chatButtonDidTap(nickname: Swift.String, completion: @escaping (Swift.Bool) -> Swift.Void)
+}
+public struct TokenInfo {
+}
+public struct APICompletionData {
+}
+public class LiveBaseViewModel {
+  public struct Input {
+  }
+  public struct Output {
+  }
+  public init(broadcastId: Swift.String, partnerId: Swift.String? = nil, apiService: SauceSDK.APIService)
+  public func transform(input: SauceSDK.LiveBaseViewModel.Input) -> SauceSDK.LiveBaseViewModel.Output
+  public func fetchBroadcastInfo()
+  public func initializeToken(broadcastId: Swift.String, token: Swift.String?, type: Swift.String) -> Combine.AnyPublisher<SauceSDK.TokenInfo, Swift.Never>
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class HighlightBottomSheet : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public init(highlightButtonAction: (() -> Swift.Void)? = nil, settingButtonAction: (() -> Swift.Void)? = nil, highlightButtonTitle: Swift.String = "하이라이트 보기")
+  @_Concurrency.MainActor @preconcurrency public func show()
+  @_Concurrency.MainActor @preconcurrency public func hide(completion: (() -> Swift.Void)? = nil)
+  @objc deinit
+}
+public struct HighlightItem {
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class PlayerView : UIKit.UIView {
+  public enum BroadcastStateType {
+    case live
+    case liveTest
+    case liveReplay
+    case liveReplayTest
+    case live_timeStamp
+    case liveTest_timeStamp
+    case liveReplay_timeStamp
+    case liveReplayTest_timeStamp
+    case vod
+    case vodTest
+    public static func == (a: SauceSDK.PlayerView.BroadcastStateType, b: SauceSDK.PlayerView.BroadcastStateType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public protocol BasePlayerViewDelegate : AnyObject {
+    func playerViewLoginTap()
+    func playerViewDidTapClose()
+    func playerViewDidTapPIP()
+    func playerViewDidToggleMute(_ isMuted: Swift.Bool)
+    func playerViewDidTapBackground()
+    func playerViewDidChangeQuality(_ quality: Swift.String)
+    func playerViewDidTapForward()
+    func playerViewDidTapBackward()
+    func playerViewDidChangeRate(_ rate: Swift.Float)
+    func playerViewGetCurrentPlaybackRate() -> Swift.Float
+    func playerViewDidSeekForHighlight(startTime: Foundation.TimeInterval, endTime: Foundation.TimeInterval)
+    func playerViewDidSetEndTime(_ time: Foundation.TimeInterval)
+    func isPlayingHighlight() -> Swift.Bool
+    func exitHighlightMode()
+  }
+  public protocol BaseViewDelegate : AnyObject {
+    func chatButtonDidTap(nickname: Swift.String, completion: @escaping (Swift.Bool) -> Swift.Void)
+    func refreshBroadcastInfo(completion: @escaping (SauceSDK.BroadcastDetail?) -> Swift.Void)
+  }
+  @_Concurrency.MainActor @preconcurrency weak public var delegate: (any SauceSDK.PlayerView.BasePlayerViewDelegate)?
+  @_Concurrency.MainActor @preconcurrency weak public var baseView_dlegate: (any SauceSDK.PlayerView.BaseViewDelegate)?
+  @_Concurrency.MainActor @preconcurrency public var onCouponEvent: ((Swift.String?) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency final public let chatView: UIKit.UIView
+  @_Concurrency.MainActor @preconcurrency final public let chatInputView: SauceSDK.ChatInputView
+  @_Concurrency.MainActor @preconcurrency public var isVOD: Swift.Bool {
+    get
+    set
+  }
+  public enum Version {
+    case v1
+    case v2
+    public static func == (a: SauceSDK.PlayerView.Version, b: SauceSDK.PlayerView.Version) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @_Concurrency.MainActor @preconcurrency public init(frame: CoreFoundation.CGRect, memberId: Swift.String = "", version: SauceSDK.PlayerView.Version = .v2)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func didMoveToSuperview()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func removeFromSuperview()
+  @_Concurrency.MainActor @preconcurrency public func configure(with info: SauceSDK.BroadcastDetail)
+  @_Concurrency.MainActor @preconcurrency public func setLikedProducts(_ productIds: Swift.Set<Swift.String>)
+  @_Concurrency.MainActor @preconcurrency public func updateChatInputState(enabled: Swift.Bool, placeholder: Swift.String)
+  @_Concurrency.MainActor @preconcurrency public func refreshBroadcastDetail()
+  @_Concurrency.MainActor @preconcurrency public func updateCoupon(with data: SauceSDK.CouponList)
+  @_Concurrency.MainActor @preconcurrency public func resetVODChatMessages()
+  @_Concurrency.MainActor @preconcurrency public func updateVODChatMessages(at currentTime: Foundation.TimeInterval)
+  @_Concurrency.MainActor @preconcurrency public func handleSeek(to time: Foundation.TimeInterval)
+}
+extension SauceSDK.PlayerView {
+  @_Concurrency.MainActor @preconcurrency public func updateBannerTime(_ currentTime: Foundation.TimeInterval)
+  @_Concurrency.MainActor @preconcurrency public func configureProductsView(with products: [SauceSDK.ProductListDetail]?)
+  @_Concurrency.MainActor @preconcurrency public func updateRewardView(isActive: Swift.Bool, time: Swift.Int?, linkUrl: Swift.String?, message: Swift.String)
+}
+extension SauceSDK.PlayerView : UIKit.UIGestureRecognizerDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func gestureRecognizer(_ gestureRecognizer: UIKit.UIGestureRecognizer, shouldReceive touch: UIKit.UITouch) -> Swift.Bool
+}
+extension SauceSDK.PlayerView : UIKit.UITableViewDelegate, UIKit.UITableViewDataSource {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGFloat
+}
+extension SauceSDK.PlayerView : UIKit.UIScrollViewDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class ChatInputView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var onSendMessage: ((Swift.String) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public func activateInput()
+  @_Concurrency.MainActor @preconcurrency public func deactivateInput()
+  @objc deinit
+}
+extension SauceSDK.ChatInputView : UIKit.UITextViewDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func textView(_ textView: UIKit.UITextView, shouldChangeTextIn range: Foundation.NSRange, replacementText text: Swift.String) -> Swift.Bool
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func textViewDidChange(_ textView: UIKit.UITextView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func textViewDidBeginEditing(_ textView: UIKit.UITextView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func textViewDidEndEditing(_ textView: UIKit.UITextView)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class ProductView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency public func configure(with product: SauceSDK.ProductListDetail, count: Swift.Int)
+  @_Concurrency.MainActor @preconcurrency public func setOnProductClick(_ callback: @escaping (Swift.String) -> Swift.Void)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class LIVEControllerView : UIKit.UIView {
+  public protocol ControllerViewDelegate : AnyObject {
+    func controllerViewDidTapClose()
+    func controllerViewDidTapPIP()
+    func controllerViewDidToggleMute(_ isMuted: Swift.Bool)
+    func controllerViewDidTapBackground()
+    func controllerViewDidTapPlay()
+    func controllerViewDidSeek(to time: Swift.Float)
+    func controllerViewDidTapLive()
+    func controllerViewDidBeginSeeking()
+  }
+  @_Concurrency.MainActor @preconcurrency weak public var delegate: (any SauceSDK.LIVEControllerView.ControllerViewDelegate)?
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency public func updateTimeShift(progress: Swift.Float, duration: Swift.Float)
+  @_Concurrency.MainActor @preconcurrency public func configure(isMuted: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func showBuffering()
+  @_Concurrency.MainActor @preconcurrency public func hideBuffering()
+  @_Concurrency.MainActor @preconcurrency public func updatePlayButton(isPlaying: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func updateLiveState(isLive: Swift.Bool, timeShift: Swift.String? = nil)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class LIVEVideoPlayer : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var onClose: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onLogin: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency public func setupPlayer(with info: SauceSDK.BroadcastDetail)
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func observeValue(forKeyPath keyPath: Swift.String?, of object: Any?, change: [Foundation.NSKeyValueChangeKey : Any]?, context: Swift.UnsafeMutableRawPointer?)
+}
+extension SauceSDK.LIVEVideoPlayer : SauceSDK.PlayerView.BasePlayerViewDelegate {
+  @_Concurrency.MainActor @preconcurrency public func playerViewLoginTap()
+  @_Concurrency.MainActor @preconcurrency public func playerViewDidTapForward()
+  @_Concurrency.MainActor @preconcurrency public func playerViewDidTapBackward()
+  @_Concurrency.MainActor @preconcurrency public func playerViewDidChangeRate(_ rate: Swift.Float)
+  @_Concurrency.MainActor @preconcurrency public func playerViewGetCurrentPlaybackRate() -> Swift.Float
+  @_Concurrency.MainActor @preconcurrency public func playerViewDidSeekForHighlight(startTime: Foundation.TimeInterval, endTime: Foundation.TimeInterval)
+  @_Concurrency.MainActor @preconcurrency public func playerViewDidSetEndTime(_ time: Foundation.TimeInterval)
+  @_Concurrency.MainActor @preconcurrency public func isPlayingHighlight() -> Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public func exitHighlightMode()
+  @_Concurrency.MainActor @preconcurrency public func playerViewDidTapClose()
+  @_Concurrency.MainActor @preconcurrency public func playerViewDidTapPIP()
+  @_Concurrency.MainActor @preconcurrency public func playerViewDidToggleMute(_ isMuted: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func playerViewDidTapBackground()
+  @_Concurrency.MainActor @preconcurrency public func playerViewDidChangeQuality(_ quality: Swift.String)
+}
+extension SauceSDK.LIVEVideoPlayer : SauceSDK.LIVEControllerView.ControllerViewDelegate {
+  @_Concurrency.MainActor @preconcurrency public func controllerViewDidBeginSeeking()
+  @_Concurrency.MainActor @preconcurrency public func controllerViewDidChangeSpeed(_ speed: Swift.Float)
+  @_Concurrency.MainActor @preconcurrency public func controllerViewDidTapClose()
+  @_Concurrency.MainActor @preconcurrency public func controllerViewDidTapPIP()
+  @_Concurrency.MainActor @preconcurrency public func controllerViewDidToggleMute(_ isMuted: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func controllerViewDidTapBackground()
+  @_Concurrency.MainActor @preconcurrency public func controllerViewDidTapPlay()
+  @_Concurrency.MainActor @preconcurrency public func controllerViewDidSeek(to progress: Swift.Float)
+  @_Concurrency.MainActor @preconcurrency public func controllerViewDidTapLive()
+}
+public struct PlaylistResponse : Swift.Codable {
+  public let code: Swift.String
+  public let timestamp: Swift.Int64
+  public let requestId: Swift.String
+  public let message: Swift.String
+  public let response: SauceSDK.PlaylistData
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct PlaylistData : Swift.Codable {
+  public let count: Swift.Int
+  public let items: [SauceSDK.PlaylistItem]
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct PlaylistItem : Swift.Codable {
+  public let regDt: Swift.String?
+  public let outputInfo: [SauceSDK.OutputInfo]
+  public let programmingEndDt: Swift.String?
+  public let broadcastStandbyVerticalImageUrl: Swift.String?
+  public let broadcastStandbyHorizontalImageUrl: Swift.String?
+  public let standByImageUrl: [Swift.String]?
+  public let broadcastId: Swift.String?
+  public let programmingStartDt: Swift.String?
+  public let aspectRatio: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class VODControllerView : UIKit.UIView {
+  public protocol ControllerViewDelegate : AnyObject {
+    func controllerViewDidTapClose()
+    func controllerViewDidTapPIP()
+    func controllerViewDidToggleMute(_ isMuted: Swift.Bool)
+    func controllerViewDidTapBackground()
+    func controllerViewDidTapPlay()
+    func controllerViewDidSeek(to time: Swift.Float)
+    func controllerViewDidTapForward()
+    func controllerViewDidTapBackward()
+    func controllerViewDidChangeSpeed(_ speed: Swift.Float)
+    func controllerViewDidBeginSeeking()
+  }
+  @_Concurrency.MainActor @preconcurrency weak public var delegate: (any SauceSDK.VODControllerView.ControllerViewDelegate)?
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency public func configure(isMuted: Swift.Bool = false, currentRate: Swift.Float)
+  @_Concurrency.MainActor @preconcurrency public func resetSpeed()
+  @_Concurrency.MainActor @preconcurrency public func setTotalTime(seconds: Swift.Float)
+  @_Concurrency.MainActor @preconcurrency public func updateCurrentTime(seconds: Swift.Float)
+  @_Concurrency.MainActor @preconcurrency public func setHighlightRange(totalDuration: Swift.Float, startTime: Swift.Float, endTime: Swift.Float)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class VODVideoPlayer : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var onClose: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onLogin: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public init()
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency public func setupPlayer(with info: SauceSDK.BroadcastDetail)
+}
+extension SauceSDK.VODVideoPlayer : UIKit.UITableViewDelegate, UIKit.UITableViewDataSource {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, willDisplay cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didEndDisplaying cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndScrollingAnimation(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class ScheduleView : UIKit.UIView {
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency public func setupSchedule(with info: SauceSDK.BroadcastDetail)
+}
+extension SauceSDK.ScheduleView : UIKit.UICollectionViewDataSource {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+}
+extension SauceSDK.ScheduleView : UIKit.UICollectionViewDelegateFlowLayout {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, sizeForItemAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGSize
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Swift.Int) -> CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, minimumLineSpacingForSectionAt section: Swift.Int) -> CoreFoundation.CGFloat
+}
+extension SauceSDK.ScheduleView : UIKit.UICollectionViewDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, willDisplay cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class AnimatedView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class BottomSheetView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class ChatView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class ErrorView : UIKit.UIView {
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class LoadingView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public func startAnimating()
+  @_Concurrency.MainActor @preconcurrency public func stopAnimating()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class SkeletonView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @objc deinit
+}
+extension Foundation.Bundle {
+  public static var module: Foundation.Bundle {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class Logger {
+  public static let shared: SauceSDK.Logger
+  public func log(_ message: Swift.String)
+  @objc deinit
+}
+public struct StringUtils {
+  public static func extractPartnerId(from broadcastId: Swift.String) -> Swift.String?
+  public static func generateGuestNickname() -> Swift.String
+}
+open class ShowRoomBaseViewModel {
+  final public let isLoading: Combine.CurrentValueSubject<Swift.Bool, Swift.Never>
+  final public let error: Combine.PassthroughSubject<any Swift.Error, Swift.Never>
+  final public let event: Combine.PassthroughSubject<SauceSDK.ViewModelEvent, Swift.Never>
+  public init()
+  @objc deinit
+}
+public enum ViewModelEvent {
+  case showAlert(title: Swift.String, message: Swift.String)
+  case navigate(to: SauceSDK.NavigationDestination)
+  case dismiss
+  case reload
+  case custom(Any)
+}
+public enum NavigationDestination {
+  case detail(id: Swift.String)
+  case list
+  case settings
+  case custom(Any)
+}
+public protocol ViewModelState {
+}
+public protocol ViewModelAction {
+}
+open class StatefulViewModel<State, Action> : SauceSDK.ShowRoomBaseViewModel where State : SauceSDK.ViewModelState, Action : SauceSDK.ViewModelAction {
+  final public let state: Combine.CurrentValueSubject<State, Swift.Never>
+  public init(initialState: State)
+  open func dispatch(_ action: Action)
+  @objc deinit
+}
+public struct EmptyState : SauceSDK.ViewModelState {
+}
+public struct EmptyAction : SauceSDK.ViewModelAction {
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency open class ShowRoomBaseView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency open func setupUI()
+  @_Concurrency.MainActor @preconcurrency open func setupConstraints()
+  @_Concurrency.MainActor @preconcurrency open func setupBindings()
+  @_Concurrency.MainActor @preconcurrency public func addShadow(color: UIKit.UIColor = .black, opacity: Swift.Float = 0.2, offset: CoreFoundation.CGSize = .zero, radius: CoreFoundation.CGFloat = 3)
+  @_Concurrency.MainActor @preconcurrency public func roundCorners(radius: CoreFoundation.CGFloat = 8.0, corners: QuartzCore.CACornerMask = .all)
+  @_Concurrency.MainActor @preconcurrency public func addBorder(width: CoreFoundation.CGFloat = 1.0, color: UIKit.UIColor = .lightGray)
+  @objc deinit
+}
+extension QuartzCore.CACornerMask {
+  public static var all: QuartzCore.CACornerMask {
+    get
+  }
+  public static var top: QuartzCore.CACornerMask {
+    get
+  }
+  public static var bottom: QuartzCore.CACornerMask {
+    get
+  }
+}
+public struct AppConstants {
+  public struct API {
+    public static let baseURL: Swift.String
+    public static let timeout: Swift.Double
+    public static let apiKey: Swift.String
+  }
+  public struct UI {
+    public static let primaryColor: UIKit.UIColor
+    public static let secondaryColor: UIKit.UIColor
+    public static let backgroundColor: UIKit.UIColor
+    public static let textColor: UIKit.UIColor
+    public static let cornerRadius: CoreFoundation.CGFloat
+    public static let padding: CoreFoundation.CGFloat
+    public static let headerFont: UIKit.UIFont
+    public static let bodyFont: UIKit.UIFont
+    public static let captionFont: UIKit.UIFont
+  }
+  public struct UserDefaultsKeys {
+    public static let isLoggedIn: Swift.String
+    public static let userToken: Swift.String
+    public static let userId: Swift.String
+    public static let lastSyncTimestamp: Swift.String
+  }
+  public struct NotificationNames {
+    public static let userDidLogin: Swift.String
+    public static let userDidLogout: Swift.String
+    public static let dataDidSync: Swift.String
+  }
+}
+@_hasMissingDesignatedInitializers public class ShowRoomClient {
+  public var onLivePlayer: ((Swift.String, Swift.String?) -> Swift.Void)?
+  public var onClipPlayer: ((Swift.String?) -> Swift.Void)?
+  public var onVodPlayer: ((Swift.String, Swift.String?) -> Swift.Void)?
+  public static func initInstance(partnerID: Swift.String?, apiHost: SauceSDK.ShowRoomAPIHost = .stage)
+  public static func getInstance(showRoomID: Swift.String, viewController: UIKit.UIViewController) -> SauceSDK.ShowRoomView
+  public func setAPIHost(_ host: SauceSDK.ShowRoomAPIHost)
+  public func getAPIHost() -> SauceSDK.ShowRoomAPIHost
+  public static func getPartnerID() -> Swift.String?
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class BroadcastPreviewCell : UIKit.UICollectionViewCell {
+  @_Concurrency.MainActor @preconcurrency public var isPlaying: Swift.Bool {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public var isSearchResult: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public var isDetailView: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public func configure(with broadcast: SauceSDK.VodBroadcastModel)
+  @_Concurrency.MainActor @preconcurrency public func configure(with clip: SauceSDK.ClipBroadcastModel)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency public func playPreview()
+  @_Concurrency.MainActor @preconcurrency public func stopPreview()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func prepareForReuse()
+  @_Concurrency.MainActor @preconcurrency public func configureForCardLayout()
+  @_Concurrency.MainActor @preconcurrency public func resetToDefaultLayout()
+  @_Concurrency.MainActor @preconcurrency public func resetToThumbnailState()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class LazyLoadableView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var isDataLoaded: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public var refreshInterval: Swift.Double
+  @_Concurrency.MainActor @preconcurrency public func loadDataIfNeeded()
+  @_Concurrency.MainActor @preconcurrency public func checkVisibility()
+  @_Concurrency.MainActor @preconcurrency public func isViewVisible() -> Swift.Bool
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class WaveLoadingIndicator : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency public func startAnimating()
+  @_Concurrency.MainActor @preconcurrency public func stopAnimating()
+  @_Concurrency.MainActor @preconcurrency public var hidesWhenStopped: Swift.Bool {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
+  }
+  @_Concurrency.MainActor @preconcurrency public func setDotColor(_ color: UIKit.UIColor)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class BannerView : SauceSDK.LazyLoadableView {
+  @_Concurrency.MainActor @preconcurrency public init(id: Swift.Int, isFirstItem: Swift.Bool = false)
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency override public func loadDataIfNeeded()
+}
+extension SauceSDK.BannerView : UIKit.UICollectionViewDataSource, UIKit.UICollectionViewDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewWillBeginDragging(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDragging(_ scrollView: UIKit.UIScrollView, willDecelerate decelerate: Swift.Bool)
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class ClipCurationView : SauceSDK.LazyLoadableView {
+  @_Concurrency.MainActor @preconcurrency public var onEmptyState: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onClipPlayer: ((Swift.String?) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onActionButtonTapped: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public init(id: Swift.Int, parentVC: UIKit.UIViewController? = nil)
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency override public func loadDataIfNeeded()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
+  }
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func didMoveToWindow()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func didMoveToSuperview()
+  @_Concurrency.MainActor @preconcurrency public func applyTheme(_ theme: SauceSDK.ShowRoomTheme)
+}
+extension SauceSDK.ClipCurationView : UIKit.UICollectionViewDataSource {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+}
+extension SauceSDK.ClipCurationView : UIKit.UICollectionViewDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, willDisplay cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didEndDisplaying cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDragging(_ scrollView: UIKit.UIScrollView, willDecelerate decelerate: Swift.Bool)
+}
+extension SauceSDK.ClipCurationView : UIKit.UICollectionViewDelegateFlowLayout {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, sizeForItemAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGSize
+}
+public enum CurationType {
+  case liveRecent
+  case vodCuration
+  case clipCuration
+  public static func == (a: SauceSDK.CurationType, b: SauceSDK.CurationType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class CurationDetailView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var onCloseButtonTapped: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public init(type: SauceSDK.CurationType, contentId: Swift.Int, title: Swift.String, subtitle: Swift.String? = nil, totalCount: Swift.Int = 0)
+  @objc deinit
+}
+extension SauceSDK.CurationDetailView : UIKit.UICollectionViewDataSource {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, viewForSupplementaryElementOfKind kind: Swift.String, at indexPath: Foundation.IndexPath) -> UIKit.UICollectionReusableView
+}
+extension SauceSDK.CurationDetailView : UIKit.UICollectionViewDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, willDisplay cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didEndDisplaying cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDragging(_ scrollView: UIKit.UIScrollView, willDecelerate decelerate: Swift.Bool)
+}
+public enum Strings {
+  public enum Header {
+    public static let emptyRecentSearches: Swift.String
+    public static let searchPlaceholder: Swift.String
+    public static let recentSearches: Swift.String
+    public static let clearAll: Swift.String
+  }
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class LiveCalendarView : SauceSDK.LazyLoadableView {
+  @_Concurrency.MainActor @preconcurrency public var onLivePlayer: ((Swift.String, Swift.String?) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public init(id: Swift.Int)
+  @_Concurrency.MainActor @preconcurrency override public func loadDataIfNeeded()
+  @objc deinit
+}
+extension SauceSDK.LiveCalendarView : UIKit.UICollectionViewDataSource, UIKit.UICollectionViewDelegateFlowLayout {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, sizeForItemAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGSize
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class LiveRecentView : SauceSDK.LazyLoadableView {
+  @_Concurrency.MainActor @preconcurrency public var onActionButtonTapped: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onLivePlayer: ((Swift.String, Swift.String?) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public init(id: Swift.Int, parentVC: UIKit.UIViewController? = nil)
+  @_Concurrency.MainActor @preconcurrency override public func loadDataIfNeeded()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
+  }
+  @objc deinit
+}
+extension SauceSDK.LiveRecentView : UIKit.UICollectionViewDataSource {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+}
+extension SauceSDK.LiveRecentView : UIKit.UICollectionViewDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, willDisplay cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didEndDisplaying cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDragging(_ scrollView: UIKit.UIScrollView, willDecelerate decelerate: Swift.Bool)
+}
+extension SauceSDK.LiveRecentView : UIKit.UICollectionViewDelegateFlowLayout {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, sizeForItemAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGSize
+}
+public enum LiveUpcomingLayoutType {
+  case imageCarousel
+  case list
+  case grid
+  case carousel
+  public static func == (a: SauceSDK.LiveUpcomingLayoutType, b: SauceSDK.LiveUpcomingLayoutType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class LiveUpcomingView : SauceSDK.LazyLoadableView {
+  @_Concurrency.MainActor @preconcurrency public var onLivePlayer: ((Swift.String, Swift.String?) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onEmptyState: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public init(id: Swift.Int, layoutType: SauceSDK.LiveUpcomingLayoutType = .grid)
+  @_Concurrency.MainActor @preconcurrency public func updateLayoutType(_ type: SauceSDK.LiveUpcomingLayoutType)
+  @_Concurrency.MainActor @preconcurrency override public func loadDataIfNeeded()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
+  }
+  @objc deinit
+}
+extension SauceSDK.LiveUpcomingView : UIKit.UICollectionViewDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
+}
+extension SauceSDK.LiveUpcomingView : UIKit.UICollectionViewDataSource {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+}
+extension SauceSDK.LiveUpcomingView : UIKit.UICollectionViewDelegateFlowLayout {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, sizeForItemAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGSize
+}
+extension SauceSDK.LiveUpcomingView : UIKit.UIScrollViewDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewWillBeginDragging(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
+}
+@_hasMissingDesignatedInitializers public class ThemeManager {
+  public static let shared: SauceSDK.ThemeManager
+  public struct DefaultTheme {
+  }
+  public func setTheme(_ theme: SauceSDK.ShowRoomTheme?)
+  public func getCurrentTheme() -> SauceSDK.ShowRoomTheme
+  public func observeTheme() -> Combine.AnyPublisher<SauceSDK.ShowRoomTheme, Swift.Never>
+  public func clearThemeCache()
+  public func forceReloadTheme()
+  public func clearAllCache()
+  public func clearCompleteCache()
+  @objc deinit
+}
+public enum ThemeColorKey {
+  case background
+  case border
+  case placeholderText
+  case postCount
+  case allViewText
+  case contentGroupTitle
+  case contentTitle
+  case loadingIcon
+  case searchIcon
+  case searchBarBackground
+  case curationIntroText
+  case shopNameFont
+  case broadcastDate
+  case defaultDate
+  case todayBackground
+  case todayText
+  case noBroadcastDate
+  case notification
+  case notificationModalTitle
+  case notificationModalContent
+  case broadcastDateTime
+  case discount
+  public static func == (a: SauceSDK.ThemeColorKey, b: SauceSDK.ThemeColorKey) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum ThemeSettingKey {
+  case isLogoEnabled
+  case isSearchEnabled
+  case isCurationAllViewEnabled
+  case isShopNameEnabled
+  case isScheduleAllEnabled
+  case isNotificationEnabled
+  case isProductPriceVisible
+  case isLiveBroadcastEnabled
+  public static func == (a: SauceSDK.ThemeSettingKey, b: SauceSDK.ThemeSettingKey) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum ThemeTextKey {
+  case allViewText
+  case slUpcomingLiveTitle
+  case slLiveCalendarTitle
+  case slRecentLiveTitle
+  case searchBarPlaceholder
+  case scheduleWording
+  case liveCalendarTitle
+  case recentLiveTitle
+  public static func == (a: SauceSDK.ThemeTextKey, b: SauceSDK.ThemeTextKey) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class ShowRoomView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var onClose: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onTouch: ((Swift.String?) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onLivePlayer: ((Swift.String, Swift.String?) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onClipPlayer: ((Swift.String?) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onVodPlayer: ((Swift.String, Swift.String?) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public func updateTheme()
+  @_Concurrency.MainActor @preconcurrency public init(showRoomID: Swift.String, partnerId: Swift.String?, vc: UIKit.UIViewController)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency public func startPlayer()
+}
+extension SauceSDK.ShowRoomView : UIKit.UIScrollViewDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDragging(_ scrollView: UIKit.UIScrollView, willDecelerate decelerate: Swift.Bool)
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class VodCurationView : SauceSDK.LazyLoadableView {
+  @_Concurrency.MainActor @preconcurrency public var onActionButtonTapped: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onLivePlayer: ((Swift.String, Swift.String?) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onVodPlayer: ((Swift.String, Swift.String?) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public init(id: Swift.Int, parentVC: UIKit.UIViewController? = nil)
+  @_Concurrency.MainActor @preconcurrency override public func loadDataIfNeeded()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
+  }
+  @_Concurrency.MainActor @preconcurrency public func applyTheme(_ theme: SauceSDK.ShowRoomTheme)
+  @objc deinit
+}
+extension SauceSDK.VodCurationView : UIKit.UICollectionViewDataSource {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+}
+extension SauceSDK.VodCurationView : UIKit.UICollectionViewDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, willDisplay cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didEndDisplaying cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDragging(_ scrollView: UIKit.UIScrollView, willDecelerate decelerate: Swift.Bool)
+}
+extension SauceSDK.VodCurationView : UIKit.UICollectionViewDelegateFlowLayout {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, sizeForItemAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGSize
+}
+public enum ShowRoomAPIHost {
+  case stage
+  case prod
+  public static var currentSocketURL: Swift.String {
+    get
+  }
+  public static var currentConfigURL: Swift.String {
+    get
+  }
+  public static var currentClipResourcesURL: Swift.String {
+    get
+  }
+  public static var currentAnalyticsURL: Swift.String {
+    get
+  }
+  public static var currentShowRoomURL: Swift.String {
+    get
+  }
+  public static var currentShowRoomURL_v2: Swift.String {
+    get
+  }
+  public static func == (a: SauceSDK.ShowRoomAPIHost, b: SauceSDK.ShowRoomAPIHost) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public var showRoomCurrentEnvironment: SauceSDK.ShowRoomAPIHost
+public struct VodCurationResponse : Swift.Codable {
+  public let code: Swift.String
+  public let data: SauceSDK.VodCurationDTO
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct VodBroadcastListResponse : Swift.Codable {
+  public let code: Swift.String
+  public let data: SauceSDK.VodBroadcastListResponse.VodBroadcastListData
+  public struct VodBroadcastListData : Swift.Codable {
+    public let totalCount: Swift.Int
+    public let pageSize: Swift.Int
+    public let currentPage: Swift.Int
+    public let totalPage: Swift.Int
+    public let vodCurationBroadcastList: [SauceSDK.VodBroadcastDTO]
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct BannerResponseDTO : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct BannerDataDTO : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct BannerItemDTO : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct PageInfoDTO : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct SortInfoDTO : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ClipCurationResponse : Swift.Codable {
+  public let timestamp: Foundation.TimeInterval
+  public let requestId: Swift.String
+  public let data: SauceSDK.ClipCurationResponse.ClipCurationData
+  public struct ClipCurationData : Swift.Codable {
+    public let id: Swift.Int
+    public let name: Swift.String
+    public let isNameVisible: Swift.Bool
+    public let description: Swift.String?
+    public let isDescriptionVisible: Swift.Bool
+    public let orderType: Swift.String
+    public let orderSortType: Swift.String
+    public let viewType: Swift.String
+    public let playType: Swift.String
+    public let isDisplayProductVisible: Swift.Bool
+    public let isPageViewCountVisible: Swift.Bool
+    public let isPlayButtonVisible: Swift.Bool
+    public let isBrandNameVisible: Swift.Bool
+    public let state: Swift.String
+    public let sortNo: Swift.Int
+    public let partnerUniqueId: Swift.String
+    public let partnerAdminUserUniqueId: Swift.String
+    public let rewardAchieveViewType: Swift.String
+    public let serviceAdminId: Swift.String
+    public let serviceManagerId: Swift.String?
+    public let serviceOperatorId: Swift.String?
+    public let createdAt: Swift.String
+    public let updatedAt: Swift.String
+    public let deletedAt: Swift.String?
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ClipDetailResponse : Swift.Codable {
+  public let timestamp: Foundation.TimeInterval
+  public let requestId: Swift.String
+  public let data: SauceSDK.ClipDetailResponse.ClipDetailData
+  public struct ClipDetailData : Swift.Codable {
+    public let count: Swift.Int
+    public let page: Swift.Int
+    public let limit: Swift.Int
+    public let rows: [SauceSDK.ClipDetailDTO]
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ClipDetailDTO : Swift.Codable {
+  public let id: Swift.Int
+  public let description: Swift.String
+  public let type: Swift.String
+  public let state: Swift.String
+  public let displayStartedAt: Swift.String?
+  public let displayEndedAt: Swift.String?
+  public let thumbnailUrl: Swift.String
+  public let customThumbnailUrl: Swift.String?
+  public let thumbnailType: Swift.String
+  public let channelName: Swift.String?
+  public let channelUrl: Swift.String?
+  public let channelThumbnailUrl: Swift.String?
+  public let weblink: Swift.String?
+  public let deeplink: Swift.String?
+  public let isRewardLocked: Swift.Bool
+  public let isCartUsed: Swift.Bool?
+  public let isChannelUsed: Swift.Bool
+  public let isTagUsed: Swift.Bool
+  public let partnerUniqueId: Swift.String
+  public let partnerAdminUserUniqueId: Swift.String
+  public let serviceAdminId: Swift.String
+  public let serviceManagerId: Swift.String?
+  public let serviceOperatorId: Swift.String?
+  public let createdAt: Swift.String
+  public let updatedAt: Swift.String
+  public let clipInformationId: Swift.Int
+  public let clipSourceId: Swift.Int
+  public let rewardId: Swift.Int?
+  public let clipSource: SauceSDK.ClipDetailDTO.ClipSourceDTO
+  public let clipInformation: SauceSDK.ClipDetailDTO.ClipInformationDTO
+  public let curationClips: SauceSDK.ClipDetailDTO.CurationClipsDTO
+  public let product: SauceSDK.ClipDetailDTO.ProductDTO?
+  public let shortUrl: Swift.String
+  public let clipTags: [SauceSDK.ClipDetailDTO.ClipTagDTO]?
+  public struct ClipTagDTO : Swift.Codable {
+    public let id: Swift.Int?
+    public let tag: Swift.String?
+    public let name: Swift.String?
+    public init(from decoder: any Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+  }
+  public struct ClipSourceDTO : Swift.Codable {
+    public let id: Swift.Int
+    public let hash: Swift.String
+    public let state: Swift.String
+    public let errorCode: Swift.String?
+    public let duration: Swift.Int
+    public let size: Swift.Int
+    public let width: Swift.Int
+    public let height: Swift.Int
+    public let previewKey: Swift.String
+    public let key: Swift.String
+    public let progress: Swift.Int?
+    public let eta: Swift.Double?
+    public let createdAt: Swift.String
+    public let updatedAt: Swift.String
+    public let deletedAt: Swift.String?
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct ClipInformationDTO : Swift.Codable {
+    public let id: Swift.Int
+    public let pv: Swift.Int
+    public let click: Swift.Int
+    public let like: Swift.Int
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct CurationClipsDTO : Swift.Codable {
+    public let sortNo: Swift.Int
+    public let createdAt: Swift.String
+    public let updatedAt: Swift.String
+    public let curationId: Swift.Int
+    public let clipId: Swift.Int
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct ProductDTO : Swift.Codable {
+    public let clipId: Swift.Int
+    public let productId: Swift.Int
+    public let productUniqueId: Swift.String
+    public let partnerId: Swift.Int
+    public let affiliateProductId: Swift.String?
+    public let productName: Swift.String
+    public let brandName: Swift.String
+    public let productPriceType: Swift.String
+    public let countryCode: Swift.String
+    public let contryName: Swift.String?
+    public let currencyCode: Swift.String
+    public let currencyNotationCode: Swift.String
+    public let price: Swift.String
+    public let textPrice: Swift.String?
+    public let discountType: Swift.String
+    public let discountRate: Swift.String
+    public let discountPrice: Swift.String
+    public let sellingPrice: Swift.String
+    public let sellingTextPrice: Swift.String?
+    public let redirectUrl: Swift.String
+    public let createdSystemCode: Swift.String
+    public let createdId: Swift.String
+    public let createdName: Swift.String
+    public let createdDate: Swift.String
+    public let updatedId: Swift.String
+    public let updatedName: Swift.String
+    public let updatedDate: Swift.String
+    public let thumbnailUrl: Swift.String
+    public let displayYn: Swift.String
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ClipDTO : Swift.Decodable {
+  public let id: Swift.String
+  public let title: Swift.String
+  public let description: Swift.String?
+  public let thumbnailUrl: Swift.String?
+  public let videoUrl: Swift.String?
+  public let duration: Foundation.TimeInterval
+  public let viewCount: Swift.Int
+  public let likeCount: Swift.Int
+  public let publishDate: Foundation.Date?
+  public let channelName: Swift.String
+  public let channelImageUrl: Swift.String?
+  public let information: SauceSDK.ClipInformationDTO?
+  public let products: [SauceSDK.ClipProductDTO]
+  public let tags: [SauceSDK.ClipTagDTO]
+  public init(from decoder: any Swift.Decoder) throws
+  public init(id: Swift.String, title: Swift.String, description: Swift.String?, thumbnailUrl: Swift.String?, videoUrl: Swift.String?, duration: Foundation.TimeInterval, viewCount: Swift.Int, likeCount: Swift.Int, publishDate: Foundation.Date?, channelName: Swift.String, channelImageUrl: Swift.String?, information: SauceSDK.ClipInformationDTO?, products: [SauceSDK.ClipProductDTO], tags: [SauceSDK.ClipTagDTO])
+}
+public struct ClipInformationDTO : Swift.Decodable {
+  public let source: SauceSDK.ClipSourceDTO?
+  public init(source: SauceSDK.ClipSourceDTO?)
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ClipSourceDTO : Swift.Decodable {
+  public let id: Swift.String
+  public let type: Swift.String
+  public let startTime: Foundation.TimeInterval
+  public let endTime: Foundation.TimeInterval
+  public init(from decoder: any Swift.Decoder) throws
+  public init(id: Swift.String, type: Swift.String, startTime: Foundation.TimeInterval, endTime: Foundation.TimeInterval)
+}
+public struct ClipProductDTO : Swift.Decodable {
+  public let id: Swift.String
+  public let name: Swift.String
+  public let salePrice: Swift.Int
+  public let originalPrice: Swift.Int
+  public let imageUrl: Swift.String?
+  public let productUrl: Swift.String?
+  public init(id: Swift.String, name: Swift.String, salePrice: Swift.Int, originalPrice: Swift.Int, imageUrl: Swift.String?, productUrl: Swift.String?)
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ClipTagDTO : Swift.Decodable {
+  public let id: Swift.String
+  public let name: Swift.String
+  public init(id: Swift.String, name: Swift.String)
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ClipListResponse : Swift.Decodable {
+  public let data: SauceSDK.ClipListData
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ClipListData : Swift.Decodable {
+  public let clips: [SauceSDK.ClipDTO]
+  public let pagination: SauceSDK.PaginationData
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct PaginationData : Swift.Decodable {
+  public let currentPage: Swift.Int
+  public let totalPages: Swift.Int
+  public let totalItems: Swift.Int
+  public let hasNext: Swift.Bool
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct LiveUpcomingDTO : Swift.Codable {
+  public let code: Swift.String
+  public let data: SauceSDK.LiveUpcomingDTO.LiveUpcomingDataDTO
+  public struct LiveUpcomingDataDTO : Swift.Codable {
+    public let paginationData: SauceSDK.LiveUpcomingDTO.PaginationDataDTO
+    public let broadcastList: [SauceSDK.LiveUpcomingDTO.BroadcastDTO]
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct PaginationDataDTO : Swift.Codable {
+    public let totalCount: Swift.Int
+    public let pageSize: Swift.Int
+    public let currentPage: Swift.Int
+    public let totalPage: Swift.Int
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct BroadcastDTO : Swift.Codable {
+    public let broadcastId: Swift.String
+    public let roomId: Swift.String
+    public let broadcastName: Swift.String
+    public let broadcastStateCode: Swift.String
+    public let broadcastThumbnailList: [SauceSDK.LiveUpcomingDTO.ThumbnailDTO]
+    public let outputPath: Swift.String
+    public let partnerProfileImageUrl: Swift.String
+    public let previewUrl: Swift.String?
+    public let productDetailList: [SauceSDK.LiveUpcomingDTO.ProductDetailDTO]
+    public let programmingStartDt: Swift.String
+    public let programmingEndDt: Swift.String
+    public let room: SauceSDK.LiveUpcomingDTO.RoomDTO?
+    public let shopName: Swift.String
+    public let shortUrl: Swift.String
+    public let totalDuration: Swift.Double?
+    public let usePurchaseEvent: Swift.Bool
+    public let showroomContentStateCode: Swift.String
+    public let showroomContentPublicStartDate: Swift.String
+    public let showroomContentPublicEndDate: Swift.String
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct ThumbnailDTO : Swift.Codable {
+    public let isRepresentative: Swift.Bool
+    public let thumbnailUrl: Swift.String
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct ProductDetailDTO : Swift.Codable {
+    public let productId: Swift.String
+    public let ord: Swift.Int
+    public let productName: Swift.String
+    public let brandName: Swift.String
+    public let countryName: Swift.String?
+    public let currencyId: Swift.String
+    public let currencyNotation: Swift.String?
+    public let price: Swift.String
+    public let sellingPrice: Swift.String
+    public let discountPrice: Swift.String
+    public let discountTypeCode: Swift.String
+    public let discountRate: Swift.String
+    public let priceTypeCode: Swift.String
+    public let explanation: Swift.String?
+    public let externalProductId: Swift.String?
+    public let isSoldout: Swift.Int
+    public let productCategoryId1: Swift.String?
+    public let productCategoryId2: Swift.String?
+    public let productCategoryName1: Swift.String?
+    public let productCategoryName2: Swift.String?
+    public let redirectUrl: Swift.String
+    public let realTimeProductShow: Swift.Bool
+    public let realTimeIntroduction: Swift.Bool
+    public let thumbnailUrlList: [SauceSDK.LiveUpcomingDTO.ThumbnailDTO]
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct RoomDTO : Swift.Codable {
+    public let chatCounterInfo: Swift.Int?
+    public let incomingCounterInfo: Swift.Int?
+    public let reactionCounterInfo: Swift.Int?
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ShowRoomResponseDTO : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ShowRoomDataDTO : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ShowRoomContentDTO : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ThemeResponseDTO : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ThemeDataDTO : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct VodBroadcastDTO : Swift.Codable {
+  public let vodCurationBroadcastId: Swift.Int
+  public let sortNo: Swift.Int
+  public let broadcastTypeCode: Swift.String
+  public let broadcastThumbnailList: [SauceSDK.VodBroadcastDTO.ThumbnailDTO]
+  public let broadcastName: Swift.String
+  public let productList: [SauceSDK.VodBroadcastDTO.ProductDetailDTO]?
+  public let productCount: Swift.Int
+  public let incomingCounterInfo: Swift.Int
+  public let totalDuration: Swift.Double
+  public let shopName: Swift.String?
+  public let partnerProfileImageUrl: Swift.String?
+  public let programmingStartDt: Swift.String
+  public let programmingEndDt: Swift.String?
+  public let outputPath: Swift.String?
+  public let previewUrl: Swift.String?
+  public let isReplay: Swift.Bool
+  public let broadcastId: Swift.String
+  public let partnerUniqueId: Swift.String
+  public let showroomContentStateCode: Swift.String?
+  public let showroomContentPublicStartDate: Swift.String?
+  public let showroomContentPublicEndDate: Swift.String?
+  public init(from decoder: any Swift.Decoder) throws
+  public init()
+  public struct ThumbnailDTO : Swift.Codable {
+    public let isRepresentative: Swift.Bool
+    public let thumbnailUrl: Swift.String
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct ProductDetailDTO : Swift.Codable {
+    public let productId: Swift.String
+    public let ord: Swift.Int
+    public let productName: Swift.String
+    public let brandName: Swift.String
+    public let countryName: Swift.String?
+    public let currencyId: Swift.String
+    public let currencyNotation: Swift.String?
+    public let textprice: Swift.String?
+    public let price: Swift.String
+    public let sellingPrice: Swift.String
+    public let discountTypeCode: Swift.String
+    public let discountPrice: Swift.String
+    public let discountRate: Swift.String
+    public let priceTypeCode: Swift.String
+    public let explanation: Swift.String?
+    public let externalProductId: Swift.String?
+    public let isSoldout: Swift.Int
+    public let productCategoryId1: Swift.String?
+    public let productCategoryId2: Swift.String?
+    public let productCategoryName1: Swift.String?
+    public let productCategoryName2: Swift.String?
+    public let redirectUrl: Swift.String
+    public let realTimeProductShow: Swift.Bool
+    public let realTimeIntroduction: Swift.Bool
+    public let thumbnailUrlList: [SauceSDK.VodBroadcastDTO.ProductThumbnailDTO]?
+    public init(from decoder: any Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+  }
+  public struct ProductThumbnailDTO : Swift.Codable {
+    public let productThumbnailType: Swift.String?
+    public let thumbnailUrl: Swift.String
+    public let representative: Swift.Bool
+    public var isRepresentative: Swift.Bool {
+      get
+    }
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct VodCurationDTO : Swift.Codable {
+  public let id: Swift.Int
+  public let partnerUniqueId: Swift.String
+  public let vodCurationName: Swift.String
+  public let isNameEnabled: Swift.Bool
+  public let description: Swift.String?
+  public let isDescriptionEnabled: Swift.Bool
+  public let viewTypeCode: Swift.String
+  public let playTypeCode: Swift.String
+  public let isProductDisplayEnabled: Swift.Bool
+  public let isProductBrandDisplayEnabled: Swift.Bool
+  public let isPvCountDisplayEnabled: Swift.Bool
+  public let isPlayButtonDisplayEnabled: Swift.Bool
+  public init()
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ClipBroadcastModel {
+  public let id: Swift.Int
+  public let title: Swift.String
+  public let description: Swift.String
+  public let thumbnailUrl: Swift.String
+  public let customThumbnailUrl: Swift.String?
+  public let channelName: Swift.String?
+  public let profileImageUrl: Swift.String?
+  public let viewCount: Swift.Int
+  public let likeCount: Swift.Int
+  public let duration: Swift.Int
+  public let previewUrl: Swift.String?
+  public let weblink: Swift.String?
+  public let deeplink: Swift.String?
+  public let shortUrl: Swift.String
+  public let broadcastTypeCode: Swift.String
+  public let isPlayButtonDisplayEnabled: Swift.Bool
+  public let tags: [Swift.String]
+  public let productInfo: SauceSDK.ClipBroadcastModel.ProductInfo?
+  public init(id: Swift.Int, title: Swift.String, description: Swift.String, thumbnailUrl: Swift.String, customThumbnailUrl: Swift.String? = nil, channelName: Swift.String? = nil, profileImageUrl: Swift.String? = nil, viewCount: Swift.Int, likeCount: Swift.Int, duration: Swift.Int, previewUrl: Swift.String? = nil, weblink: Swift.String? = nil, deeplink: Swift.String? = nil, shortUrl: Swift.String, broadcastTypeCode: Swift.String, isPlayButtonDisplayEnabled: Swift.Bool, tags: [Swift.String], productInfo: SauceSDK.ClipBroadcastModel.ProductInfo? = nil)
+  public init(from dto: SauceSDK.ClipDetailDTO)
+  public struct ProductInfo {
+    public let id: Swift.String
+    public let name: Swift.String
+    public let brandName: Swift.String
+    public let textprice: Swift.String?
+    public let price: Swift.String
+    public let sellingPrice: Swift.String
+    public let discountRateString: Swift.String
+    public var discountRate: Swift.Int {
+      get
+    }
+    public let currencyNotation: Swift.String?
+    public let thumbnailUrl: Swift.String
+    public let redirectUrl: Swift.String
+    public let isSoldout: Swift.Bool
+    public let priceTypeCode: Swift.String
+    public let discountTypeCode: Swift.String
+    public init(id: Swift.String, name: Swift.String, brandName: Swift.String, textprice: Swift.String?, price: Swift.String, sellingPrice: Swift.String, discountRateString: Swift.String, currencyNotation: Swift.String?, thumbnailUrl: Swift.String, redirectUrl: Swift.String, isSoldout: Swift.Bool, priceTypeCode: Swift.String, discountTypeCode: Swift.String)
+  }
+}
+public struct ClipCurationModel {
+  public let id: Swift.Int
+  public let partnerUniqueId: Swift.String
+  public let title: Swift.String
+  public let isNameEnabled: Swift.Bool
+  public let description: Swift.String?
+  public let isDescriptionEnabled: Swift.Bool
+  public let viewTypeCode: Swift.String
+  public let playTypeCode: Swift.String
+  public let isProductDisplayEnabled: Swift.Bool
+  public let isProductBrandDisplayEnabled: Swift.Bool
+  public let isPvCountDisplayEnabled: Swift.Bool
+  public let isPlayButtonDisplayEnabled: Swift.Bool
+  public init(from dto: SauceSDK.ClipCurationResponse.ClipCurationData)
+  public init(empty: Swift.Bool = true)
+}
+public struct ClipModel : Swift.Identifiable {
+  public let id: Swift.String
+  public let title: Swift.String
+  public let description: Swift.String?
+  public let thumbnailUrl: Foundation.URL?
+  public let videoUrl: Foundation.URL?
+  public let duration: Foundation.TimeInterval
+  public let viewCount: Swift.Int
+  public let likeCount: Swift.Int
+  public let publishDate: Foundation.Date?
+  public let channelName: Swift.String
+  public let channelImageUrl: Foundation.URL?
+  public let information: SauceSDK.ClipInformation?
+  public let products: [SauceSDK.ClipProduct]
+  public let tags: [SauceSDK.ShowRoomClipTag]
+  public init(from dto: SauceSDK.ClipDTO)
+  public typealias ID = Swift.String
+}
+public struct ClipInformation {
+  public let source: SauceSDK.ClipSource?
+  public init(from dto: SauceSDK.ClipInformationDTO)
+}
+public struct ClipSource {
+  public let id: Swift.String
+  public let type: Swift.String
+  public let startTime: Foundation.TimeInterval
+  public let endTime: Foundation.TimeInterval
+  public init(from dto: SauceSDK.ClipSourceDTO)
+}
+public struct ClipProduct : Swift.Identifiable {
+  public let id: Swift.String
+  public let name: Swift.String
+  public let salePrice: Swift.Int
+  public let originalPrice: Swift.Int
+  public let imageUrl: Foundation.URL?
+  public let productUrl: Foundation.URL?
+  public init(from dto: SauceSDK.ClipProductDTO)
+  public typealias ID = Swift.String
+}
+public struct ShowRoomClipTag : Swift.Identifiable {
+  public let id: Swift.String
+  public let name: Swift.String
+  public init(from dto: SauceSDK.ClipTagDTO)
+  public typealias ID = Swift.String
+}
+public struct LiveUpcomingModel {
+  public let broadcasts: [SauceSDK.LiveUpcomingModel.Broadcast]
+  public let pagination: SauceSDK.LiveUpcomingModel.Pagination
+  public struct Broadcast {
+    public let id: Swift.String
+    public let roomId: Swift.String
+    public let name: Swift.String
+    public let stateCode: Swift.String
+    public let thumbnailUrl: Swift.String
+    public let outputPath: Swift.String
+    public let profileImageUrl: Swift.String
+    public let startDate: Foundation.Date
+    public let endDate: Foundation.Date
+    public let shopName: Swift.String
+    public let shortUrl: Swift.String
+    public let chatCount: Swift.Int
+    public let usePurchaseEvent: Swift.Bool
+    public let incomingCount: Swift.Int
+    public let reactionCount: Swift.Int
+    public let previewUrl: Swift.String
+    public let products: [SauceSDK.LiveUpcomingModel.Product]
+    public init(id: Swift.String, roomId: Swift.String, name: Swift.String, stateCode: Swift.String, thumbnailUrl: Swift.String, outputPath: Swift.String, profileImageUrl: Swift.String, startDate: Foundation.Date, endDate: Foundation.Date, shopName: Swift.String, shortUrl: Swift.String, chatCount: Swift.Int = 0, usePurchaseEvent: Swift.Bool = false, incomingCount: Swift.Int = 0, reactionCount: Swift.Int = 0, previewUrl: Swift.String, products: [SauceSDK.LiveUpcomingModel.Product] = [])
+  }
+  public struct Pagination {
+    public let totalCount: Swift.Int
+    public let pageSize: Swift.Int
+    public let currentPage: Swift.Int
+    public let totalPage: Swift.Int
+    public init(totalCount: Swift.Int, pageSize: Swift.Int, currentPage: Swift.Int, totalPage: Swift.Int)
+  }
+  public struct Product {
+    public let id: Swift.String
+    public let order: Swift.Int
+    public let name: Swift.String
+    public let brandName: Swift.String
+    public let countryName: Swift.String?
+    public let currencyId: Swift.String
+    public let currencyNotation: Swift.String?
+    public let price: Swift.String
+    public let sellingPrice: Swift.String
+    public let discountPrice: Swift.String
+    public let discountTypeCode: Swift.String
+    public let discountRate: Swift.String
+    public let priceTypeCode: Swift.String
+    public let explanation: Swift.String?
+    public let externalProductId: Swift.String?
+    public let isSoldout: Swift.Bool
+    public let productCategoryId1: Swift.String?
+    public let productCategoryId2: Swift.String?
+    public let productCategoryName1: Swift.String?
+    public let productCategoryName2: Swift.String?
+    public let redirectUrl: Swift.String
+    public let realTimeProductShow: Swift.Bool
+    public let realTimeIntroduction: Swift.Bool
+    public let thumbnailUrl: Swift.String
+    public init(id: Swift.String, order: Swift.Int, name: Swift.String, brandName: Swift.String, countryName: Swift.String? = nil, currencyId: Swift.String, currencyNotation: Swift.String? = nil, price: Swift.String, sellingPrice: Swift.String, discountPrice: Swift.String, discountTypeCode: Swift.String, discountRate: Swift.String, priceTypeCode: Swift.String, explanation: Swift.String? = nil, externalProductId: Swift.String? = nil, isSoldout: Swift.Bool, productCategoryId1: Swift.String? = nil, productCategoryId2: Swift.String? = nil, productCategoryName1: Swift.String? = nil, productCategoryName2: Swift.String? = nil, redirectUrl: Swift.String, realTimeProductShow: Swift.Bool, realTimeIntroduction: Swift.Bool, thumbnailUrl: Swift.String)
+  }
+  public init(broadcasts: [SauceSDK.LiveUpcomingModel.Broadcast], pagination: SauceSDK.LiveUpcomingModel.Pagination)
+}
+extension SauceSDK.LiveUpcomingModel {
+  public static func from(dto: SauceSDK.LiveUpcomingDTO) -> SauceSDK.LiveUpcomingModel
+}
+public struct ShowRoomData {
+  public let id: Swift.Int
+  public let showroomUniqueId: Swift.String
+  public let partnerId: Swift.Int
+  public let showroomContents: [SauceSDK.ShowRoomContent]
+}
+public struct ShowRoomContent {
+  public let id: Swift.Int
+  public let contentTypeCode: SauceSDK.ContentType
+  public let contentUniqueId: Swift.Int
+  public let stateCode: SauceSDK.StateCode
+  public let sortNo: Swift.Int
+  public let publicStartDate: Foundation.Date?
+  public let publicEndDate: Foundation.Date?
+  public var isInPublicPeriod: Swift.Bool {
+    get
+  }
+}
+public enum ContentType : Swift.String {
+  case liveCalendar
+  case banner
+  case liveUpcoming
+  case liveRecent
+  case clipCuration
+  case vodCuration
+  case unknown
+  public var displayText: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum StateCode : Swift.String {
+  case public_
+  case private_
+  case draft
+  case unknown
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct ShowRoomTheme {
+  public let id: Swift.Int
+  public let showroomId: Swift.Int
+  public let partnerId: Swift.Int
+  public let partnerUniqueId: Swift.String
+  public let themeUniqueId: Swift.String
+  public let themeName: Swift.String
+  public let isLogoEnabled: Swift.Bool
+  public let logoUrl: Swift.String?
+  public let backgroundColor: Swift.String
+  public let borderColor: Swift.String
+  public let placeholderTextColor: Swift.String
+  public let postCountColor: Swift.String
+  public let allViewTextColor: Swift.String
+  public let contentGroupTitleColor: Swift.String
+  public let contentTitleColor: Swift.String
+  public let loadingIconColor: Swift.String
+  public let allViewText: Swift.String
+  public let isSearchEnabled: Swift.Bool
+  public let searchAreaTypeCode: Swift.String
+  public let searchPlaceholderText: Swift.String?
+  public let searchIconColor: Swift.String
+  public let searchAreaBackgroundColor: Swift.String
+  public let isCurationAllViewEnabled: Swift.Bool
+  public let curationDescriptionColor: Swift.String
+  public let slVodCurationAutoPlayTypeCode: Swift.String
+  public let isSlVodCurationStoreInfoEnabled: Swift.Bool
+  public let isSlVodCurationProductBrandEnabled: Swift.Bool
+  public let isSlVodCurationPvCountEnabled: Swift.Bool
+  public let isSlVodCurationPlayButtonEnabled: Swift.Bool
+  public let slVodCurationStoreNameColor: Swift.String
+  public let isSlVodCurationVideoTypeBadgeEnabled: Swift.Bool
+  public let scClipCurationAutoPlayTypeCode: Swift.String
+  public let isScClipCurationProductInfoEnabled: Swift.Bool
+  public let isScClipCurationProductBrandEnabled: Swift.Bool
+  public let isScClipCurationPvCountEnabled: Swift.Bool
+  public let isScClipCurationPlayButtonEnabled: Swift.Bool
+  public let isScClipCurationChannelInfoEnabled: Swift.Bool
+  public let scClipCurationChannelNameColor: Swift.String
+  public let isScClipCurationVideoTypeBadgeEnabled: Swift.Bool
+  public let isLiveStoreInfoEnabled: Swift.Bool
+  public let liveStoreNameColor: Swift.String
+  public let slUpcomingLiveTitle: Swift.String
+  public let isSlUpcomingLiveTitleExist: Swift.Bool
+  public let slUpcomingLiveTypeCode: Swift.String
+  public let slUpcomingLiveBroadcastDatetimeColor: Swift.String
+  public let slLiveCalendarTitle: Swift.String
+  public let isSlLiveCalendarTitleExist: Swift.Bool
+  public let slLiveCalendarDateColor: Swift.String
+  public let slLiveCalendarTodayDateBgColor: Swift.String
+  public let slLiveCalendarTodayDateTextColor: Swift.String
+  public let slLiveCalendarNoBroadcastDateTextColor: Swift.String
+  public let isLiveNotificationEnabled: Swift.Bool
+  public let liveNotificationColor: Swift.String
+  public let liveNotificationModalTitleColor: Swift.String
+  public let liveNotificationModalContentColor: Swift.String
+  public let liveNotificationPrivacyAgreementTypeCode: Swift.String
+  public let liveNotificationPrivacyAgreementContent: Swift.String?
+  public let liveNotificationPrivacyAgreementImage: Swift.String?
+  public let slRecentLiveTitle: Swift.String
+  public let isSlRecentLiveTitleExist: Swift.Bool
+  public let slRecentLiveMaxContentDisplayCount: Swift.Int
+  public let slRecentLiveBroadcastDatetimeColor: Swift.String
+  public let isSlRecentLiveStoreInfoEnabled: Swift.Bool
+  public let slRecentLiveStoreNameColor: Swift.String
+  public let isSlRecentLiveVideoTypeBadgeEnabled: Swift.Bool
+  public let isSlRecentLiveProductPriceInfoEnabled: Swift.Bool
+  public let slRecentLiveProductDiscountColor: Swift.String
+  public let isSlRealTimeLiveEnabled: Swift.Bool
+  public let isSlUpcomingLiveRealTimeLiveEnabled: Swift.Bool
+  public init(id: Swift.Int, showroomId: Swift.Int, partnerId: Swift.Int, partnerUniqueId: Swift.String, themeUniqueId: Swift.String, themeName: Swift.String, isLogoEnabled: Swift.Bool, logoUrl: Swift.String?, backgroundColor: Swift.String, borderColor: Swift.String, placeholderTextColor: Swift.String, postCountColor: Swift.String, allViewTextColor: Swift.String, contentGroupTitleColor: Swift.String, contentTitleColor: Swift.String, loadingIconColor: Swift.String, allViewText: Swift.String, isSearchEnabled: Swift.Bool, searchAreaTypeCode: Swift.String, searchPlaceholderText: Swift.String?, searchIconColor: Swift.String, searchAreaBackgroundColor: Swift.String, isCurationAllViewEnabled: Swift.Bool, curationDescriptionColor: Swift.String, slVodCurationAutoPlayTypeCode: Swift.String, isSlVodCurationStoreInfoEnabled: Swift.Bool, isSlVodCurationProductBrandEnabled: Swift.Bool, isSlVodCurationPvCountEnabled: Swift.Bool, isSlVodCurationPlayButtonEnabled: Swift.Bool, slVodCurationStoreNameColor: Swift.String, isSlVodCurationVideoTypeBadgeEnabled: Swift.Bool, scClipCurationAutoPlayTypeCode: Swift.String, isScClipCurationProductInfoEnabled: Swift.Bool, isScClipCurationProductBrandEnabled: Swift.Bool, isScClipCurationPvCountEnabled: Swift.Bool, isScClipCurationPlayButtonEnabled: Swift.Bool, isScClipCurationChannelInfoEnabled: Swift.Bool, scClipCurationChannelNameColor: Swift.String, isScClipCurationVideoTypeBadgeEnabled: Swift.Bool, isLiveStoreInfoEnabled: Swift.Bool, liveStoreNameColor: Swift.String, slUpcomingLiveTitle: Swift.String, isSlUpcomingLiveTitleExist: Swift.Bool, slUpcomingLiveTypeCode: Swift.String, slUpcomingLiveBroadcastDatetimeColor: Swift.String, slLiveCalendarTitle: Swift.String, isSlLiveCalendarTitleExist: Swift.Bool, slLiveCalendarDateColor: Swift.String, slLiveCalendarTodayDateBgColor: Swift.String, slLiveCalendarTodayDateTextColor: Swift.String, slLiveCalendarNoBroadcastDateTextColor: Swift.String, isLiveNotificationEnabled: Swift.Bool, liveNotificationColor: Swift.String, liveNotificationModalTitleColor: Swift.String, liveNotificationModalContentColor: Swift.String, liveNotificationPrivacyAgreementTypeCode: Swift.String, liveNotificationPrivacyAgreementContent: Swift.String?, liveNotificationPrivacyAgreementImage: Swift.String?, slRecentLiveTitle: Swift.String, isSlRecentLiveTitleExist: Swift.Bool, slRecentLiveMaxContentDisplayCount: Swift.Int, slRecentLiveBroadcastDatetimeColor: Swift.String, isSlRecentLiveStoreInfoEnabled: Swift.Bool, slRecentLiveStoreNameColor: Swift.String, isSlRecentLiveVideoTypeBadgeEnabled: Swift.Bool, isSlRecentLiveProductPriceInfoEnabled: Swift.Bool, slRecentLiveProductDiscountColor: Swift.String, isSlRealTimeLiveEnabled: Swift.Bool, isSlUpcomingLiveRealTimeLiveEnabled: Swift.Bool)
+}
+public struct VodBroadcastModel {
+  public let broadcastId: Swift.String
+  public let broadcastName: Swift.String
+  public let thumbnailUrl: Swift.String
+  public let previewUrl: Swift.String?
+  public let outputPath: Swift.String
+  public let partnerProfileImageUrl: Swift.String
+  public let duration: Swift.Double
+  public let startDate: Foundation.Date?
+  public let endDate: Foundation.Date?
+  public let shopName: Swift.String
+  public let isReplay: Swift.Bool
+  public let productCount: Swift.Int
+  public let viewCount: Swift.Int
+  public let vodCurationBroadcastId: Swift.Int
+  public let sortNo: Swift.Int
+  public let broadcastTypeCode: Swift.String
+  public let partnerUniqueId: Swift.String
+  public let showroomContentStateCode: Swift.String
+  public let showroomContentPublicStartDate: Swift.String
+  public let showroomContentPublicEndDate: Swift.String
+  public let thumbnailList: [SauceSDK.VodBroadcastModel.ThumbnailInfo]
+  public let products: [SauceSDK.VodBroadcastModel.ProductInfo]
+  public init(broadcastId: Swift.String, broadcastName: Swift.String, thumbnailUrl: Swift.String, previewUrl: Swift.String?, shopName: Swift.String, broadcastTypeCode: Swift.String)
+  public init(broadcastId: Swift.String, broadcastName: Swift.String, thumbnailUrl: Swift.String, previewUrl: Swift.String?, shopName: Swift.String, broadcastTypeCode: Swift.String, products: [SauceSDK.VodBroadcastModel.ProductInfo], productCount: Swift.Int? = nil, duration: Swift.Double? = nil, thumbnailList: [SauceSDK.VodBroadcastModel.ThumbnailInfo]? = nil, partnerProfileImageUrl: Swift.String? = nil)
+  public struct ThumbnailInfo {
+    public let isRepresentative: Swift.Bool
+    public let thumbnailUrl: Swift.String
+    public init(isRepresentative: Swift.Bool, thumbnailUrl: Swift.String)
+  }
+  public struct ProductInfo {
+    public let id: Swift.String
+    public let ordinal: Swift.Int
+    public let name: Swift.String
+    public let brandName: Swift.String
+    public let countryName: Swift.String?
+    public let currencyId: Swift.String
+    public let currencyNotation: Swift.String?
+    public let price: Swift.String
+    public let textprice: Swift.String?
+    public let sellingPrice: Swift.String
+    public let discountTypeCode: Swift.String
+    public let discountPrice: Swift.String
+    public let discountRateString: Swift.String
+    public let priceTypeCode: Swift.String
+    public let explanation: Swift.String?
+    public let externalProductId: Swift.String?
+    public let isSoldout: Swift.Bool
+    public let productCategoryId1: Swift.String?
+    public let productCategoryId2: Swift.String?
+    public let productCategoryName1: Swift.String?
+    public let productCategoryName2: Swift.String?
+    public let redirectUrl: Swift.String
+    public let realTimeProductShow: Swift.Bool
+    public let realTimeIntroduction: Swift.Bool
+    public let thumbnails: [SauceSDK.VodBroadcastModel.ProductInfo.ProductThumbnail]
+    public var discountRate: Swift.Int {
+      get
+    }
+    public init(id: Swift.String, ordinal: Swift.Int, name: Swift.String, brandName: Swift.String, countryName: Swift.String?, currencyId: Swift.String, currencyNotation: Swift.String?, textprice: Swift.String?, price: Swift.String, sellingPrice: Swift.String, discountTypeCode: Swift.String, discountPrice: Swift.String, discountRateString: Swift.String, priceTypeCode: Swift.String, explanation: Swift.String?, externalProductId: Swift.String?, isSoldout: Swift.Bool, productCategoryId1: Swift.String?, productCategoryId2: Swift.String?, productCategoryName1: Swift.String?, productCategoryName2: Swift.String?, redirectUrl: Swift.String, realTimeProductShow: Swift.Bool, realTimeIntroduction: Swift.Bool, thumbnails: [SauceSDK.VodBroadcastModel.ProductInfo.ProductThumbnail])
+    public struct ProductThumbnail {
+      public let isRepresentative: Swift.Bool
+      public let thumbnailType: Swift.String?
+      public let thumbnailUrl: Swift.String
+      public init(isRepresentative: Swift.Bool, thumbnailType: Swift.String?, thumbnailUrl: Swift.String)
+    }
+  }
+  public init(from dto: SauceSDK.VodBroadcastDTO)
+  public init()
+}
+public struct VodCurationModel {
+  public let id: Swift.Int
+  public let partnerUniqueId: Swift.String
+  public let title: Swift.String
+  public let isNameEnabled: Swift.Bool
+  public let description: Swift.String?
+  public let isDescriptionEnabled: Swift.Bool
+  public let viewTypeCode: Swift.String
+  public let playTypeCode: Swift.String
+  public let isProductDisplayEnabled: Swift.Bool
+  public let isProductBrandDisplayEnabled: Swift.Bool
+  public let isPvCountDisplayEnabled: Swift.Bool
+  public let isPlayButtonDisplayEnabled: Swift.Bool
+  public init(from dto: SauceSDK.VodCurationDTO)
+  public init(empty: Swift.Bool = true)
+}
+@_hasMissingDesignatedInitializers public class ImageLoader {
+  public static let shared: SauceSDK.ImageLoader
+  public func loadImage(from urlString: Swift.String) -> Combine.AnyPublisher<UIKit.UIImage?, any Swift.Error>
+  public func loadImage(from urlString: Swift.String, into imageView: UIKit.UIImageView, placeholder: UIKit.UIImage? = nil)
+  public func clearCache()
+  @objc deinit
+}
+public enum ImageLoaderError : Swift.Error {
+  case invalidURL
+  case downloadFailed(any Swift.Error)
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+extension SauceSDK.SauceClient.APIHost : Swift.Equatable {}
+extension SauceSDK.SauceClient.APIHost : Swift.Hashable {}
+extension SauceSDK.ModuleType : Swift.Equatable {}
+extension SauceSDK.ModuleType : Swift.Hashable {}
+extension SauceSDK.ShareType : Swift.Equatable {}
+extension SauceSDK.ShareType : Swift.Hashable {}
+extension SauceSDK.TutorialType : Swift.Equatable {}
+extension SauceSDK.TutorialType : Swift.Hashable {}
+extension SauceSDK.ProductTheme : Swift.Equatable {}
+extension SauceSDK.ProductTheme : Swift.Hashable {}
+extension SauceSDK.ClipAPIHost : Swift.Equatable {}
+extension SauceSDK.ClipAPIHost : Swift.Hashable {}
+extension SauceSDK.PIPState : Swift.Equatable {}
+extension SauceSDK.PIPState : Swift.Hashable {}
+extension SauceSDK.PIPPosition : Swift.Equatable {}
+extension SauceSDK.PIPPosition : Swift.Hashable {}
+extension SauceSDK.MessageHandlerName : Swift.Equatable {}
+extension SauceSDK.MessageHandlerName : Swift.Hashable {}
+extension SauceSDK.MessageHandlerName : Swift.RawRepresentable {}
+extension SauceSDK.PlayerVersion : Swift.Equatable {}
+extension SauceSDK.PlayerVersion : Swift.Hashable {}
+extension SauceSDK.PlayerVersion : Swift.RawRepresentable {}
+extension SauceSDK.BroadcastConfigData.ShareType : Swift.Equatable {}
+extension SauceSDK.BroadcastConfigData.ShareType : Swift.Hashable {}
+extension SauceSDK.BroadcastConfigData.ShareType : Swift.RawRepresentable {}
+extension SauceSDK.BroadcastConfigData.TutorialType : Swift.Equatable {}
+extension SauceSDK.BroadcastConfigData.TutorialType : Swift.Hashable {}
+extension SauceSDK.BroadcastConfigData.TutorialType : Swift.RawRepresentable {}
+extension SauceSDK.BroadcastConfigData.ProductTheme : Swift.Equatable {}
+extension SauceSDK.BroadcastConfigData.ProductTheme : Swift.Hashable {}
+extension SauceSDK.BroadcastConfigData.ProductTheme : Swift.RawRepresentable {}
+extension SauceSDK.LiveAPIHost : Swift.Equatable {}
+extension SauceSDK.LiveAPIHost : Swift.Hashable {}
+extension SauceSDK.PlayerView.BroadcastStateType : Swift.Equatable {}
+extension SauceSDK.PlayerView.BroadcastStateType : Swift.Hashable {}
+extension SauceSDK.PlayerView.Version : Swift.Equatable {}
+extension SauceSDK.PlayerView.Version : Swift.Hashable {}
+extension SauceSDK.CurationType : Swift.Equatable {}
+extension SauceSDK.CurationType : Swift.Hashable {}
+extension SauceSDK.LiveUpcomingLayoutType : Swift.Equatable {}
+extension SauceSDK.LiveUpcomingLayoutType : Swift.Hashable {}
+extension SauceSDK.ThemeColorKey : Swift.Equatable {}
+extension SauceSDK.ThemeColorKey : Swift.Hashable {}
+extension SauceSDK.ThemeSettingKey : Swift.Equatable {}
+extension SauceSDK.ThemeSettingKey : Swift.Hashable {}
+extension SauceSDK.ThemeTextKey : Swift.Equatable {}
+extension SauceSDK.ThemeTextKey : Swift.Hashable {}
+extension SauceSDK.ShowRoomAPIHost : Swift.Equatable {}
+extension SauceSDK.ShowRoomAPIHost : Swift.Hashable {}
+extension SauceSDK.ContentType : Swift.Equatable {}
+extension SauceSDK.ContentType : Swift.Hashable {}
+extension SauceSDK.ContentType : Swift.RawRepresentable {}
+extension SauceSDK.StateCode : Swift.Equatable {}
+extension SauceSDK.StateCode : Swift.Hashable {}
+extension SauceSDK.StateCode : Swift.RawRepresentable {}

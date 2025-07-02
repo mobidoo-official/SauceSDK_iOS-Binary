@@ -1,0 +1,24 @@
+// swift-tools-version: 5.9
+import PackageDescription
+
+let package = Package(
+    name: "SauceSDK",
+    platforms: [
+        .iOS(.v13)
+    ],
+    products: [
+        .library(
+            name: "SauceSDK",
+            targets: ["SauceSDK"]),
+    ],
+    dependencies: [
+        // XCFramework 배포에서는 의존성 없음 (Static Linking)
+    ],
+    targets: [
+        .binaryTarget(
+            name: "SauceSDK",
+            url: "https://github.com/mobidoo-official/SauceSDK_iOS-Binary/releases/download/0.0.1/SauceSDK.xcframework.zip",
+            checksum: "your_checksum_here"
+        )
+    ]
+) 
