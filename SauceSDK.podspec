@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name                 = "SauceSDK"
-    spec.version              = "0.0.1"
+  spec.version              = "0.0.2"
   spec.summary              = "SauceSDK - Live Commerce SDK for iOS"
   spec.description          = <<-DESC
                               SauceSDK는 라이브 커머스 기능을 제공하는 iOS SDK입니다.
@@ -20,32 +20,35 @@ Pod::Spec.new do |spec|
     :tag => "v#{spec.version}" 
   }
   
-  # XCFramework 설정 (Static Linking)
+  # XCFramework 설정 (Static Linking - 의존성 격리)
   spec.vendored_frameworks  = "SauceSDK.xcframework"
   
-  # 프레임워크 설정
-  spec.frameworks           = "UIKit", "Foundation", "AVFoundation", "WebKit"
-  spec.libraries            = "c++", "z"
+  # 시스템 프레임워크 (필수만)
+  spec.frameworks           = "UIKit", "Foundation", "AVFoundation"
   
   # Swift 버전
   spec.swift_version        = "5.0"
   
-  # 빌드 설정
+  # Static Framework 설정 (의존성 충돌 방지를 위해 필수)
   spec.requires_arc         = true
   spec.static_framework     = true
   
   # 의존성 없음 (Static Linking으로 모든 의존성 포함됨)
-  # spec.dependency 'Kingfisher' - 제거됨
-  # spec.dependency 'SnapKit' - 제거됨
+  # Kingfisher, SnapKit, Alamofire 등이 XCFramework에 내장됨
   
-  # 추가 설정
+  # User Script Sandboxing 호환 설정
   spec.pod_target_xcconfig = {
     'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => '',
-    'ENABLE_BITCODE' => 'NO'
+    'ENABLE_BITCODE' => 'NO',
+    'ENABLE_USER_SCRIPT_SANDBOXING' => 'YES',
+    'DEFINES_MODULE' => 'YES'
   }
   
   spec.user_target_xcconfig = {
     'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => '',
     'ENABLE_BITCODE' => 'NO'
   }
+  
+  # Sandboxing 문제 해결을 위한 추가 설정
+  spec.script_phases = []  # 추가 스크립트 단계 제거
 end 
