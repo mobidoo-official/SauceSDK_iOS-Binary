@@ -1,0 +1,168 @@
+name: Release and Deploy
+
+# 배포용 레포에 태그가 푸시될 때 실행
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release-and-deploy:
+    name: 🚀 Release and Deploy
+    runs-on: macos-14
+    
+    steps:
+    # 1. 코드 체크아웃
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    # 2. 버전 정보 추출
+    - name: 📋 Extract Version Info
+      id: version
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/}
+        VERSION_NUMBER=${VERSION#v}
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "version_number=$VERSION_NUMBER" >> $GITHUB_OUTPUT
+        echo "🏷️ 배포 버전: $VERSION"
+    
+    # 3. 릴리즈 노트 생성
+    - name: 📝 Generate Release Notes
+      run: |
+        cat > release_notes.md << EOF
+        # SauceSDK ${{ steps.version.outputs.version }}
+        
+        ## 📦 배포 정보
+        - **빌드 날짜**: $(date '+%Y-%m-%d %H:%M:%S UTC')
+        - **아키텍처**: iOS Device (arm64) + Simulator (arm64, x86_64)
+        - **파일 크기**: $(ls -lh SauceSDK.xcframework.zip | awk '{print $5}')
+        
+        ## 🚀 설치 방법
+        
+        ### Swift Package Manager
+        \`\`\`swift
+        dependencies: [
+            .package(url: "https://github.com/mobidoo-official/SauceSDK_iOS-Binary", from: "${{ steps.version.outputs.version_number }}")
+        ]
+        \`\`\`
+        
+        ### CocoaPods
+        \`\`\`ruby
+        pod 'SauceSDK', '~> ${{ steps.version.outputs.version_number }}'
+        \`\`\`
+        
+        ### 직접 다운로드
+        1. \`SauceSDK.xcframework.zip\` 다운로드
+        2. 압축 해제 후 프로젝트에 드래그 앤 드롭
+        
+        ## 🔐 체크섬 검증
+        \`\`\`bash
+        shasum -a 256 SauceSDK.xcframework.zip
+        # $(shasum -a 256 SauceSDK.xcframework.zip | awk '{print $1}')
+        \`\`\`
+        
+        ## 📚 사용법
+        \`\`\`swift
+        import SauceSDK
+        
+        // SDK 초기화
+        SauceClient.initInstance(partnerID: "your-partner-id")
+        
+        // 라이브 플레이어
+        let liveClient = SauceLivePlayerClient.getInstance()
+        
+        // 클립 플레이어  
+        let clipClient = SauceClipPlayerClient.getInstance()
+        
+        // 쇼룸
+        let showRoomClient = ShowRoomClient.getInstance()
+        \`\`\`
+        EOF
+        
+        echo "✅ 릴리즈 노트 생성 완료"
+    
+    # 4. 체크섬 파일 생성 (없는 경우)
+    - name: 🔐 Generate Checksum
+      run: |
+        if [ ! -f "SauceSDK.xcframework.zip.sha256" ]; then
+          echo "🔐 체크섬 파일 생성 중..."
+          shasum -a 256 SauceSDK.xcframework.zip > SauceSDK.xcframework.zip.sha256
+        fi
+        
+        echo "📄 체크섬: $(cat SauceSDK.xcframework.zip.sha256)"
+    
+    # 5. GitHub Release 생성
+    - name: 🚀 Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.version.outputs.version }}
+        name: SauceSDK ${{ steps.version.outputs.version }}
+        body_path: release_notes.md
+        files: |
+          SauceSDK.xcframework.zip
+          SauceSDK.xcframework.zip.sha256
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    # 6. Ruby 환경 설정 (CocoaPods용)
+    - name: 💎 Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.2'
+        bundler-cache: true
+    
+    # 7. CocoaPods 설치
+    - name: 📦 Install CocoaPods
+      run: |
+        gem install cocoapods
+        pod --version
+    
+    # 8. CocoaPods 배포
+    - name: 🚀 Deploy to CocoaPods
+      env:
+        COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+      run: |
+        if [ -z "$COCOAPODS_TRUNK_TOKEN" ]; then
+          echo "⚠️ COCOAPODS_TRUNK_TOKEN이 설정되지 않았습니다."
+          echo "CocoaPods 배포를 건너뜁니다."
+          exit 0
+        fi
+        
+        echo "🔍 Podspec 검증 중..."
+        pod spec lint SauceSDK.podspec --allow-warnings --verbose
+        
+        echo "🚀 CocoaPods에 배포 중..."
+        pod trunk push SauceSDK.podspec --allow-warnings --verbose
+        
+        echo "✅ CocoaPods 배포 완료!"
+        echo "📦 설치 방법: pod 'SauceSDK', '~> ${{ steps.version.outputs.version_number }}'"
+    
+    # 9. 배포 결과 요약
+    - name: 📊 Deployment Summary
+      if: always()
+      run: |
+        echo "## 🎉 SauceSDK ${{ steps.version.outputs.version }} 배포 완료!" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "| 배포 채널 | 상태 |" >> $GITHUB_STEP_SUMMARY
+        echo "|----------|------|" >> $GITHUB_STEP_SUMMARY
+        echo "| GitHub Release | ✅ 완료 |" >> $GITHUB_STEP_SUMMARY
+        echo "| CocoaPods | ${{ env.COCOAPODS_TRUNK_TOKEN && '✅ 완료' || '⚠️ 건너뜀' }} |" >> $GITHUB_STEP_SUMMARY
+        echo "| Swift Package Manager | ✅ 완료 |" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 📦 설치 방법" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**CocoaPods:**" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`ruby" >> $GITHUB_STEP_SUMMARY
+        echo "pod 'SauceSDK', '~> ${{ steps.version.outputs.version_number }}'" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Swift Package Manager:**" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`swift" >> $GITHUB_STEP_SUMMARY
+        echo "dependencies: [" >> $GITHUB_STEP_SUMMARY
+        echo "    .package(url: \"https://github.com/mobidoo-official/SauceSDK_iOS-Binary\", from: \"${{ steps.version.outputs.version_number }}\")" >> $GITHUB_STEP_SUMMARY
+        echo "]" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY

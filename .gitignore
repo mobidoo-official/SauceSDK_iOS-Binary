@@ -60,3 +60,8 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+# SPM에서 제외할 파일들
+*.podspec
+*.zip
+DISTRIBUTION_GUIDE.md
