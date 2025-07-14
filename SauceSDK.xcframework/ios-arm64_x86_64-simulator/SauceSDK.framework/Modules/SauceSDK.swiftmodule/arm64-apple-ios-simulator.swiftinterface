@@ -10,6 +10,7 @@ import DeveloperToolsSupport
 import Foundation
 import Network
 import QuartzCore
+import Security
 import Swift
 import SwiftUI
 import UIKit
@@ -17,8 +18,38 @@ import WebKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+public struct SaucePermissions {
+  public let partnerId: Swift.String
+  public let useLive: Swift.Bool
+  public let useClip: Swift.Bool
+  public let useShowroom: Swift.Bool
+  public init(partnerId: Swift.String, useLive: Swift.Bool, useClip: Swift.Bool, useShowroom: Swift.Bool)
+}
+public enum SauceAuthenticationError : Swift.Error, Foundation.LocalizedError {
+  case invalidActivationKey
+  case invalidSignature
+  case expiredKey
+  case malformedPayload
+  case unsupportedAlgorithm
+  case cryptographicError
+  case unauthorizedPartner
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public static func == (a: SauceSDK.SauceAuthenticationError, b: SauceSDK.SauceAuthenticationError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class SauceAuthenticationManager {
+  public static let shared: SauceSDK.SauceAuthenticationManager
+  public func validateActivationKey(_ activationKey: Swift.String) throws -> SauceSDK.SaucePermissions
+  @objc deinit
+}
 @_hasMissingDesignatedInitializers public class SauceClient {
   public static let shared: SauceSDK.SauceClient
+  public static var isTestMode: Swift.Bool
   public static var partnerID: Swift.String? {
     get
   }
@@ -26,6 +57,9 @@ import _SwiftConcurrencyShims
     get
   }
   public static var isInitialized: Swift.Bool {
+    get
+  }
+  public static var permissions: SauceSDK.SaucePermissions? {
     get
   }
   public enum APIHost {
@@ -37,8 +71,11 @@ import _SwiftConcurrencyShims
       get
     }
   }
-  public static func initInstance(partnerID: Swift.String, apiHost: SauceSDK.SauceClient.APIHost = .stage)
+  public static func initInstance(activationKey: Swift.String, apiHost: SauceSDK.SauceClient.APIHost = .stage)
   public static func checkInitialization()
+  public static func isLiveEnabled() -> Swift.Bool
+  public static func isClipEnabled() -> Swift.Bool
+  public static func isShowroomEnabled() -> Swift.Bool
   public static func printConfiguration()
   @objc deinit
 }
@@ -2702,7 +2739,8 @@ public struct ShowRoomTheme {
   public let slRecentLiveProductDiscountColor: Swift.String
   public let isSlRealTimeLiveEnabled: Swift.Bool
   public let isSlUpcomingLiveRealTimeLiveEnabled: Swift.Bool
-  public init(id: Swift.Int, showroomId: Swift.Int, partnerId: Swift.Int, partnerUniqueId: Swift.String, themeUniqueId: Swift.String, themeName: Swift.String, isLogoEnabled: Swift.Bool, logoUrl: Swift.String?, backgroundColor: Swift.String, borderColor: Swift.String, placeholderTextColor: Swift.String, postCountColor: Swift.String, allViewTextColor: Swift.String, contentGroupTitleColor: Swift.String, contentTitleColor: Swift.String, loadingIconColor: Swift.String, allViewText: Swift.String, isSearchEnabled: Swift.Bool, searchAreaTypeCode: Swift.String, searchPlaceholderText: Swift.String?, searchIconColor: Swift.String, searchAreaBackgroundColor: Swift.String, isCurationAllViewEnabled: Swift.Bool, curationDescriptionColor: Swift.String, slVodCurationAutoPlayTypeCode: Swift.String, isSlVodCurationStoreInfoEnabled: Swift.Bool, isSlVodCurationProductBrandEnabled: Swift.Bool, isSlVodCurationPvCountEnabled: Swift.Bool, isSlVodCurationPlayButtonEnabled: Swift.Bool, slVodCurationStoreNameColor: Swift.String, isSlVodCurationVideoTypeBadgeEnabled: Swift.Bool, scClipCurationAutoPlayTypeCode: Swift.String, isScClipCurationProductInfoEnabled: Swift.Bool, isScClipCurationProductBrandEnabled: Swift.Bool, isScClipCurationPvCountEnabled: Swift.Bool, isScClipCurationPlayButtonEnabled: Swift.Bool, isScClipCurationChannelInfoEnabled: Swift.Bool, scClipCurationChannelNameColor: Swift.String, isScClipCurationVideoTypeBadgeEnabled: Swift.Bool, isLiveStoreInfoEnabled: Swift.Bool, liveStoreNameColor: Swift.String, slUpcomingLiveTitle: Swift.String, isSlUpcomingLiveTitleExist: Swift.Bool, slUpcomingLiveTypeCode: Swift.String, slUpcomingLiveBroadcastDatetimeColor: Swift.String, slLiveCalendarTitle: Swift.String, isSlLiveCalendarTitleExist: Swift.Bool, slLiveCalendarDateColor: Swift.String, slLiveCalendarTodayDateBgColor: Swift.String, slLiveCalendarTodayDateTextColor: Swift.String, slLiveCalendarNoBroadcastDateTextColor: Swift.String, isLiveNotificationEnabled: Swift.Bool, liveNotificationColor: Swift.String, liveNotificationModalTitleColor: Swift.String, liveNotificationModalContentColor: Swift.String, liveNotificationPrivacyAgreementTypeCode: Swift.String, liveNotificationPrivacyAgreementContent: Swift.String?, liveNotificationPrivacyAgreementImage: Swift.String?, slRecentLiveTitle: Swift.String, isSlRecentLiveTitleExist: Swift.Bool, slRecentLiveMaxContentDisplayCount: Swift.Int, slRecentLiveBroadcastDatetimeColor: Swift.String, isSlRecentLiveStoreInfoEnabled: Swift.Bool, slRecentLiveStoreNameColor: Swift.String, isSlRecentLiveVideoTypeBadgeEnabled: Swift.Bool, isSlRecentLiveProductPriceInfoEnabled: Swift.Bool, slRecentLiveProductDiscountColor: Swift.String, isSlRealTimeLiveEnabled: Swift.Bool, isSlUpcomingLiveRealTimeLiveEnabled: Swift.Bool)
+  public let eventColor: Swift.String
+  public init(id: Swift.Int, showroomId: Swift.Int, partnerId: Swift.Int, partnerUniqueId: Swift.String, themeUniqueId: Swift.String, themeName: Swift.String, isLogoEnabled: Swift.Bool, logoUrl: Swift.String?, backgroundColor: Swift.String, borderColor: Swift.String, placeholderTextColor: Swift.String, postCountColor: Swift.String, allViewTextColor: Swift.String, contentGroupTitleColor: Swift.String, contentTitleColor: Swift.String, loadingIconColor: Swift.String, allViewText: Swift.String, isSearchEnabled: Swift.Bool, searchAreaTypeCode: Swift.String, searchPlaceholderText: Swift.String?, searchIconColor: Swift.String, searchAreaBackgroundColor: Swift.String, isCurationAllViewEnabled: Swift.Bool, curationDescriptionColor: Swift.String, slVodCurationAutoPlayTypeCode: Swift.String, isSlVodCurationStoreInfoEnabled: Swift.Bool, isSlVodCurationProductBrandEnabled: Swift.Bool, isSlVodCurationPvCountEnabled: Swift.Bool, isSlVodCurationPlayButtonEnabled: Swift.Bool, slVodCurationStoreNameColor: Swift.String, isSlVodCurationVideoTypeBadgeEnabled: Swift.Bool, scClipCurationAutoPlayTypeCode: Swift.String, isScClipCurationProductInfoEnabled: Swift.Bool, isScClipCurationProductBrandEnabled: Swift.Bool, isScClipCurationPvCountEnabled: Swift.Bool, isScClipCurationPlayButtonEnabled: Swift.Bool, isScClipCurationChannelInfoEnabled: Swift.Bool, scClipCurationChannelNameColor: Swift.String, isScClipCurationVideoTypeBadgeEnabled: Swift.Bool, isLiveStoreInfoEnabled: Swift.Bool, liveStoreNameColor: Swift.String, slUpcomingLiveTitle: Swift.String, isSlUpcomingLiveTitleExist: Swift.Bool, slUpcomingLiveTypeCode: Swift.String, slUpcomingLiveBroadcastDatetimeColor: Swift.String, slLiveCalendarTitle: Swift.String, isSlLiveCalendarTitleExist: Swift.Bool, slLiveCalendarDateColor: Swift.String, slLiveCalendarTodayDateBgColor: Swift.String, slLiveCalendarTodayDateTextColor: Swift.String, slLiveCalendarNoBroadcastDateTextColor: Swift.String, isLiveNotificationEnabled: Swift.Bool, liveNotificationColor: Swift.String, liveNotificationModalTitleColor: Swift.String, liveNotificationModalContentColor: Swift.String, liveNotificationPrivacyAgreementTypeCode: Swift.String, liveNotificationPrivacyAgreementContent: Swift.String?, liveNotificationPrivacyAgreementImage: Swift.String?, slRecentLiveTitle: Swift.String, isSlRecentLiveTitleExist: Swift.Bool, slRecentLiveMaxContentDisplayCount: Swift.Int, slRecentLiveBroadcastDatetimeColor: Swift.String, isSlRecentLiveStoreInfoEnabled: Swift.Bool, slRecentLiveStoreNameColor: Swift.String, isSlRecentLiveVideoTypeBadgeEnabled: Swift.Bool, isSlRecentLiveProductPriceInfoEnabled: Swift.Bool, slRecentLiveProductDiscountColor: Swift.String, isSlRealTimeLiveEnabled: Swift.Bool, isSlUpcomingLiveRealTimeLiveEnabled: Swift.Bool, eventColor: Swift.String)
 }
 public struct VodBroadcastModel {
   public let broadcastId: Swift.String
@@ -2804,6 +2842,8 @@ public enum ImageLoaderError : Swift.Error {
     get
   }
 }
+extension SauceSDK.SauceAuthenticationError : Swift.Equatable {}
+extension SauceSDK.SauceAuthenticationError : Swift.Hashable {}
 extension SauceSDK.SauceClient.APIHost : Swift.Equatable {}
 extension SauceSDK.SauceClient.APIHost : Swift.Hashable {}
 extension SauceSDK.ModuleType : Swift.Equatable {}

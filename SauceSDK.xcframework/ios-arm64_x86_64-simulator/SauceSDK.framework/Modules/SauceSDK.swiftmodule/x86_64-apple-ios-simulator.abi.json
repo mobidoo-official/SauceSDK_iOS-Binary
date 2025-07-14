@@ -12,6 +12,868 @@
         "moduleName": "SauceSDK"
       },
       {
+        "kind": "Import",
+        "name": "Security",
+        "printedName": "Security",
+        "declKind": "Import",
+        "moduleName": "SauceSDK"
+      },
+      {
+        "kind": "Import",
+        "name": "CryptoKit",
+        "printedName": "CryptoKit",
+        "declKind": "Import",
+        "moduleName": "SauceSDK"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SaucePermissions",
+        "printedName": "SaucePermissions",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "partnerId",
+            "printedName": "partnerId",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:8SauceSDK0A11PermissionsV9partnerIdSSvp",
+            "mangledName": "$s8SauceSDK0A11PermissionsV9partnerIdSSvp",
+            "moduleName": "SauceSDK",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8SauceSDK0A11PermissionsV9partnerIdSSvg",
+                "mangledName": "$s8SauceSDK0A11PermissionsV9partnerIdSSvg",
+                "moduleName": "SauceSDK",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "useLive",
+            "printedName": "useLive",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:8SauceSDK0A11PermissionsV7useLiveSbvp",
+            "mangledName": "$s8SauceSDK0A11PermissionsV7useLiveSbvp",
+            "moduleName": "SauceSDK",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8SauceSDK0A11PermissionsV7useLiveSbvg",
+                "mangledName": "$s8SauceSDK0A11PermissionsV7useLiveSbvg",
+                "moduleName": "SauceSDK",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "useClip",
+            "printedName": "useClip",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:8SauceSDK0A11PermissionsV7useClipSbvp",
+            "mangledName": "$s8SauceSDK0A11PermissionsV7useClipSbvp",
+            "moduleName": "SauceSDK",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8SauceSDK0A11PermissionsV7useClipSbvg",
+                "mangledName": "$s8SauceSDK0A11PermissionsV7useClipSbvg",
+                "moduleName": "SauceSDK",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "useShowroom",
+            "printedName": "useShowroom",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:8SauceSDK0A11PermissionsV11useShowroomSbvp",
+            "mangledName": "$s8SauceSDK0A11PermissionsV11useShowroomSbvp",
+            "moduleName": "SauceSDK",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8SauceSDK0A11PermissionsV11useShowroomSbvg",
+                "mangledName": "$s8SauceSDK0A11PermissionsV11useShowroomSbvg",
+                "moduleName": "SauceSDK",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(partnerId:useLive:useClip:useShowroom:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SaucePermissions",
+                "printedName": "SauceSDK.SaucePermissions",
+                "usr": "s:8SauceSDK0A11PermissionsV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:8SauceSDK0A11PermissionsV9partnerId7useLive0F4Clip0F8ShowroomACSS_S3btcfc",
+            "mangledName": "$s8SauceSDK0A11PermissionsV9partnerId7useLive0F4Clip0F8ShowroomACSS_S3btcfc",
+            "moduleName": "SauceSDK",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:8SauceSDK0A11PermissionsV",
+        "mangledName": "$s8SauceSDK0A11PermissionsV",
+        "moduleName": "SauceSDK",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SauceAuthenticationError",
+        "printedName": "SauceAuthenticationError",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "invalidActivationKey",
+            "printedName": "invalidActivationKey",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(SauceSDK.SauceAuthenticationError.Type) -> SauceSDK.SauceAuthenticationError",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SauceAuthenticationError",
+                    "printedName": "SauceSDK.SauceAuthenticationError",
+                    "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "SauceSDK.SauceAuthenticationError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SauceAuthenticationError",
+                        "printedName": "SauceSDK.SauceAuthenticationError",
+                        "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:8SauceSDK0A19AuthenticationErrorO20invalidActivationKeyyA2CmF",
+            "mangledName": "$s8SauceSDK0A19AuthenticationErrorO20invalidActivationKeyyA2CmF",
+            "moduleName": "SauceSDK"
+          },
+          {
+            "kind": "Var",
+            "name": "invalidSignature",
+            "printedName": "invalidSignature",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(SauceSDK.SauceAuthenticationError.Type) -> SauceSDK.SauceAuthenticationError",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SauceAuthenticationError",
+                    "printedName": "SauceSDK.SauceAuthenticationError",
+                    "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "SauceSDK.SauceAuthenticationError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SauceAuthenticationError",
+                        "printedName": "SauceSDK.SauceAuthenticationError",
+                        "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:8SauceSDK0A19AuthenticationErrorO16invalidSignatureyA2CmF",
+            "mangledName": "$s8SauceSDK0A19AuthenticationErrorO16invalidSignatureyA2CmF",
+            "moduleName": "SauceSDK"
+          },
+          {
+            "kind": "Var",
+            "name": "expiredKey",
+            "printedName": "expiredKey",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(SauceSDK.SauceAuthenticationError.Type) -> SauceSDK.SauceAuthenticationError",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SauceAuthenticationError",
+                    "printedName": "SauceSDK.SauceAuthenticationError",
+                    "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "SauceSDK.SauceAuthenticationError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SauceAuthenticationError",
+                        "printedName": "SauceSDK.SauceAuthenticationError",
+                        "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:8SauceSDK0A19AuthenticationErrorO10expiredKeyyA2CmF",
+            "mangledName": "$s8SauceSDK0A19AuthenticationErrorO10expiredKeyyA2CmF",
+            "moduleName": "SauceSDK"
+          },
+          {
+            "kind": "Var",
+            "name": "malformedPayload",
+            "printedName": "malformedPayload",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(SauceSDK.SauceAuthenticationError.Type) -> SauceSDK.SauceAuthenticationError",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SauceAuthenticationError",
+                    "printedName": "SauceSDK.SauceAuthenticationError",
+                    "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "SauceSDK.SauceAuthenticationError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SauceAuthenticationError",
+                        "printedName": "SauceSDK.SauceAuthenticationError",
+                        "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:8SauceSDK0A19AuthenticationErrorO16malformedPayloadyA2CmF",
+            "mangledName": "$s8SauceSDK0A19AuthenticationErrorO16malformedPayloadyA2CmF",
+            "moduleName": "SauceSDK"
+          },
+          {
+            "kind": "Var",
+            "name": "unsupportedAlgorithm",
+            "printedName": "unsupportedAlgorithm",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(SauceSDK.SauceAuthenticationError.Type) -> SauceSDK.SauceAuthenticationError",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SauceAuthenticationError",
+                    "printedName": "SauceSDK.SauceAuthenticationError",
+                    "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "SauceSDK.SauceAuthenticationError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SauceAuthenticationError",
+                        "printedName": "SauceSDK.SauceAuthenticationError",
+                        "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:8SauceSDK0A19AuthenticationErrorO20unsupportedAlgorithmyA2CmF",
+            "mangledName": "$s8SauceSDK0A19AuthenticationErrorO20unsupportedAlgorithmyA2CmF",
+            "moduleName": "SauceSDK"
+          },
+          {
+            "kind": "Var",
+            "name": "cryptographicError",
+            "printedName": "cryptographicError",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(SauceSDK.SauceAuthenticationError.Type) -> SauceSDK.SauceAuthenticationError",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SauceAuthenticationError",
+                    "printedName": "SauceSDK.SauceAuthenticationError",
+                    "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "SauceSDK.SauceAuthenticationError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SauceAuthenticationError",
+                        "printedName": "SauceSDK.SauceAuthenticationError",
+                        "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:8SauceSDK0A19AuthenticationErrorO013cryptographicD0yA2CmF",
+            "mangledName": "$s8SauceSDK0A19AuthenticationErrorO013cryptographicD0yA2CmF",
+            "moduleName": "SauceSDK"
+          },
+          {
+            "kind": "Var",
+            "name": "unauthorizedPartner",
+            "printedName": "unauthorizedPartner",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(SauceSDK.SauceAuthenticationError.Type) -> SauceSDK.SauceAuthenticationError",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SauceAuthenticationError",
+                    "printedName": "SauceSDK.SauceAuthenticationError",
+                    "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "SauceSDK.SauceAuthenticationError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SauceAuthenticationError",
+                        "printedName": "SauceSDK.SauceAuthenticationError",
+                        "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:8SauceSDK0A19AuthenticationErrorO19unauthorizedPartneryA2CmF",
+            "mangledName": "$s8SauceSDK0A19AuthenticationErrorO19unauthorizedPartneryA2CmF",
+            "moduleName": "SauceSDK"
+          },
+          {
+            "kind": "Var",
+            "name": "errorDescription",
+            "printedName": "errorDescription",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:8SauceSDK0A19AuthenticationErrorO16errorDescriptionSSSgvp",
+            "mangledName": "$s8SauceSDK0A19AuthenticationErrorO16errorDescriptionSSSgvp",
+            "moduleName": "SauceSDK",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8SauceSDK0A19AuthenticationErrorO16errorDescriptionSSSgvg",
+                "mangledName": "$s8SauceSDK0A19AuthenticationErrorO16errorDescriptionSSSgvg",
+                "moduleName": "SauceSDK",
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "==",
+            "printedName": "==(_:_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "SauceAuthenticationError",
+                "printedName": "SauceSDK.SauceAuthenticationError",
+                "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "SauceAuthenticationError",
+                "printedName": "SauceSDK.SauceAuthenticationError",
+                "usr": "s:8SauceSDK0A19AuthenticationErrorO"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8SauceSDK0A19AuthenticationErrorO2eeoiySbAC_ACtFZ",
+            "mangledName": "$s8SauceSDK0A19AuthenticationErrorO2eeoiySbAC_ACtFZ",
+            "moduleName": "SauceSDK",
+            "static": true,
+            "implicit": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Var",
+            "name": "hashValue",
+            "printedName": "hashValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:8SauceSDK0A19AuthenticationErrorO9hashValueSivp",
+            "mangledName": "$s8SauceSDK0A19AuthenticationErrorO9hashValueSivp",
+            "moduleName": "SauceSDK",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8SauceSDK0A19AuthenticationErrorO9hashValueSivg",
+                "mangledName": "$s8SauceSDK0A19AuthenticationErrorO9hashValueSivg",
+                "moduleName": "SauceSDK",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "hash",
+            "printedName": "hash(into:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Hasher",
+                "printedName": "Swift.Hasher",
+                "paramValueOwnership": "InOut",
+                "usr": "s:s6HasherV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8SauceSDK0A19AuthenticationErrorO4hash4intoys6HasherVz_tF",
+            "mangledName": "$s8SauceSDK0A19AuthenticationErrorO4hash4intoys6HasherVz_tF",
+            "moduleName": "SauceSDK",
+            "implicit": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:8SauceSDK0A19AuthenticationErrorO",
+        "mangledName": "$s8SauceSDK0A19AuthenticationErrorO",
+        "moduleName": "SauceSDK",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Error",
+            "printedName": "Error",
+            "usr": "s:s5ErrorP",
+            "mangledName": "$ss5ErrorP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "LocalizedError",
+            "printedName": "LocalizedError",
+            "usr": "s:10Foundation14LocalizedErrorP",
+            "mangledName": "$s10Foundation14LocalizedErrorP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SauceAuthenticationManager",
+        "printedName": "SauceAuthenticationManager",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "shared",
+            "printedName": "shared",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SauceAuthenticationManager",
+                "printedName": "SauceSDK.SauceAuthenticationManager",
+                "usr": "s:8SauceSDK0A21AuthenticationManagerC"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:8SauceSDK0A21AuthenticationManagerC6sharedACvpZ",
+            "mangledName": "$s8SauceSDK0A21AuthenticationManagerC6sharedACvpZ",
+            "moduleName": "SauceSDK",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SauceAuthenticationManager",
+                    "printedName": "SauceSDK.SauceAuthenticationManager",
+                    "usr": "s:8SauceSDK0A21AuthenticationManagerC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8SauceSDK0A21AuthenticationManagerC6sharedACvgZ",
+                "mangledName": "$s8SauceSDK0A21AuthenticationManagerC6sharedACvgZ",
+                "moduleName": "SauceSDK",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "validateActivationKey",
+            "printedName": "validateActivationKey(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SaucePermissions",
+                "printedName": "SauceSDK.SaucePermissions",
+                "usr": "s:8SauceSDK0A11PermissionsV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8SauceSDK0A21AuthenticationManagerC21validateActivationKeyyAA0A11PermissionsVSSKF",
+            "mangledName": "$s8SauceSDK0A21AuthenticationManagerC21validateActivationKeyyAA0A11PermissionsVSSKF",
+            "moduleName": "SauceSDK",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:8SauceSDK0A21AuthenticationManagerC",
+        "mangledName": "$s8SauceSDK0A21AuthenticationManagerC",
+        "moduleName": "SauceSDK",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "hasMissingDesignatedInitializers": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "SauceSDK"
+      },
+      {
         "kind": "TypeDecl",
         "name": "SauceClient",
         "printedName": "SauceClient",
@@ -65,6 +927,107 @@
                   "Final"
                 ],
                 "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "isTestMode",
+            "printedName": "isTestMode",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:8SauceSDK0A6ClientC10isTestModeSbvpZ",
+            "mangledName": "$s8SauceSDK0A6ClientC10isTestModeSbvpZ",
+            "moduleName": "SauceSDK",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8SauceSDK0A6ClientC10isTestModeSbvgZ",
+                "mangledName": "$s8SauceSDK0A6ClientC10isTestModeSbvgZ",
+                "moduleName": "SauceSDK",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8SauceSDK0A6ClientC10isTestModeSbvsZ",
+                "mangledName": "$s8SauceSDK0A6ClientC10isTestModeSbvsZ",
+                "moduleName": "SauceSDK",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8SauceSDK0A6ClientC10isTestModeSbvMZ",
+                "mangledName": "$s8SauceSDK0A6ClientC10isTestModeSbvMZ",
+                "moduleName": "SauceSDK",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
               }
             ]
           },
@@ -214,6 +1177,68 @@
                 "declKind": "Accessor",
                 "usr": "s:8SauceSDK0A6ClientC13isInitializedSbvgZ",
                 "mangledName": "$s8SauceSDK0A6ClientC13isInitializedSbvgZ",
+                "moduleName": "SauceSDK",
+                "static": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "permissions",
+            "printedName": "permissions",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "SauceSDK.SaucePermissions?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SaucePermissions",
+                    "printedName": "SauceSDK.SaucePermissions",
+                    "usr": "s:8SauceSDK0A11PermissionsV"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:8SauceSDK0A6ClientC11permissionsAA0A11PermissionsVSgvpZ",
+            "mangledName": "$s8SauceSDK0A6ClientC11permissionsAA0A11PermissionsVSgvpZ",
+            "moduleName": "SauceSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "SauceSDK.SaucePermissions?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SaucePermissions",
+                        "printedName": "SauceSDK.SaucePermissions",
+                        "usr": "s:8SauceSDK0A11PermissionsV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8SauceSDK0A6ClientC11permissionsAA0A11PermissionsVSgvgZ",
+                "mangledName": "$s8SauceSDK0A6ClientC11permissionsAA0A11PermissionsVSgvgZ",
                 "moduleName": "SauceSDK",
                 "static": true,
                 "declAttributes": [
@@ -441,7 +1466,7 @@
           {
             "kind": "Function",
             "name": "initInstance",
-            "printedName": "initInstance(partnerID:apiHost:)",
+            "printedName": "initInstance(activationKey:apiHost:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -463,8 +1488,8 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:8SauceSDK0A6ClientC12initInstance9partnerID7apiHostySS_AC7APIHostOtFZ",
-            "mangledName": "$s8SauceSDK0A6ClientC12initInstance9partnerID7apiHostySS_AC7APIHostOtFZ",
+            "usr": "s:8SauceSDK0A6ClientC12initInstance13activationKey7apiHostySS_AC7APIHostOtFZ",
+            "mangledName": "$s8SauceSDK0A6ClientC12initInstance13activationKey7apiHostySS_AC7APIHostOtFZ",
             "moduleName": "SauceSDK",
             "static": true,
             "declAttributes": [
@@ -494,6 +1519,76 @@
               "Final",
               "AccessControl",
               "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "isLiveEnabled",
+            "printedName": "isLiveEnabled()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8SauceSDK0A6ClientC13isLiveEnabledSbyFZ",
+            "mangledName": "$s8SauceSDK0A6ClientC13isLiveEnabledSbyFZ",
+            "moduleName": "SauceSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "isClipEnabled",
+            "printedName": "isClipEnabled()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8SauceSDK0A6ClientC13isClipEnabledSbyFZ",
+            "mangledName": "$s8SauceSDK0A6ClientC13isClipEnabledSbyFZ",
+            "moduleName": "SauceSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "isShowroomEnabled",
+            "printedName": "isShowroomEnabled()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8SauceSDK0A6ClientC17isShowroomEnabledSbyFZ",
+            "mangledName": "$s8SauceSDK0A6ClientC17isShowroomEnabledSbyFZ",
+            "moduleName": "SauceSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl"
             ],
             "funcSelfKind": "NonMutating"
           },
@@ -100978,9 +102073,54 @@
             ]
           },
           {
+            "kind": "Var",
+            "name": "eventColor",
+            "printedName": "eventColor",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:8SauceSDK13ShowRoomThemeV10eventColorSSvp",
+            "mangledName": "$s8SauceSDK13ShowRoomThemeV10eventColorSSvp",
+            "moduleName": "SauceSDK",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8SauceSDK13ShowRoomThemeV10eventColorSSvg",
+                "mangledName": "$s8SauceSDK13ShowRoomThemeV10eventColorSSvg",
+                "moduleName": "SauceSDK",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(id:showroomId:partnerId:partnerUniqueId:themeUniqueId:themeName:isLogoEnabled:logoUrl:backgroundColor:borderColor:placeholderTextColor:postCountColor:allViewTextColor:contentGroupTitleColor:contentTitleColor:loadingIconColor:allViewText:isSearchEnabled:searchAreaTypeCode:searchPlaceholderText:searchIconColor:searchAreaBackgroundColor:isCurationAllViewEnabled:curationDescriptionColor:slVodCurationAutoPlayTypeCode:isSlVodCurationStoreInfoEnabled:isSlVodCurationProductBrandEnabled:isSlVodCurationPvCountEnabled:isSlVodCurationPlayButtonEnabled:slVodCurationStoreNameColor:isSlVodCurationVideoTypeBadgeEnabled:scClipCurationAutoPlayTypeCode:isScClipCurationProductInfoEnabled:isScClipCurationProductBrandEnabled:isScClipCurationPvCountEnabled:isScClipCurationPlayButtonEnabled:isScClipCurationChannelInfoEnabled:scClipCurationChannelNameColor:isScClipCurationVideoTypeBadgeEnabled:isLiveStoreInfoEnabled:liveStoreNameColor:slUpcomingLiveTitle:isSlUpcomingLiveTitleExist:slUpcomingLiveTypeCode:slUpcomingLiveBroadcastDatetimeColor:slLiveCalendarTitle:isSlLiveCalendarTitleExist:slLiveCalendarDateColor:slLiveCalendarTodayDateBgColor:slLiveCalendarTodayDateTextColor:slLiveCalendarNoBroadcastDateTextColor:isLiveNotificationEnabled:liveNotificationColor:liveNotificationModalTitleColor:liveNotificationModalContentColor:liveNotificationPrivacyAgreementTypeCode:liveNotificationPrivacyAgreementContent:liveNotificationPrivacyAgreementImage:slRecentLiveTitle:isSlRecentLiveTitleExist:slRecentLiveMaxContentDisplayCount:slRecentLiveBroadcastDatetimeColor:isSlRecentLiveStoreInfoEnabled:slRecentLiveStoreNameColor:isSlRecentLiveVideoTypeBadgeEnabled:isSlRecentLiveProductPriceInfoEnabled:slRecentLiveProductDiscountColor:isSlRealTimeLiveEnabled:isSlUpcomingLiveRealTimeLiveEnabled:)",
+            "printedName": "init(id:showroomId:partnerId:partnerUniqueId:themeUniqueId:themeName:isLogoEnabled:logoUrl:backgroundColor:borderColor:placeholderTextColor:postCountColor:allViewTextColor:contentGroupTitleColor:contentTitleColor:loadingIconColor:allViewText:isSearchEnabled:searchAreaTypeCode:searchPlaceholderText:searchIconColor:searchAreaBackgroundColor:isCurationAllViewEnabled:curationDescriptionColor:slVodCurationAutoPlayTypeCode:isSlVodCurationStoreInfoEnabled:isSlVodCurationProductBrandEnabled:isSlVodCurationPvCountEnabled:isSlVodCurationPlayButtonEnabled:slVodCurationStoreNameColor:isSlVodCurationVideoTypeBadgeEnabled:scClipCurationAutoPlayTypeCode:isScClipCurationProductInfoEnabled:isScClipCurationProductBrandEnabled:isScClipCurationPvCountEnabled:isScClipCurationPlayButtonEnabled:isScClipCurationChannelInfoEnabled:scClipCurationChannelNameColor:isScClipCurationVideoTypeBadgeEnabled:isLiveStoreInfoEnabled:liveStoreNameColor:slUpcomingLiveTitle:isSlUpcomingLiveTitleExist:slUpcomingLiveTypeCode:slUpcomingLiveBroadcastDatetimeColor:slLiveCalendarTitle:isSlLiveCalendarTitleExist:slLiveCalendarDateColor:slLiveCalendarTodayDateBgColor:slLiveCalendarTodayDateTextColor:slLiveCalendarNoBroadcastDateTextColor:isLiveNotificationEnabled:liveNotificationColor:liveNotificationModalTitleColor:liveNotificationModalContentColor:liveNotificationPrivacyAgreementTypeCode:liveNotificationPrivacyAgreementContent:liveNotificationPrivacyAgreementImage:slRecentLiveTitle:isSlRecentLiveTitleExist:slRecentLiveMaxContentDisplayCount:slRecentLiveBroadcastDatetimeColor:isSlRecentLiveStoreInfoEnabled:slRecentLiveStoreNameColor:isSlRecentLiveVideoTypeBadgeEnabled:isSlRecentLiveProductPriceInfoEnabled:slRecentLiveProductDiscountColor:isSlRealTimeLiveEnabled:isSlUpcomingLiveRealTimeLiveEnabled:eventColor:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -101433,11 +102573,17 @@
                 "name": "Bool",
                 "printedName": "Swift.Bool",
                 "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:8SauceSDK13ShowRoomThemeV2id10showroomId07partnerH00i6UniqueH005themejH00K4Name13isLogoEnabled7logoUrl15backgroundColor06borderS0015placeholderTextS009postCountS007allViewvS0017contentGroupTitleS0012contentTitleS0011loadingIconS00yzV00m6SearchO018searchAreaTypeCode017searchPlaceholderV0010searchIconS0020searchAreaBackgroundS00m11CurationAllzO0019curationDescriptionS029slVodCurationAutoPlayTypeCode0m22SlVodCurationStoreInfoO00m25SlVodCurationProductBrandO00m15SlVodCurationPvxO00m23SlVodCurationPlayButtonO0018slVodCurationStorelS00m27SlVodCurationVideoTypeBadgeO030scClipCurationAutoPlayTypeCode0m25ScClipCurationProductInfoO00m26ScClipCurationProductBrandO00m16ScClipCurationPvxO00m24ScClipCurationPlayButtonO00m25ScClipCurationChannelInfoO0021scClipCurationChannellS00m28ScClipCurationVideoTypeBadgeO00m13LiveStoreInfoO009liveStorelS019slUpcomingLiveTitle0M24SlUpcomingLiveTitleExist22slUpcomingLiveTypeCode031slUpcomingLiveBroadcastDatetimeS019slLiveCalendarTitle0M24SlLiveCalendarTitleExist018slLiveCalendarDateS0025slLiveCalendarTodayDateBgS0023slLiveCalendarTodayDatevS0029slLiveCalendarNoBroadcastDatevS00m16LiveNotificationO0016liveNotificationS0026liveNotificationModalTitleS0028liveNotificationModalContentS040liveNotificationPrivacyAgreementTypeCode39liveNotificationPrivacyAgreementContent37liveNotificationPrivacyAgreementImage17slRecentLiveTitle0M22SlRecentLiveTitleExist029slRecentLiveMaxContentDisplayX0029slRecentLiveBroadcastDatetimeS00m21SlRecentLiveStoreInfoO0017slRecentLiveStorelS00m26SlRecentLiveVideoTypeBadgeO00m28SlRecentLiveProductPriceInfoO0027slRecentLiveProductDiscountS00m14SlRealTimeLiveO00m26SlUpcomingLiveRealTimeLiveO0ACSi_S2iS3SSbSSSgS9SSbSSA45_S2SSbS2SS4bSSSbSSS5bSSS2bS2SSbS3SSbS4SSbS4SA45_A45_SSSbSiSSSbSSS2bSSS2btcfc",
-            "mangledName": "$s8SauceSDK13ShowRoomThemeV2id10showroomId07partnerH00i6UniqueH005themejH00K4Name13isLogoEnabled7logoUrl15backgroundColor06borderS0015placeholderTextS009postCountS007allViewvS0017contentGroupTitleS0012contentTitleS0011loadingIconS00yzV00m6SearchO018searchAreaTypeCode017searchPlaceholderV0010searchIconS0020searchAreaBackgroundS00m11CurationAllzO0019curationDescriptionS029slVodCurationAutoPlayTypeCode0m22SlVodCurationStoreInfoO00m25SlVodCurationProductBrandO00m15SlVodCurationPvxO00m23SlVodCurationPlayButtonO0018slVodCurationStorelS00m27SlVodCurationVideoTypeBadgeO030scClipCurationAutoPlayTypeCode0m25ScClipCurationProductInfoO00m26ScClipCurationProductBrandO00m16ScClipCurationPvxO00m24ScClipCurationPlayButtonO00m25ScClipCurationChannelInfoO0021scClipCurationChannellS00m28ScClipCurationVideoTypeBadgeO00m13LiveStoreInfoO009liveStorelS019slUpcomingLiveTitle0M24SlUpcomingLiveTitleExist22slUpcomingLiveTypeCode031slUpcomingLiveBroadcastDatetimeS019slLiveCalendarTitle0M24SlLiveCalendarTitleExist018slLiveCalendarDateS0025slLiveCalendarTodayDateBgS0023slLiveCalendarTodayDatevS0029slLiveCalendarNoBroadcastDatevS00m16LiveNotificationO0016liveNotificationS0026liveNotificationModalTitleS0028liveNotificationModalContentS040liveNotificationPrivacyAgreementTypeCode39liveNotificationPrivacyAgreementContent37liveNotificationPrivacyAgreementImage17slRecentLiveTitle0M22SlRecentLiveTitleExist029slRecentLiveMaxContentDisplayX0029slRecentLiveBroadcastDatetimeS00m21SlRecentLiveStoreInfoO0017slRecentLiveStorelS00m26SlRecentLiveVideoTypeBadgeO00m28SlRecentLiveProductPriceInfoO0027slRecentLiveProductDiscountS00m14SlRealTimeLiveO00m26SlUpcomingLiveRealTimeLiveO0ACSi_S2iS3SSbSSSgS9SSbSSA45_S2SSbS2SS4bSSSbSSS5bSSS2bS2SSbS3SSbS4SSbS4SA45_A45_SSSbSiSSSbSSS2bSSS2btcfc",
+            "usr": "s:8SauceSDK13ShowRoomThemeV2id10showroomId07partnerH00i6UniqueH005themejH00K4Name13isLogoEnabled7logoUrl15backgroundColor06borderS0015placeholderTextS009postCountS007allViewvS0017contentGroupTitleS0012contentTitleS0011loadingIconS00yzV00m6SearchO018searchAreaTypeCode017searchPlaceholderV0010searchIconS0020searchAreaBackgroundS00m11CurationAllzO0019curationDescriptionS029slVodCurationAutoPlayTypeCode0m22SlVodCurationStoreInfoO00m25SlVodCurationProductBrandO00m15SlVodCurationPvxO00m23SlVodCurationPlayButtonO0018slVodCurationStorelS00m27SlVodCurationVideoTypeBadgeO030scClipCurationAutoPlayTypeCode0m25ScClipCurationProductInfoO00m26ScClipCurationProductBrandO00m16ScClipCurationPvxO00m24ScClipCurationPlayButtonO00m25ScClipCurationChannelInfoO0021scClipCurationChannellS00m28ScClipCurationVideoTypeBadgeO00m13LiveStoreInfoO009liveStorelS019slUpcomingLiveTitle0M24SlUpcomingLiveTitleExist22slUpcomingLiveTypeCode031slUpcomingLiveBroadcastDatetimeS019slLiveCalendarTitle0M24SlLiveCalendarTitleExist018slLiveCalendarDateS0025slLiveCalendarTodayDateBgS0023slLiveCalendarTodayDatevS0029slLiveCalendarNoBroadcastDatevS00m16LiveNotificationO0016liveNotificationS0026liveNotificationModalTitleS0028liveNotificationModalContentS040liveNotificationPrivacyAgreementTypeCode39liveNotificationPrivacyAgreementContent37liveNotificationPrivacyAgreementImage17slRecentLiveTitle0M22SlRecentLiveTitleExist029slRecentLiveMaxContentDisplayX0029slRecentLiveBroadcastDatetimeS00m21SlRecentLiveStoreInfoO0017slRecentLiveStorelS00m26SlRecentLiveVideoTypeBadgeO00m28SlRecentLiveProductPriceInfoO0027slRecentLiveProductDiscountS00m14SlRealTimeLiveO00m26SlUpcomingLiveRealTimeLiveO005eventS0ACSi_S2iS3SSbSSSgS9SSbSSA46_S2SSbS2SS4bSSSbSSS5bSSS2bS2SSbS3SSbS4SSbS4SA46_A46_SSSbSiSSSbSSS2bSSS2bSStcfc",
+            "mangledName": "$s8SauceSDK13ShowRoomThemeV2id10showroomId07partnerH00i6UniqueH005themejH00K4Name13isLogoEnabled7logoUrl15backgroundColor06borderS0015placeholderTextS009postCountS007allViewvS0017contentGroupTitleS0012contentTitleS0011loadingIconS00yzV00m6SearchO018searchAreaTypeCode017searchPlaceholderV0010searchIconS0020searchAreaBackgroundS00m11CurationAllzO0019curationDescriptionS029slVodCurationAutoPlayTypeCode0m22SlVodCurationStoreInfoO00m25SlVodCurationProductBrandO00m15SlVodCurationPvxO00m23SlVodCurationPlayButtonO0018slVodCurationStorelS00m27SlVodCurationVideoTypeBadgeO030scClipCurationAutoPlayTypeCode0m25ScClipCurationProductInfoO00m26ScClipCurationProductBrandO00m16ScClipCurationPvxO00m24ScClipCurationPlayButtonO00m25ScClipCurationChannelInfoO0021scClipCurationChannellS00m28ScClipCurationVideoTypeBadgeO00m13LiveStoreInfoO009liveStorelS019slUpcomingLiveTitle0M24SlUpcomingLiveTitleExist22slUpcomingLiveTypeCode031slUpcomingLiveBroadcastDatetimeS019slLiveCalendarTitle0M24SlLiveCalendarTitleExist018slLiveCalendarDateS0025slLiveCalendarTodayDateBgS0023slLiveCalendarTodayDatevS0029slLiveCalendarNoBroadcastDatevS00m16LiveNotificationO0016liveNotificationS0026liveNotificationModalTitleS0028liveNotificationModalContentS040liveNotificationPrivacyAgreementTypeCode39liveNotificationPrivacyAgreementContent37liveNotificationPrivacyAgreementImage17slRecentLiveTitle0M22SlRecentLiveTitleExist029slRecentLiveMaxContentDisplayX0029slRecentLiveBroadcastDatetimeS00m21SlRecentLiveStoreInfoO0017slRecentLiveStorelS00m26SlRecentLiveVideoTypeBadgeO00m28SlRecentLiveProductPriceInfoO0027slRecentLiveProductDiscountS00m14SlRealTimeLiveO00m26SlUpcomingLiveRealTimeLiveO005eventS0ACSi_S2iS3SSbSSSgS9SSbSSA46_S2SSbS2SS4bSSSbSSS5bSSS2bS2SSbS3SSbS4SSbS4SA46_A46_SSSbSiSSSbSSS2bSSS2bSStcfc",
             "moduleName": "SauceSDK",
             "declAttributes": [
               "AccessControl",
@@ -106289,11 +107435,25 @@
   },
   "ConstValues": [
     {
+      "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Common\/SauceAuthenticationManager.swift",
+      "kind": "StringLiteral",
+      "offset": 1824,
+      "length": 202,
+      "value": "\"-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEtcJF4JS6SqxHxsRMIfavd3FVcytF\nIWpRWEdNqzoyNsdqTzqnXi7fwFD32vcGUn4tiTiafjwWBXljTF+NEdw==\n-----END PUBLIC KEY-----\""
+    },
+    {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Common\/SauceClient.swift",
       "kind": "BooleanLiteral",
       "offset": 271,
       "length": 5,
       "value": "false"
+    },
+    {
+      "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Common\/SauceClient.swift",
+      "kind": "BooleanLiteral",
+      "offset": 415,
+      "length": 4,
+      "value": "true"
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Core\/ResourceNamespace.swift",
@@ -107810,133 +108970,133 @@
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 4409,
+      "offset": 4787,
       "length": 18,
       "value": "\"LoadingAnimation\""
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4495,
+      "offset": 4873,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 4593,
+      "offset": 4971,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 4866,
+      "offset": 5244,
       "length": 2,
       "value": "55"
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5048,
+      "offset": 5426,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 5238,
+      "offset": 5616,
       "length": 12,
       "value": "\"muted_icon\""
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5362,
+      "offset": 5740,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 5486,
+      "offset": 5864,
       "length": 17,
       "value": "\"mutebutton_icon\""
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 5506,
+      "offset": 5884,
       "length": 19,
       "value": "\"unmutebutton_icon\""
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 5758,
+      "offset": 6136,
       "length": 5,
       "value": "-18.5"
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 5800,
+      "offset": 6178,
       "length": 2,
       "value": "28"
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 5840,
+      "offset": 6218,
       "length": 2,
       "value": "28"
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5424,
+      "offset": 5802,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 6075,
+      "offset": 6453,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 6247,
+      "offset": 6625,
       "length": 12,
       "value": "\"close_icon\""
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 6359,
+      "offset": 6737,
       "length": 12,
       "value": "\"close_icon\""
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 6483,
+      "offset": 6861,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 7957,
+      "offset": 8335,
       "length": 8,
       "value": "\"000000\""
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Clip\/Sources\/NativePlayer\/Player\/PlayerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 7987,
+      "offset": 8365,
       "length": 3,
       "value": "0.5"
     },
@@ -114523,42 +115683,63 @@
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Live\/Sources\/Features\/Player\/LIVE\/LIVEControllerView.swift",
       "kind": "StringLiteral",
-      "offset": 2792,
+      "offset": 2852,
       "length": 21,
       "value": "\"ic_player_livestate\""
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Live\/Sources\/Features\/Player\/LIVE\/LIVEControllerView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2967,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Live\/Sources\/Features\/Player\/LIVE\/LIVEControllerView.swift",
       "kind": "StringLiteral",
-      "offset": 3030,
+      "offset": 3156,
+      "length": 25,
+      "value": "\"ic_player_livestate_off\""
+    },
+    {
+      "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Live\/Sources\/Features\/Player\/LIVE\/LIVEControllerView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3275,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Live\/Sources\/Features\/Player\/LIVE\/LIVEControllerView.swift",
+      "kind": "StringLiteral",
+      "offset": 3432,
       "length": 15,
       "value": "\"ic_sauce_mark\""
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Live\/Sources\/Features\/Player\/LIVE\/LIVEControllerView.swift",
       "kind": "BooleanLiteral",
-      "offset": 3280,
+      "offset": 3682,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Live\/Sources\/Features\/Player\/LIVE\/LIVEControllerView.swift",
       "kind": "BooleanLiteral",
-      "offset": 3389,
+      "offset": 3791,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Live\/Sources\/Features\/Player\/LIVE\/LIVEControllerView.swift",
       "kind": "BooleanLiteral",
-      "offset": 3514,
+      "offset": 3916,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/keaton\/Documents\/Mobidoo\/SauceSDK\/Sauce\/Sources\/Features\/Live\/Sources\/Features\/Player\/LIVE\/LIVEControllerView.swift",
       "kind": "BooleanLiteral",
-      "offset": 12034,
+      "offset": 12991,
       "length": 4,
       "value": "true"
     },

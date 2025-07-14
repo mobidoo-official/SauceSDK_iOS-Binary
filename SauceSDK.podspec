@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name                 = "SauceSDK"
-  spec.version              = "0.0.25"
+  spec.version              = "0.0.26"
   spec.summary              = "SauceSDK - Live Commerce SDK for iOS"
   spec.description          = <<-DESC
                               SauceSDK는 라이브 커머스 기능을 제공하는 iOS SDK입니다.
