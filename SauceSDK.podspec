@@ -1,10 +1,11 @@
 Pod::Spec.new do |spec|
   spec.name                 = "SauceSDK"
-  spec.version              = "0.0.26"
+  spec.version              = "1.0.0"
   spec.summary              = "SauceSDK - Live Commerce SDK for iOS"
   spec.description          = <<-DESC
                               SauceSDK는 라이브 커머스 기능을 제공하는 iOS SDK입니다.
-                              라이브 스트리밍, 클립 플레이어, 쇼룸 기능을 포함합니다.
+                              라이브/VOD 플레이어, 채팅, 쿠폰/리워드 기능을 포함합니다.
+                              1.0.0부터 Live 전용입니다 (클립/쇼룸 미포함).
                               DESC
   
   spec.homepage             = "https://github.com/mobidoo-official/SauceSDK_iOS-Binary"
