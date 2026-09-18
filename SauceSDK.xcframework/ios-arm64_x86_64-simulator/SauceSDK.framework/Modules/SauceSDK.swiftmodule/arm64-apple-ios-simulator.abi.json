@@ -39643,6 +39643,29 @@
           },
           {
             "kind": "Function",
+            "name": "stopPlayback",
+            "printedName": "stopPlayback()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8SauceSDK15LIVEVideoPlayerC12stopPlaybackyyF",
+            "mangledName": "$s8SauceSDK15LIVEVideoPlayerC12stopPlaybackyyF",
+            "moduleName": "SauceSDK",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "observeValue",
             "printedName": "observeValue(forKeyPath:of:change:context:)",
             "children": [
@@ -43605,6 +43628,29 @@
                 "accessorKind": "get"
               }
             ]
+          },
+          {
+            "kind": "Function",
+            "name": "stopPlayback",
+            "printedName": "stopPlayback()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8SauceSDK12LiveBaseViewC12stopPlaybackyyF",
+            "mangledName": "$s8SauceSDK12LiveBaseViewC12stopPlaybackyyF",
+            "moduleName": "SauceSDK",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
           },
           {
             "kind": "Function",
@@ -84553,7 +84599,14 @@
     {
       "filePath": "\/Users\/minkhun\/work\/proj\/mobidoo\/SauceSDK_iOS-Live\/Sources\/SauceLive\/Sources\/Features\/Player\/LIVE\/LIVEVideoPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 64725,
+      "offset": 46900,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/minkhun\/work\/proj\/mobidoo\/SauceSDK_iOS-Live\/Sources\/SauceLive\/Sources\/Features\/Player\/LIVE\/LIVEVideoPlayer.swift",
+      "kind": "BooleanLiteral",
+      "offset": 65193,
       "length": 5,
       "value": "false"
     },
@@ -84693,21 +84746,21 @@
     {
       "filePath": "\/Users\/minkhun\/work\/proj\/mobidoo\/SauceSDK_iOS-Live\/Sources\/SauceLive\/Sources\/Features\/Base\/LiveBaseView.swift",
       "kind": "IntegerLiteral",
-      "offset": 38358,
+      "offset": 38928,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/minkhun\/work\/proj\/mobidoo\/SauceSDK_iOS-Live\/Sources\/SauceLive\/Sources\/Features\/Base\/LiveBaseView.swift",
       "kind": "BooleanLiteral",
-      "offset": 40774,
+      "offset": 41344,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/minkhun\/work\/proj\/mobidoo\/SauceSDK_iOS-Live\/Sources\/SauceLive\/Sources\/Features\/Base\/LiveBaseView.swift",
       "kind": "BooleanLiteral",
-      "offset": 46042,
+      "offset": 46612,
       "length": 5,
       "value": "false"
     },

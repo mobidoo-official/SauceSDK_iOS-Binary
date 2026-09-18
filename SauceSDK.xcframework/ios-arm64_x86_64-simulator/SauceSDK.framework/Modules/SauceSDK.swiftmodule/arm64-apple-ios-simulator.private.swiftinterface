@@ -970,6 +970,7 @@ public struct JoinUserResponse : Swift.Codable {
     get
   }
   @_Concurrency.MainActor @preconcurrency public func setOverlaysHiddenForPIP(_ hidden: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func stopPlayback()
   @objc deinit
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func observeValue(forKeyPath keyPath: Swift.String?, of object: Any?, change: [Foundation.NSKeyValueChangeKey : Any]?, context: Swift.UnsafeMutableRawPointer?)
 }
@@ -1049,6 +1050,7 @@ public var liveCurrentEnvironment: SauceSDK.LiveAPIHost
   @_Concurrency.MainActor @preconcurrency public var currentVideoSize: CoreFoundation.CGSize? {
     get
   }
+  @_Concurrency.MainActor @preconcurrency public func stopPlayback()
   @_Concurrency.MainActor @preconcurrency public func setOverlaysHiddenForPIP(_ hidden: Swift.Bool)
   @_Concurrency.MainActor @preconcurrency public init?(broadcastID: Swift.String, token: Swift.String? = nil)
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
