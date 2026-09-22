@@ -109,6 +109,7 @@ public protocol APIServiceProtocol {
   public func fetchBannedWords(partnerId: Swift.String) -> Combine.AnyPublisher<SauceSDK.APIBaseResponse<SauceSDK.BannedWordResponse>, SauceSDK.APIError>
   public func setJoinUser<T, U>(request: T) -> Combine.AnyPublisher<U, SauceSDK.APIError> where T : Swift.Decodable, T : Swift.Encodable, U : Swift.Decodable, U : Swift.Encodable
   public func checkChatNickname(broadcastId: Swift.String, userNick: Swift.String) -> Combine.AnyPublisher<SauceSDK.NicknameCheckResponse, SauceSDK.APIError>
+  public func updateChatUser(request: SauceSDK.UpdateChatUserRequest) -> Combine.AnyPublisher<SauceSDK.UpdateChatUserResponse, SauceSDK.APIError>
   public func joinChatService(request: SauceSDK.JoinRequest) -> Combine.AnyPublisher<SauceSDK.JoinResponse, SauceSDK.APIError>
   public func participateInEvent(request: SauceSDK.EventParticipationRequest) -> Combine.AnyPublisher<SauceSDK.EventParticipationResponse, SauceSDK.APIError>
   public func getEventDetail(broadcastId: Swift.String, eventId: Swift.String) -> Combine.AnyPublisher<SauceSDK.EventDetail, SauceSDK.APIError>
@@ -744,6 +745,7 @@ public struct EventData : Swift.Codable {
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class ChatInputView : UIKit.UIView {
   @_Concurrency.MainActor @preconcurrency public var onSendMessage: ((Swift.String) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onSendFinished: (() -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public func activateInput()
   @_Concurrency.MainActor @preconcurrency public func deactivateInput()
   @objc deinit
@@ -894,6 +896,14 @@ public struct JoinResponse : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
+public struct UpdateChatUserRequest : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct UpdateChatUserResponse : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
 public struct JoinUserRequest : Swift.Codable {
   public struct AppSyncInput : Swift.Codable {
     public func encode(to encoder: any Swift.Encoder) throws
@@ -965,6 +975,7 @@ public struct JoinUserResponse : Swift.Codable {
   @_Concurrency.MainActor @preconcurrency public var onPictureInPictureStateChanged: ((Swift.Bool) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onPictureInPictureFailedToStart: (() -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onPictureInPictureButtonTapped: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onVideoSizeReady: (() -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public func setupPlayer(with info: SauceSDK.BroadcastDetail)
   @_Concurrency.MainActor @preconcurrency public var currentVideoSize: CoreFoundation.CGSize? {
     get
@@ -1036,13 +1047,17 @@ public var liveCurrentEnvironment: SauceSDK.LiveAPIHost
   @_Concurrency.MainActor @preconcurrency public var onClose: (() -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onLogin: (() -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onCouponEvent: ((Swift.String?) -> Swift.Void)?
-  @_Concurrency.MainActor @preconcurrency public var onSlotBannerClick: ((SauceSDK.SlotBannerClickInfo) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onSlotBannerClick: ((SauceSDK.SlotBannerClickInfo) -> Swift.Void)? {
+    get
+    set
+  }
   @_Concurrency.MainActor @preconcurrency public var onCloseWithReason: ((SauceSDK.PlayerCloseReason) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onLoginRequest: ((SauceSDK.LoginRequestContext) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onRestoreUserInterfaceForPIP: ((@escaping (Swift.Bool) -> Swift.Void) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onPictureInPictureStateChanged: ((Swift.Bool) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onPictureInPictureFailedToStart: (() -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onPictureInPictureButtonTapped: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onVideoSizeReady: (() -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onCouponDownload: ((Swift.String) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onCouponCustom: ((Swift.String) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onProductClick: ((SauceSDK.ProductClickInfo) -> Swift.Bool)?
@@ -1408,6 +1423,9 @@ public protocol PIPUsable {
   var pipCorner: SauceSDK.PIPCorner? { get }
   func didChangedState(_ state: SauceSDK.PIPState)
   func didChangePosition(_ position: SauceSDK.PIPPosition)
+  func willStartPIPMode()
+  func willStopPIPMode()
+  var animatesEnterPIPFrame: Swift.Bool { get }
 }
 extension SauceSDK.PIPUsable {
   public var initialState: SauceSDK.PIPState {
@@ -1433,6 +1451,11 @@ extension SauceSDK.PIPUsable {
   }
   public func didChangedState(_ state: SauceSDK.PIPState)
   public func didChangePosition(_ position: SauceSDK.PIPPosition)
+  public func willStartPIPMode()
+  public func willStopPIPMode()
+  public var animatesEnterPIPFrame: Swift.Bool {
+    get
+  }
 }
 extension SauceSDK.PIPUsable where Self : UIKit.UIViewController {
   public func setNeedsUpdatePIPFrame()
@@ -1783,6 +1806,11 @@ extension SauceSDK.SauceLivePlayerClient : SauceSDK.PIPUsable {
   @_Concurrency.MainActor @preconcurrency public var pipCorner: SauceSDK.PIPCorner? {
     get
   }
+  @_Concurrency.MainActor @preconcurrency public func willStartPIPMode()
+  @_Concurrency.MainActor @preconcurrency public var animatesEnterPIPFrame: Swift.Bool {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public func willStopPIPMode()
   @_Concurrency.MainActor @preconcurrency public func didChangedState(_ state: SauceSDK.PIPState)
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class ScheduleView : UIKit.UIView {
@@ -1898,6 +1926,7 @@ public enum SlConfigOverride {
 }
 @_hasMissingDesignatedInitializers public class ToastView {
   public static let shared: SauceSDK.ToastView
+  public static var isSuppressed: Swift.Bool
   public func show(message: Swift.String, icon: UIKit.UIImage?, in view: UIKit.UIView, autoHide: Swift.Bool = true, onTap: (() -> Swift.Void)? = nil, host: UIKit.UIView? = nil)
   public func hide()
   @objc deinit
@@ -1990,6 +2019,7 @@ extension SauceSDK.VODControllerView : UIKit.UICollectionViewDataSource, UIKit.U
   @_Concurrency.MainActor @preconcurrency public var onPictureInPictureStateChanged: ((Swift.Bool) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onPictureInPictureFailedToStart: (() -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onPictureInPictureButtonTapped: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onVideoSizeReady: (() -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var currentVideoSize: CoreFoundation.CGSize? {
     get
   }

@@ -2,7 +2,7 @@
 # 버전은 build_xcframework.sh 가 만든 프레임워크의 MARKETING_VERSION 과 같아야 한다.
 Pod::Spec.new do |s|
   s.name             = 'SauceSDK'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'Sauce Live SDK for iOS'
   s.description      = 'Live commerce player SDK (LIVE/VOD, chat, coupon, reward) by Mobidoo.'
   s.homepage         = 'https://sauce.im'
