@@ -1,0 +1,35 @@
+/* 출처: 웹 플레이어 소개 영역(Intro·Notice 모듈) CSS 추출, 수집일 2026-09-30 */
+
+.Intro-module__editor-code-wrapper { color: rgb(0, 0, 0); font-family: Pretendard, sans-serif, "Open Sans", "Apple SD Gothic Neo", "Nanum Gothic", 나눔고딕, "Malgun Gothic", 맑은고딕, 돋움, 굴림, "Helvetica Neue", Helvetica, Arial; font-size: 14px; font-weight: 400; font-style: normal; font-variant: normal; font-feature-settings: normal; line-height: normal; letter-spacing: normal; word-spacing: 0px; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-break: normal; overflow-wrap: normal; line-break: auto; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; direction: ltr; text-rendering: auto; list-style-type: none; }
+code { font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
+* { box-sizing: border-box; }
+div,span,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,code,em,img,s,strong,sub,sup,b,u,i,ol,ul,li,label,table,tbody,tr,td,figure,figcaption,mark,input { outline: none; text-decoration: none; margin: 0px; padding: 0px; border: 0px; font-size: 100%; }
+input,a { -webkit-tap-highlight-color: transparent; }
+a { text-decoration: none; color: inherit; }
+input { border-width: medium; border-style: none; border-color: currentcolor; border-image: none; background: none transparent; box-shadow: none; }
+.Intro-module__root .Intro-module__editor-code-wrapper .Intro-module__editor-code-area { white-space: pre-wrap; word-break: break-all; line-break: anywhere; }
+.Intro-module__root .Intro-module__editor-code-wrapper .Intro-module__editor-code-area :where(ul, ol):not([data-type="taskList"]) { padding-inline-start: 20px; }
+.Intro-module__root .Intro-module__editor-code-wrapper .Intro-module__editor-code-area u { text-decoration: underline; }
+.Intro-module__root .Intro-module__editor-code-wrapper .Intro-module__editor-code-area s { text-decoration: line-through; }
+.Intro-module__root .Intro-module__editor-code-wrapper .Intro-module__editor-code-area h1 { font-size: 2em; }
+.Intro-module__root .Intro-module__editor-code-wrapper .Intro-module__editor-code-area h2 { font-size: 1.5em; }
+.Intro-module__root .Intro-module__editor-code-wrapper .Intro-module__editor-code-area h3 { font-size: 1.17em; }
+.Intro-module__root .Intro-module__editor-code-wrapper .Intro-module__editor-code-area h4 { font-size: 1em; }
+.Intro-module__root .Intro-module__editor-code-wrapper .Intro-module__editor-code-area h5 { font-size: 0.83em; }
+.Intro-module__root .Intro-module__editor-code-wrapper .Intro-module__editor-code-area h6 { font-size: 0.67em; }
+.Intro-module__root .Intro-module__editor-code-wrapper .Intro-module__editor-code-area hr { border-width: 1px medium medium; border-style: solid none none; border-color: rgb(233, 233, 233) currentcolor currentcolor; border-image: none; margin: 12px 0px; }
+.Intro-module__root .Intro-module__editor-code-wrapper .Intro-module__editor-code-area img { max-width: 100%; margin-bottom: 6px; }
+
+.Notice-module__editor-code-wrapper { color: rgb(0, 0, 0); font-family: Pretendard, sans-serif, "Open Sans", "Apple SD Gothic Neo", "Nanum Gothic", 나눔고딕, "Malgun Gothic", 맑은고딕, 돋움, 굴림, "Helvetica Neue", Helvetica, Arial; font-size: 14px; font-weight: 400; font-style: normal; font-variant: normal; font-feature-settings: normal; line-height: normal; letter-spacing: normal; word-spacing: 0px; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-break: normal; overflow-wrap: normal; line-break: auto; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; direction: ltr; text-rendering: auto; list-style-type: none; }
+.Notice-module__root .Notice-module__editor-code-wrapper .Notice-module__editor-code-area { white-space: pre-wrap; word-break: break-all; line-break: anywhere; }
+.Notice-module__root .Notice-module__editor-code-wrapper .Notice-module__editor-code-area :where(ul, ol):not([data-type="taskList"]) { padding-inline-start: 20px; }
+.Notice-module__root .Notice-module__editor-code-wrapper .Notice-module__editor-code-area u { text-decoration: underline; }
+.Notice-module__root .Notice-module__editor-code-wrapper .Notice-module__editor-code-area s { text-decoration: line-through; }
+.Notice-module__root .Notice-module__editor-code-wrapper .Notice-module__editor-code-area h1 { font-size: 2em; }
+.Notice-module__root .Notice-module__editor-code-wrapper .Notice-module__editor-code-area h2 { font-size: 1.5em; }
+.Notice-module__root .Notice-module__editor-code-wrapper .Notice-module__editor-code-area h3 { font-size: 1.17em; }
+.Notice-module__root .Notice-module__editor-code-wrapper .Notice-module__editor-code-area h4 { font-size: 1em; }
+.Notice-module__root .Notice-module__editor-code-wrapper .Notice-module__editor-code-area h5 { font-size: 0.83em; }
+.Notice-module__root .Notice-module__editor-code-wrapper .Notice-module__editor-code-area h6 { font-size: 0.67em; }
+.Notice-module__root .Notice-module__editor-code-wrapper .Notice-module__editor-code-area hr { border-width: 1px medium medium; border-style: solid none none; border-color: rgb(233, 233, 233) currentcolor currentcolor; border-image: none; margin: 12px 0px; }
+.Notice-module__root .Notice-module__editor-code-wrapper .Notice-module__editor-code-area img { max-width: 100%; margin-bottom: 6px; }
