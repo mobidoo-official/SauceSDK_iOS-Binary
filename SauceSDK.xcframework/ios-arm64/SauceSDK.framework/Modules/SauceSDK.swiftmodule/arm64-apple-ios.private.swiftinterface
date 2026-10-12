@@ -1123,6 +1123,9 @@ public class LiveBaseViewModel {
   public var allowMemberLogin: Swift.Bool {
     get
   }
+  public var enableChatNicknamePopup: Swift.Bool {
+    get
+  }
   public var enableChatNicknameDuplicationCheck: Swift.Bool {
     get
   }
@@ -1155,6 +1158,15 @@ public struct ProductClickInfo : SauceSDK.LinkTarget {
   public let isAppScheme: Swift.Bool
   public let placement: SauceSDK.ProductPlacement
   public init(broadcastId: Swift.String, productId: Swift.String, url: Swift.String, isAppScheme: Swift.Bool, placement: SauceSDK.ProductPlacement)
+}
+public struct ProductLayerClickInfo : SauceSDK.LinkTarget {
+  public let broadcastId: Swift.String
+  public let productId: Swift.String
+  public let externalProductId: Swift.String?
+  public let url: Swift.String
+  public let isAppScheme: Swift.Bool
+  public let placement: SauceSDK.ProductPlacement
+  public init(broadcastId: Swift.String, productId: Swift.String, externalProductId: Swift.String?, url: Swift.String, isAppScheme: Swift.Bool, placement: SauceSDK.ProductPlacement)
 }
 public struct RewardClickInfo : SauceSDK.LinkTarget {
   public let broadcastId: Swift.String
@@ -1282,6 +1294,16 @@ public struct LoginRequestContext {
   public let resumeId: Swift.String?
   public init(feature: SauceSDK.LoginRequiredFeature, broadcastId: Swift.String?, resumeId: Swift.String? = nil)
 }
+public enum NotificationBridgeResult {
+  case success
+  case cancel
+  case fail
+  public static func == (a: SauceSDK.NotificationBridgeResult, b: SauceSDK.NotificationBridgeResult) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 public struct NotificationInfo {
   public let accessToken: Swift.String?
   public let broadcastId: Swift.String
@@ -1298,6 +1320,7 @@ public protocol LivePlayerCallback : AnyObject {
   func onClose()
   func onClose(reason: SauceSDK.PlayerCloseReason)
   func onProductClick(info: SauceSDK.ProductClickInfo) -> Swift.Bool
+  func onProductLayerClick(info: SauceSDK.ProductLayerClickInfo) -> Swift.Bool
   func onRewardClick(info: SauceSDK.RewardClickInfo) -> Swift.Bool
   func onBannerClick(info: SauceSDK.BannerClickInfo) -> Swift.Bool
   func onCouponLinkClick(info: SauceSDK.CouponLinkClickInfo) -> Swift.Bool
@@ -1308,6 +1331,8 @@ public protocol LivePlayerCallback : AnyObject {
   func onCart(productId: Swift.String)
   func onTurnOnNotification(info: SauceSDK.NotificationInfo)
   func onTurnOffNotification(info: SauceSDK.NotificationInfo)
+  func onTurnOnNotification(info: SauceSDK.NotificationInfo, completion: @escaping (SauceSDK.NotificationBridgeResult) -> Swift.Void)
+  func onTurnOffNotification(info: SauceSDK.NotificationInfo, completion: @escaping (SauceSDK.NotificationBridgeResult) -> Swift.Void)
   func onSdkAuthFailed(code: Swift.String, message: Swift.String)
   @available(*, deprecated, message: "onCouponDownload(couponCode:) / onCouponCustom(metaData:) 를 쓰세요.")
   func onCouponEvent(linkUrl: Swift.String?)
@@ -1319,6 +1344,7 @@ extension SauceSDK.LivePlayerCallback {
   public func onClose()
   public func onClose(reason: SauceSDK.PlayerCloseReason)
   public func onProductClick(info: SauceSDK.ProductClickInfo) -> Swift.Bool
+  public func onProductLayerClick(info: SauceSDK.ProductLayerClickInfo) -> Swift.Bool
   public func onRewardClick(info: SauceSDK.RewardClickInfo) -> Swift.Bool
   public func onBannerClick(info: SauceSDK.BannerClickInfo) -> Swift.Bool
   public func onCouponLinkClick(info: SauceSDK.CouponLinkClickInfo) -> Swift.Bool
@@ -1329,6 +1355,8 @@ extension SauceSDK.LivePlayerCallback {
   public func onCart(productId: Swift.String)
   public func onTurnOnNotification(info: SauceSDK.NotificationInfo)
   public func onTurnOffNotification(info: SauceSDK.NotificationInfo)
+  public func onTurnOnNotification(info: SauceSDK.NotificationInfo, completion: @escaping (SauceSDK.NotificationBridgeResult) -> Swift.Void)
+  public func onTurnOffNotification(info: SauceSDK.NotificationInfo, completion: @escaping (SauceSDK.NotificationBridgeResult) -> Swift.Void)
   public func onSdkAuthFailed(code: Swift.String, message: Swift.String)
   public func onCouponEvent(linkUrl: Swift.String?)
   public func onSlotBannerClick(info: SauceSDK.SlotBannerClickInfo)
@@ -1439,7 +1467,8 @@ public struct SauceOnAirFloatingOptions {
   public init(width: CoreFoundation.CGFloat = 150, height: CoreFoundation.CGFloat? = nil, position: SauceSDK.SauceOnAirFloatingOptions.Position = .bottomRight, offsetX: CoreFoundation.CGFloat = 0, offsetY: CoreFoundation.CGFloat = 0, badgeImageUrl: Swift.String? = nil)
 }
 extension SauceSDK.SauceLivePlayerClient {
-  @_Concurrency.MainActor @preconcurrency public static func setOnAirInit(partnerID: Swift.String, env: SauceSDK.SauceOnAirEnv = .production, options: SauceSDK.SauceOnAirFloatingOptions = SauceOnAirFloatingOptions(), token: Swift.String? = nil, completion: ((SauceSDK.SauceOnAirResult) -> Swift.Void)? = nil)
+  @_Concurrency.MainActor @preconcurrency public static func setOnAirInit(partnerID: Swift.String, env: SauceSDK.SauceOnAirEnv = .production, options: SauceSDK.SaucePipOptions? = nil, token: Swift.String? = nil, completion: ((SauceSDK.SauceOnAirResult) -> Swift.Void)? = nil)
+  @_Concurrency.MainActor @preconcurrency public static func setOnAirInit(partnerID: Swift.String, env: SauceSDK.SauceOnAirEnv = .production, options: SauceSDK.SauceOnAirFloatingOptions, token: Swift.String? = nil, completion: ((SauceSDK.SauceOnAirResult) -> Swift.Void)? = nil)
 }
 public enum SauceOnAirEnv : Swift.String, Swift.CaseIterable {
   case production
@@ -1516,7 +1545,7 @@ public protocol PIPUsable {
   func willStartPIPMode()
   func willStopPIPMode()
   var animatesEnterPIPFrame: Swift.Bool { get }
-  var pipSnapsToCornersOnly: Swift.Bool { get }
+  var pipFreeDragInsets: UIKit.UIEdgeInsets? { get }
 }
 extension SauceSDK.PIPUsable {
   public var initialState: SauceSDK.PIPState {
@@ -1547,7 +1576,7 @@ extension SauceSDK.PIPUsable {
   public var animatesEnterPIPFrame: Swift.Bool {
     get
   }
-  public var pipSnapsToCornersOnly: Swift.Bool {
+  public var pipFreeDragInsets: UIKit.UIEdgeInsets? {
     get
   }
 }
@@ -1793,6 +1822,13 @@ extension SauceSDK.SauceClient {
   public static func updateAccessToken(_ token: Swift.String)
   @discardableResult
   public static func startLivePlayer(broadcastID: Swift.String, token: Swift.String? = nil, from viewController: UIKit.UIViewController) -> SauceSDK.SauceLivePlayerClient
+  public static func showFloatingPlayer(broadcastID: Swift.String, token: Swift.String? = nil, options: SauceSDK.SaucePipOptions? = nil)
+  public static func setOnAirInit(options: SauceSDK.SaucePipOptions? = nil, token: Swift.String? = nil, completion: ((SauceSDK.SauceOnAirResult) -> Swift.Void)? = nil)
+  public static func setPipOptions(_ options: SauceSDK.SaucePipOptions?)
+  public static func getPipOptions() -> SauceSDK.SaucePipOptions?
+  public static func closePIPMode()
+  public static func setFloatingListener(_ listener: (any SauceSDK.SauceFloatingListener)?)
+  public static func getFloatingState() -> SauceSDK.SauceFloatingState
 }
 @_hasMissingDesignatedInitializers public class SauceClient {
   public static let shared: SauceSDK.SauceClient
@@ -1834,6 +1870,7 @@ extension SauceSDK.SauceClient {
     }
   }
   public static func initInstance(appKey: Swift.String, apiHost: SauceSDK.SauceClient.APIHost = .prod)
+  @_spi(SauceInternal) public static func whenPartnerIDResolved(_ body: @escaping (Swift.String?) -> Swift.Void)
   @available(*, deprecated, renamed: "initInstance(appKey:apiHost:)")
   public static func initInstance(activationKey: Swift.String, apiHost: SauceSDK.SauceClient.APIHost = .prod)
   public static func extractBroadcastId(from url: Foundation.URL) -> Swift.String?
@@ -1841,6 +1878,18 @@ extension SauceSDK.SauceClient {
   public static func isLiveEnabled() -> Swift.Bool
   public static func printConfiguration()
   @objc deinit
+}
+public protocol SauceFloatingListener : AnyObject {
+  func onStateChanged(_ state: SauceSDK.SauceFloatingState, broadcastID: Swift.String?)
+  func onFloatingClosed(broadcastID: Swift.String?, reason: SauceSDK.SauceFloatingCloseReason)
+  func onFloatingExit(broadcastID: Swift.String) -> Swift.Bool
+  func onFloatingFullscreen(broadcastID: Swift.String) -> Swift.Bool
+}
+extension SauceSDK.SauceFloatingListener {
+  public func onStateChanged(_ state: SauceSDK.SauceFloatingState, broadcastID: Swift.String?)
+  public func onFloatingClosed(broadcastID: Swift.String?, reason: SauceSDK.SauceFloatingCloseReason)
+  public func onFloatingExit(broadcastID: Swift.String) -> Swift.Bool
+  public func onFloatingFullscreen(broadcastID: Swift.String) -> Swift.Bool
 }
 @objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class SauceLivePlayerClient : SauceSDK.BaseViewController {
   @_Concurrency.MainActor @preconcurrency public static var activeClient: SauceSDK.SauceLivePlayerClient? {
@@ -1860,11 +1909,14 @@ extension SauceSDK.SauceClient {
   @_Concurrency.MainActor @preconcurrency public var onCart: ((Swift.String) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onTurnOnNotification: ((SauceSDK.NotificationInfo) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onTurnOffNotification: ((SauceSDK.NotificationInfo) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onTurnOnNotificationWithResult: ((SauceSDK.NotificationInfo, @escaping (SauceSDK.NotificationBridgeResult) -> Swift.Void) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onTurnOffNotificationWithResult: ((SauceSDK.NotificationInfo, @escaping (SauceSDK.NotificationBridgeResult) -> Swift.Void) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onCloseWithReason: ((SauceSDK.PlayerCloseReason) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onLoginRequest: ((SauceSDK.LoginRequestContext) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onCouponDownload: ((Swift.String) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onCouponCustom: ((Swift.String) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onProductClick: ((SauceSDK.ProductClickInfo) -> Swift.Bool)?
+  @_Concurrency.MainActor @preconcurrency public var onProductLayerClick: ((SauceSDK.ProductLayerClickInfo) -> Swift.Bool)?
   @_Concurrency.MainActor @preconcurrency public var onRewardClick: ((SauceSDK.RewardClickInfo) -> Swift.Bool)?
   @_Concurrency.MainActor @preconcurrency public static func initInstance(partnerID: Swift.String?, apiHost: SauceSDK.LiveAPIHost = .prod)
   @_Concurrency.MainActor @preconcurrency public static func getInstance(broadcastID: Swift.String, token: Swift.String? = nil, viewController: UIKit.UIViewController) -> SauceSDK.SauceLivePlayerClient
@@ -1896,10 +1948,9 @@ extension SauceSDK.SauceLivePlayerClient : SauceSDK.PIPUsable {
   @_Concurrency.MainActor @preconcurrency public var pipEdgeInsets: UIKit.UIEdgeInsets {
     get
   }
-  @_Concurrency.MainActor @preconcurrency public var pipSnapsToCornersOnly: Swift.Bool {
+  @_Concurrency.MainActor @preconcurrency public var pipFreeDragInsets: UIKit.UIEdgeInsets? {
     get
   }
-  @_Concurrency.MainActor @preconcurrency public func didChangePosition(_ position: SauceSDK.PIPPosition)
   @_Concurrency.MainActor @preconcurrency public func willStartPIPMode()
   @_Concurrency.MainActor @preconcurrency public var animatesEnterPIPFrame: Swift.Bool {
     get
@@ -1912,7 +1963,68 @@ extension SauceSDK.SauceLivePlayerClient {
   @_Concurrency.MainActor @preconcurrency public static var onFloatingExit: (() -> Swift.Bool)?
   @_Concurrency.MainActor @preconcurrency public static var onFloatingFullscreen: (() -> Swift.Bool)?
   @_Concurrency.MainActor @preconcurrency public static var onFloatingClosed: ((SauceSDK.SauceFloatingCloseReason) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public static func setPipOptions(_ options: SauceSDK.SaucePipOptions?)
+  @_Concurrency.MainActor @preconcurrency public static func getPipOptions() -> SauceSDK.SaucePipOptions?
+  @_Concurrency.MainActor @preconcurrency public func startPIPMode(options: SauceSDK.SaucePipOptions?)
+  @_Concurrency.MainActor @preconcurrency public static func closePIPMode()
   @_Concurrency.MainActor @preconcurrency public static func closeOnAirFloating()
+  @_Concurrency.MainActor @preconcurrency public static func startFloatingPlayer(broadcastID: Swift.String, token: Swift.String? = nil, options: SauceSDK.SaucePipOptions? = nil)
+  @_spi(SauceInternal) @_Concurrency.MainActor @preconcurrency public static var hostFloatingListener: (any SauceSDK.SauceFloatingListener)?
+  @_spi(SauceInternal) @_Concurrency.MainActor @preconcurrency public static var currentFloatingState: SauceSDK.SauceFloatingState {
+    @_spi(SauceInternal) get
+  }
+}
+public enum SaucePipPosition : Swift.Equatable {
+  case topLeft, topRight, bottomLeft, bottomRight
+  public static func == (a: SauceSDK.SaucePipPosition, b: SauceSDK.SaucePipPosition) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum SaucePipLayout : Swift.Equatable {
+  case badge, control
+  public static func == (a: SauceSDK.SaucePipLayout, b: SauceSDK.SaucePipLayout) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum SaucePipButton : Swift.String, Swift.CaseIterable, Swift.Equatable {
+  case exit, fullscreen, mute
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [SauceSDK.SaucePipButton]
+  public typealias RawValue = Swift.String
+  nonisolated public static var allCases: [SauceSDK.SaucePipButton] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum SaucePipBadge : Swift.Equatable {
+  case hidden
+  case `default`
+  case imageUrl(Swift.String)
+  public static func == (a: SauceSDK.SaucePipBadge, b: SauceSDK.SaucePipBadge) -> Swift.Bool
+}
+public struct SaucePipOptions {
+  public var width: CoreFoundation.CGFloat?
+  public var height: CoreFoundation.CGFloat?
+  public var position: SauceSDK.SaucePipPosition?
+  public var marginHorizontal: CoreFoundation.CGFloat?
+  public var marginVertical: CoreFoundation.CGFloat?
+  public var layout: SauceSDK.SaucePipLayout?
+  public var buttonList: [SauceSDK.SaucePipButton]?
+  public var badge: SauceSDK.SaucePipBadge?
+  public var closeIcon: Swift.String?
+  public var badgeMargin: CoreFoundation.CGFloat
+  public var badgeWidth: CoreFoundation.CGFloat?
+  public var badgeHeight: CoreFoundation.CGFloat?
+  public var muted: Swift.Bool?
+  public var closeOnBackground: Swift.Bool
+  public static let defaultBadgeMargin: CoreFoundation.CGFloat
+  public init(width: CoreFoundation.CGFloat? = nil, height: CoreFoundation.CGFloat? = nil, position: SauceSDK.SaucePipPosition? = nil, marginHorizontal: CoreFoundation.CGFloat? = nil, marginVertical: CoreFoundation.CGFloat? = nil, badge: SauceSDK.SaucePipBadge? = nil, badgeMargin: CoreFoundation.CGFloat = SaucePipOptions.defaultBadgeMargin, badgeWidth: CoreFoundation.CGFloat? = nil, badgeHeight: CoreFoundation.CGFloat? = nil, muted: Swift.Bool? = nil, closeOnBackground: Swift.Bool = true, layout: SauceSDK.SaucePipLayout? = nil, buttonList: [SauceSDK.SaucePipButton]? = nil, closeIcon: Swift.String? = nil)
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class ScheduleView : UIKit.UIView {
   @objc deinit
@@ -2194,6 +2306,8 @@ extension SauceSDK.PlayerCloseReason : Swift.Equatable {}
 extension SauceSDK.PlayerCloseReason : Swift.Hashable {}
 extension SauceSDK.LoginRequiredFeature : Swift.Equatable {}
 extension SauceSDK.LoginRequiredFeature : Swift.Hashable {}
+extension SauceSDK.NotificationBridgeResult : Swift.Equatable {}
+extension SauceSDK.NotificationBridgeResult : Swift.Hashable {}
 extension SauceSDK.ModuleType : Swift.Equatable {}
 extension SauceSDK.ModuleType : Swift.Hashable {}
 extension SauceSDK.SauceFloatingState : Swift.Equatable {}
@@ -2219,5 +2333,9 @@ extension SauceSDK.PlayerView.Version : Swift.Equatable {}
 extension SauceSDK.PlayerView.Version : Swift.Hashable {}
 extension SauceSDK.SauceClient.APIHost : Swift.Equatable {}
 extension SauceSDK.SauceClient.APIHost : Swift.Hashable {}
+extension SauceSDK.SaucePipPosition : Swift.Hashable {}
+extension SauceSDK.SaucePipLayout : Swift.Hashable {}
+extension SauceSDK.SaucePipButton : Swift.Hashable {}
+extension SauceSDK.SaucePipButton : Swift.RawRepresentable {}
 extension SauceSDK.SdkAuth.State : Swift.Equatable {}
 extension SauceSDK.SdkAuth.State : Swift.Hashable {}
