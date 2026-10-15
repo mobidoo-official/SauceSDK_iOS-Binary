@@ -1829,6 +1829,8 @@ extension SauceSDK.SauceClient {
   public static func closePIPMode()
   public static func setFloatingListener(_ listener: (any SauceSDK.SauceFloatingListener)?)
   public static func getFloatingState() -> SauceSDK.SauceFloatingState
+  @discardableResult
+  public static func startLivePlayer(broadcastID: Swift.String, token: Swift.String? = nil) -> SauceSDK.SauceLivePlayerClient?
 }
 @_hasMissingDesignatedInitializers public class SauceClient {
   public static let shared: SauceSDK.SauceClient
@@ -1891,6 +1893,37 @@ extension SauceSDK.SauceFloatingListener {
   public func onFloatingExit(broadcastID: Swift.String) -> Swift.Bool
   public func onFloatingFullscreen(broadcastID: Swift.String) -> Swift.Bool
 }
+@available(iOS 13, *)
+extension SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public func onSauceClose(_ action: @escaping (SauceSDK.PlayerCloseReason) -> Swift.Void) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func onSauceLoginRequest(_ action: @escaping (SauceSDK.LoginRequestContext) -> Swift.Void) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func onSauceProductClick(_ action: @escaping (SauceSDK.ProductClickInfo) -> Swift.Bool) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func onSauceRewardClick(_ action: @escaping (SauceSDK.RewardClickInfo) -> Swift.Bool) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func onSauceBannerClick(_ action: @escaping (SauceSDK.BannerClickInfo) -> Swift.Bool) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func onSauceCouponLinkClick(_ action: @escaping (SauceSDK.CouponLinkClickInfo) -> Swift.Bool) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func onSauceShare(_ action: @escaping (SauceSDK.ShareInfo) -> Swift.Bool) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func onSauceOpenLink(_ action: @escaping (SauceSDK.LinkClickInfo) -> Swift.Bool) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func onSauceCouponDownload(_ action: @escaping (Swift.String) -> Swift.Void) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func onSauceCouponCustom(_ action: @escaping (Swift.String) -> Swift.Void) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func onSauceCart(_ action: @escaping (Swift.String) -> Swift.Void) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func onSauceTurnOnNotification(_ action: @escaping (SauceSDK.NotificationInfo) -> Swift.Void) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func onSauceTurnOffNotification(_ action: @escaping (SauceSDK.NotificationInfo) -> Swift.Void) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func onSauceError(_ action: @escaping (any Swift.Error) -> Swift.Void) -> some SwiftUICore.View
+  
+}
 @objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class SauceLivePlayerClient : SauceSDK.BaseViewController {
   @_Concurrency.MainActor @preconcurrency public static var activeClient: SauceSDK.SauceLivePlayerClient? {
     get
@@ -1918,8 +1951,10 @@ extension SauceSDK.SauceFloatingListener {
   @_Concurrency.MainActor @preconcurrency public var onProductClick: ((SauceSDK.ProductClickInfo) -> Swift.Bool)?
   @_Concurrency.MainActor @preconcurrency public var onProductLayerClick: ((SauceSDK.ProductLayerClickInfo) -> Swift.Bool)?
   @_Concurrency.MainActor @preconcurrency public var onRewardClick: ((SauceSDK.RewardClickInfo) -> Swift.Bool)?
+  @_Concurrency.MainActor @preconcurrency public var presentsAsFullScreenModal: Swift.Bool
   @_Concurrency.MainActor @preconcurrency public static func initInstance(partnerID: Swift.String?, apiHost: SauceSDK.LiveAPIHost = .prod)
   @_Concurrency.MainActor @preconcurrency public static func getInstance(broadcastID: Swift.String, token: Swift.String? = nil, viewController: UIKit.UIViewController) -> SauceSDK.SauceLivePlayerClient
+  @_Concurrency.MainActor @preconcurrency public static func getInstance(broadcastID: Swift.String, token: Swift.String? = nil) -> SauceSDK.SauceLivePlayerClient?
   @_Concurrency.MainActor @preconcurrency public func updateAccessToken(_ newToken: Swift.String)
   @_Concurrency.MainActor @preconcurrency public func startPlayer()
   @available(*, deprecated, message: "더 이상 필요 없다. 프로토콜 콜백은 클로저가 없을 때 자동으로 호출된다.")
@@ -1974,6 +2009,18 @@ extension SauceSDK.SauceLivePlayerClient {
     @_spi(SauceInternal) get
   }
 }
+@available(iOS 13, *)
+extension SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public func sauceLivePlayer(isPresented: SwiftUICore.Binding<Swift.Bool>, broadcastID: Swift.String, token: Swift.String? = nil) -> some SwiftUICore.View
+  
+}
+public struct SaucePipShadow : Swift.Equatable {
+  public var isEnabled: Swift.Bool
+  public var color: Swift.String?
+  public var radius: CoreFoundation.CGFloat
+  public init(isEnabled: Swift.Bool = true, color: Swift.String? = nil, radius: CoreFoundation.CGFloat = 10)
+  public static func == (a: SauceSDK.SaucePipShadow, b: SauceSDK.SaucePipShadow) -> Swift.Bool
+}
 public enum SaucePipPosition : Swift.Equatable {
   case topLeft, topRight, bottomLeft, bottomRight
   public static func == (a: SauceSDK.SaucePipPosition, b: SauceSDK.SaucePipPosition) -> Swift.Bool
@@ -2023,8 +2070,12 @@ public struct SaucePipOptions {
   public var badgeHeight: CoreFoundation.CGFloat?
   public var muted: Swift.Bool?
   public var closeOnBackground: Swift.Bool
+  public var cornerRadius: CoreFoundation.CGFloat?
+  public var borderWidth: CoreFoundation.CGFloat
+  public var borderColor: Swift.String?
+  public var shadow: SauceSDK.SaucePipShadow?
   public static let defaultBadgeMargin: CoreFoundation.CGFloat
-  public init(width: CoreFoundation.CGFloat? = nil, height: CoreFoundation.CGFloat? = nil, position: SauceSDK.SaucePipPosition? = nil, marginHorizontal: CoreFoundation.CGFloat? = nil, marginVertical: CoreFoundation.CGFloat? = nil, badge: SauceSDK.SaucePipBadge? = nil, badgeMargin: CoreFoundation.CGFloat = SaucePipOptions.defaultBadgeMargin, badgeWidth: CoreFoundation.CGFloat? = nil, badgeHeight: CoreFoundation.CGFloat? = nil, muted: Swift.Bool? = nil, closeOnBackground: Swift.Bool = true, layout: SauceSDK.SaucePipLayout? = nil, buttonList: [SauceSDK.SaucePipButton]? = nil, closeIcon: Swift.String? = nil)
+  public init(width: CoreFoundation.CGFloat? = nil, height: CoreFoundation.CGFloat? = nil, position: SauceSDK.SaucePipPosition? = nil, marginHorizontal: CoreFoundation.CGFloat? = nil, marginVertical: CoreFoundation.CGFloat? = nil, badge: SauceSDK.SaucePipBadge? = nil, badgeMargin: CoreFoundation.CGFloat = SaucePipOptions.defaultBadgeMargin, badgeWidth: CoreFoundation.CGFloat? = nil, badgeHeight: CoreFoundation.CGFloat? = nil, muted: Swift.Bool? = nil, closeOnBackground: Swift.Bool = true, layout: SauceSDK.SaucePipLayout? = nil, buttonList: [SauceSDK.SaucePipButton]? = nil, closeIcon: Swift.String? = nil, cornerRadius: CoreFoundation.CGFloat? = nil, borderWidth: CoreFoundation.CGFloat = 0, borderColor: Swift.String? = nil, shadow: SauceSDK.SaucePipShadow? = nil)
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class ScheduleView : UIKit.UIView {
   @objc deinit
